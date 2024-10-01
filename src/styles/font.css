@@ -1,0 +1,23 @@
+/* 제목 폰트 */
+@font-face {
+  font-family: 'Galmuri7';
+  src:
+    url('../fonts/Galmuri7.woff2') format('woff2'),
+    url('../fonts/Galmuri7.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 기본 폰트 */
+@font-face {
+  font-family: 'Galmuri9';
+  src:
+    url('../fonts/Galmuri9.woff2') format('woff2'),
+    url('../fonts/Galmuri9.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'Galmuri9', sans-serif;
+}
