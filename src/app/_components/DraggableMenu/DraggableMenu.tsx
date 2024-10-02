@@ -2,7 +2,7 @@
 
 import { motion, useDragControls } from 'framer-motion';
 import MonsterBall from './MonsterBall';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function DraggableMenu() {
   const [isDragging, setIsDragging] = useState(false);
@@ -11,7 +11,7 @@ export default function DraggableMenu() {
 
   return (
     <div className={'relative'}>
-      <div ref={constraintsRef} className={'absolute h-[100vh] w-[100vw] -z-10'}>
+      <div ref={constraintsRef} className={'absolute h-[100dvh] w-[100dvw] -z-10'}>
         <motion.div
           dragControls={dragControls}
           drag
@@ -23,6 +23,7 @@ export default function DraggableMenu() {
           dragTransition={{ bounceStiffness: 500, bounceDamping: 20 }}
           dragElastic={0.5}
           dragMomentum={true}
+          style={{ touchAction: 'none' }}
         >
           <MonsterBall />
         </motion.div>
