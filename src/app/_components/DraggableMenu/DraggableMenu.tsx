@@ -35,7 +35,10 @@ export default function DraggableMenu() {
           style={{ touchAction: 'none' }}
         >
           <div className={'flex gap-5'}>
-            <article onClick={handleMonsterBallClick}>
+            <article
+              onClick={handleMonsterBallClick}
+              className={classNames('hover:cursor-pointer', isDragging && 'hover:cursor-grab')}
+            >
               <MonsterBall />
             </article>
             <SearchMenu isOpenMenu={isOpen} />
