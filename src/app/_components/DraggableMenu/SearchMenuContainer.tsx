@@ -6,9 +6,10 @@ import defaultPokemonImage from '@/images/pokemon/pikachu.png';
 
 interface SearchMenuContainerProps {
   isOpenMenu: boolean;
+  onCloseMenuClick: () => void;
 }
 
-export default function SearchMenuContainer({ isOpenMenu }: SearchMenuContainerProps) {
+export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: SearchMenuContainerProps) {
   const [isVisible, setIsVisible] = useState(isOpenMenu);
 
   useEffect(() => {
@@ -35,13 +36,21 @@ export default function SearchMenuContainer({ isOpenMenu }: SearchMenuContainerP
           !isVisible && 'invisible',
         )}
       >
-        <Image
-          className={'m-auto h-[150px] w-[150px] md:h-[375px] md:w-[375px]'}
-          src={defaultPokemonImage}
-          alt={'포켓몬 이미지'}
-          height={375}
-          width={375}
-        />
+        <div className={'relative'}>
+          <button
+            onClick={onCloseMenuClick}
+            className={'absolute right-0 bottom-0 md:top-0 h-5 w-5 rounded-full leading-normal'}
+          >
+            x
+          </button>
+          <Image
+            className={'m-auto h-[150px] w-[150px] md:h-[375px] md:w-[375px]'}
+            src={defaultPokemonImage}
+            alt={'포켓몬 이미지'}
+            height={375}
+            width={375}
+          />
+        </div>
         <SearchMenuContent />
       </div>
     </div>

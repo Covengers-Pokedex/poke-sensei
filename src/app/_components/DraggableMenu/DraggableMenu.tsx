@@ -13,7 +13,7 @@ export default function DraggableMenu() {
   const constraintsRef = useRef(null);
   const menuContainer = useRef(null);
 
-  const handleMonsterBallClick = () => {
+  const handleMenuDisplayClick = () => {
     // 드래그가 아니라 클릭이 일어날 경우에만 메뉴가 열리도록 분기 처리
     if (!isDragging) {
       setIsOpen(prevState => !prevState);
@@ -23,7 +23,7 @@ export default function DraggableMenu() {
   return (
     <div className={'relative'}>
       <div ref={constraintsRef} className={'absolute h-[100dvh] w-[100dvw] -z-10'}>
-        <SearchMenuContainer isOpenMenu={isOpen} />
+        <SearchMenuContainer isOpenMenu={isOpen} onCloseMenuClick={handleMenuDisplayClick} />
         <motion.div
           ref={menuContainer}
           dragControls={dragControls}
@@ -39,7 +39,7 @@ export default function DraggableMenu() {
         >
           <div className={'flex gap-5'}>
             <article
-              onClick={handleMonsterBallClick}
+              onClick={handleMenuDisplayClick}
               className={classNames('hover:cursor-pointer', isDragging && 'hover:cursor-grab')}
             >
               <MonsterBall />
