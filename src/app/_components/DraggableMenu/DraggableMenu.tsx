@@ -3,7 +3,7 @@
 import { motion, useDragControls } from 'framer-motion';
 import MonsterBall from './MonsterBall';
 import { useRef, useState } from 'react';
-import SearchMenu from './SearchMenu';
+import SearchMenuContainer from './SearchMenuContainer';
 import classNames from 'classnames';
 
 export default function DraggableMenu() {
@@ -11,6 +11,7 @@ export default function DraggableMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const dragControls = useDragControls();
   const constraintsRef = useRef(null);
+  const menuContainer = useRef(null);
 
   const handleMonsterBallClick = () => {
     // 드래그가 아니라 클릭이 일어날 경우에만 메뉴가 열리도록 분기 처리
@@ -22,7 +23,9 @@ export default function DraggableMenu() {
   return (
     <div className={'relative'}>
       <div ref={constraintsRef} className={'absolute h-[100dvh] w-[100dvw] -z-10'}>
+        <SearchMenuContainer isOpenMenu={isOpen} />
         <motion.div
+          ref={menuContainer}
           dragControls={dragControls}
           drag
           onDragStart={() => setIsDragging(true)}
@@ -41,7 +44,6 @@ export default function DraggableMenu() {
             >
               <MonsterBall />
             </article>
-            <SearchMenu isOpenMenu={isOpen} />
           </div>
         </motion.div>
       </div>
