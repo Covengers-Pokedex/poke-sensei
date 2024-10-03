@@ -9,30 +9,35 @@ const config: Config = {
   theme: {
     extend: {
       keyframes: {
-        'scale-in-ver-center': {
+        'slide-in-elliptic-bottom-bck': {
           '0%': {
-            transform: 'scaleY(0)',
-            opacity: '1',
+            transform: 'translateY(600px) rotateX(-30deg) scale(6.5)',
+            'transform-origin': '50% -100%',
+            opacity: '0',
           },
           '100%': {
-            transform: 'scaleY(1)',
+            transform: 'translateY(0) rotateX(0) scale(1)',
+            'transform-origin': '50% 500px',
             opacity: '1',
           },
         },
-        'scale-out-ver-center': {
+        'slide-out-elliptic-bottom-fwd': {
           '0%': {
-            transform: 'scaleY(1)',
+            transform: 'translateY(0) rotateX(0) scale(1)',
+            'transform-origin': '50% 500px',
             opacity: '1',
           },
           '100%': {
-            transform: 'scaleY(0)',
-            opacity: '1',
+            transform: 'translateY(600px) rotateX(-20deg) scale(6)',
+
+            'transform-origin': '50% -100%',
+            opacity: '0',
           },
         },
       },
       animation: {
-        scaleInVerCenter: 'scale-in-ver-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-        scaleOutVerCenter: 'scale-out-ver-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        slideInEllipticBottomBck: 'slide-in-elliptic-bottom-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        slideOutEllipticBottomFwd: 'slide-out-elliptic-bottom-fwd 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
       },
       colors: {
         background: 'var(--background)',
