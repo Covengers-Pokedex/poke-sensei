@@ -32,8 +32,13 @@ export interface PokemonAbility {
 }
 
 export interface GetPokemonParams {
-  number: number;
+  number: number | string;
   language: string;
+}
+
+export interface GetPokemonListParams {
+  offset: number;
+  limit: number;
 }
 
 export interface Ability {
