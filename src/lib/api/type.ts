@@ -34,5 +34,20 @@ export interface PokemonAbility {
 export interface GetPokemonParams {
   number: number;
   language: string;
-  shiny: boolean;
+}
+
+export interface Ability {
+  flavor: string;
+  name: string;
+}
+
+export interface PokemonInfo {
+  id: number;
+  weight: number;
+  height: number;
+  image: string;
+  name: string;
+  shiny: string;
+  abilityList: Ability[];
+  typeList: PokemonLanguage[];
 }
