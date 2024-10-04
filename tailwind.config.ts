@@ -29,7 +29,6 @@ const config: Config = {
           },
           '100%': {
             transform: 'translateY(600px) rotateX(-20deg) scale(6)',
-
             'transform-origin': '50% -100%',
             opacity: '0',
           },

@@ -33,7 +33,7 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: Se
         className={classNames(
           'flex gap-4 flex-col md:flex-row',
           isOpenMenu ? 'visible animate-slideInEllipticBottomBck' : 'animate-slideOutEllipticBottomFwd',
-          !isVisible && 'invisible',
+          !isVisible && 'hidden',
         )}
       >
         <div className={'relative'}>
