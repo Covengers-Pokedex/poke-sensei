@@ -6,7 +6,7 @@ import { useRef, useState } from 'react';
 import SearchMenuContainer from './SearchMenuContainer';
 import classNames from 'classnames';
 
-export default function DraggableMenu() {
+export default function DraggableMenuTrigger() {
   const [isDragging, setIsDragging] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const dragControls = useDragControls();

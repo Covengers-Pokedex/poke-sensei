@@ -1,9 +1,9 @@
-import DraggableMenu from './_components/draggableSearchMenu/DraggableMenu';
+import DraggableMenuTrigger from './_components/draggableSearchMenu/DraggableMenuTrigger';
 
 export default function Landing() {
   return (
     <div>
-      <DraggableMenu />
+      <DraggableMenuTrigger />
     </div>
   );
 }
