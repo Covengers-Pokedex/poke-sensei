@@ -10,6 +10,7 @@ import {
   getAbilities,
 } from './getPokemonData';
 
+// 포켓몬 한마리의 데이터
 export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => {
   try {
     const pokemonData = await fetchPokemonData(number);
@@ -39,4 +40,18 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
   } catch (error) {
     console.error(error);
   }
+};
+
+let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
+// 포켓몬 랜덤 이미지(로딩, 퀴즈)
+export const getPokemonRandomImage = async () => {
+  if (defaultNumber === null) {
+    defaultNumber = Math.floor(Math.random() * 1025 + 1);
+  }
+
+  const pokemonData = await fetchPokemonData(defaultNumber);
+  const pokemonRandomImage =
+    pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
+    pokemonData.sprites.front_default;
+  return pokemonRandomImage;
 };
