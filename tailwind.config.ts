@@ -9,34 +9,30 @@ const config: Config = {
   theme: {
     extend: {
       keyframes: {
-        'slide-in-elliptic-bottom-bck': {
+        'fade-in-bottom': {
           '0%': {
-            transform: 'translateY(600px) rotateX(-30deg) scale(6.5)',
-            'transform-origin': '50% -100%',
+            transform: 'translateY(50px)',
             opacity: '0',
           },
           '100%': {
-            transform: 'translateY(0) rotateX(0) scale(1)',
-            'transform-origin': '50% 500px',
+            transform: 'translateY(0)',
             opacity: '1',
           },
         },
-        'slide-out-elliptic-bottom-fwd': {
+        'fade-out-bottom': {
           '0%': {
-            transform: 'translateY(0) rotateX(0) scale(1)',
-            'transform-origin': '50% 500px',
+            transform: 'translateY(0)',
             opacity: '1',
           },
           '100%': {
-            transform: 'translateY(600px) rotateX(-20deg) scale(6)',
-            'transform-origin': '50% -100%',
+            transform: 'translateY(50px)',
             opacity: '0',
           },
         },
       },
       animation: {
-        slideInEllipticBottomBck: 'slide-in-elliptic-bottom-bck 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
-        slideOutEllipticBottomFwd: 'slide-out-elliptic-bottom-fwd 0.7s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
+        fadeInBottom: 'fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
+        fadeOutBottom: 'fade-out-bottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
       },
       colors: {
         background: 'var(--background)',
