@@ -41,7 +41,6 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     console.error(error);
   }
 };
-
 // 포켓몬 도감 리스트 데이터
 // Todo 더보기 버튼 클릭시 offset와 limit로 추가 데이터 불러오도록 하기
 export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
