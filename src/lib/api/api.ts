@@ -44,21 +44,22 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
 
 // 포켓몬 도감 리스트 데이터
 // Todo 더보기 버튼 클릭시 offset와 limit로 추가 데이터 불러오도록 하기
-export const getPokemonAllList = async () => {
+export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
   // offset: 몇번째 부터 불러올지 정하는 값, limit: 몇개의 데이터를 불러올지 정하는 값
-  const pokemonAllListResponse = await fetchPokemonListData({ offset: 0, limit: 20 });
-  const pokemonPromises = pokemonAllListResponse.results.map((result: Language) => {
+  const pokemonAllListResponse = await fetchPokemonListData({ offset, limit });
+  const pokemonPromises: PokemonInfo[] = pokemonAllListResponse.results.map((result: Language) => {
     const pokemonQuery = result.name;
     return getPokemonInfo({ number: pokemonQuery, language: 'ko' });
   });
   const pokemonAllList = await Promise.all(pokemonPromises);
-  return pokemonAllList;
+  return pokemonAllList as PokemonInfo[];
 };
 
 // 포켓몬 랜덤 이미지(로딩, 퀴즈)
 let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
 export const getPokemonRandomImage = async () => {
   if (defaultNumber === null) {
+    // 마지막 포켓몬 번호 1025라서 1~1025 랜던 번호
     defaultNumber = Math.floor(Math.random() * 1025 + 1);
   }
 
@@ -66,5 +67,5 @@ export const getPokemonRandomImage = async () => {
   const pokemonRandomImage =
     pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
     pokemonData.sprites.front_default;
-  return pokemonRandomImage;
+  return pokemonRandomImage as string;
 };
