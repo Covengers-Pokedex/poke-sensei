@@ -8,16 +8,16 @@ interface ModalFrameProps {
   isOpenModal: boolean;
   closeModal: () => void;
   children: ReactNode;
+  backdropBgColor?: string;
 }
 
-export default function ModalFrame({ isOpenModal, closeModal, children }: ModalFrameProps) {
-  //TODO: toggleModal 하면 닫힘 애니메이션 나오는 순간에 클릭하면 닫히다가 다시 열림
+export default function ModalFrame({ isOpenModal, closeModal, children, backdropBgColor }: ModalFrameProps) {
   const { isHidden } = useHidden(isOpenModal);
   return (
     <>
       {!isHidden && (
         <Portal>
-          <BackDrop onCloseModal={closeModal} />
+          <BackDrop closeModal={closeModal} backdropBgColor={backdropBgColor} />
           <div className="fixed modal-z-index viewport-center">
             <div className={classNames(isOpenModal ? 'animate-fadeInBottom' : 'animate-fadeOutBottom')}>{children}</div>
           </div>
