@@ -1,3 +1,3 @@
-export default function BackDrop() {
-  return <div className="backdrop modal-z-index" />;
+export default function BackDrop({ onCloseModal }: { onCloseModal: () => void }) {
+  return <div onClick={onCloseModal} className="backdrop modal-z-index" />;
 }
