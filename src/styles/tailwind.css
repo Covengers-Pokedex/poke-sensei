@@ -6,4 +6,10 @@
   .backdrop {
     @apply fixed top-0 left-0 h-[100dvh] w-[100dvw];
   }
+  .draggable-z-index {
+    z-index: 1;
+  }
+  .modal-z-index {
+    z-index: 2;
+  }
 }

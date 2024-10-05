@@ -22,7 +22,7 @@ export default function DraggableMenuTrigger() {
 
   return (
     // 배경이 되는 요소는 클릭이 되지 않아야 도감 클릭에 영향을 미치지 않기 때문에 pointer-events-none 스타일 적용
-    <div ref={constraintsRef} className={'backdrop pointer-events-none'}>
+    <div ref={constraintsRef} className={'backdrop pointer-events-none draggable-z-index'}>
       <SearchMenuContainer isOpenMenu={isOpen} onCloseMenuClick={handleMenuDisplayClick} />
       <motion.div
         ref={menuContainer}
