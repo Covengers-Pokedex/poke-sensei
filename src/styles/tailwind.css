@@ -6,10 +6,16 @@
   .backdrop {
     @apply fixed top-0 left-0 h-[100dvh] w-[100dvw];
   }
+  .viewport-center {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
   .draggable-z-index {
     z-index: 1;
   }
-  .modal-z-index {
+  .modal-backdrop-z-index {
     z-index: 2;
+  }
+  .modal-z-index {
+    z-index: 3;
   }
 }
