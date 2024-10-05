@@ -28,7 +28,7 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: Se
   }, [isOpenMenu]);
 
   return (
-    <div className={'absolute left-1/2 top-1/4 -translate-x-1/2 w-full flex justify-center pointer-events-auto'}>
+    <div className="absolute left-1/2 top-1/4 -translate-x-1/2 w-full flex justify-center pointer-events-auto">
       <div
         className={classNames(
           'flex gap-4 flex-col items-center',
@@ -36,10 +36,10 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: Se
           !isVisible && 'hidden',
         )}
       >
-        <button onClick={onCloseMenuClick} className={'absolute right-1 top-0'}>
+        <button onClick={onCloseMenuClick} className="absolute right-1 top-0">
           x
         </button>
-        <Image src={defaultPokemonImage} alt={'포켓몬 이미지'} height={75} width={75} unoptimized priority />
+        <Image src={defaultPokemonImage} alt="포켓몬 이미지" height={75} width={75} unoptimized priority />
         <SearchMenuContent />
       </div>
     </div>
