@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import SearchMenuContent from './SearchMenuContent';
 import Image from 'next/image';
-import defaultPokemonImage from '@/images/pokemon/pikachu-live.gif';
+import defaultPokemonImage from '@/images/pokemon/pikachu.gif';
 
 interface SearchMenuContainerProps {
   isOpenMenu: boolean;
