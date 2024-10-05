@@ -2,6 +2,7 @@ import getQueryClient from '@/utils/getQueryClient';
 import PokemonList from '../_components/main/PokemonList';
 import { getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import SearchSection from '../_components/main/SearchSection';
 export default async function MainPage() {
   const queryClient = getQueryClient();
 
@@ -14,12 +15,11 @@ export default async function MainPage() {
 
   const dehydratedState = dehydrate(queryClient);
   return (
-    <>
+    <div className="max-w-[1200px]  mb-0 xl:mx-auto mt-20 rounded-xl px-5 xl:px-10 h-full bg-gray-200">
+      <SearchSection />
       <HydrationBoundary state={dehydratedState}>
-        <div className="max-w-[1200px] m-10 xl:m-auto mt-20 rounded-xl px-5 xl:px-10 min-h-[100vh] bg-gray-200">
-          <PokemonList />
-        </div>
+        <PokemonList />
       </HydrationBoundary>
-    </>
+    </div>
   );
 }

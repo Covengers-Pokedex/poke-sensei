@@ -1,15 +1,16 @@
 'use client';
 import Image from 'next/image';
 import monsterBall from '@/images/items/poke-ball.webp';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getPokemonAllList } from '@/lib/api/api';
+import matchTypeToColor from '@/utils/matchTypeToColor';
+import useInfiniteScroll from '@/hooks/useInfinityScroll';
+import { useState } from 'react';
 
 export default function PokemonList() {
-  const {
-    data: pokemonData,
-    fetchNextPage,
-    error,
-  } = useInfiniteQuery({
+  const [hasMore, setHasMore] = useState(true);
+
+  const { data: pokemonData, fetchNextPage } = useInfiniteQuery({
     queryKey: ['pokemon'],
     queryFn: ({ pageParam }) => getPokemonAllList({ offset: pageParam, limit: 20 }),
     initialPageParam: 0,
@@ -17,17 +18,21 @@ export default function PokemonList() {
       if (lastPage.length >= 20) {
         return allPages.length * 20;
       }
+      setHasMore(false);
       return undefined;
     },
   });
-
+  const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
+    fetchNextPage();
+    saveScrollPosition();
+  }, hasMore);
   return (
-    <div className="grid gap-4 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-[40%]">
+    <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
       {pokemonData?.pages.map(pokemonList =>
         pokemonList.map(pokemon => (
           <div
             key={pokemon.id}
-            className="flex transition-all ease-in duration-200 hover:scale-110 bg-white rounded-xl shadow-md flex-col border relative w-[210px] h-[210px] p-4 items-center justify-between"
+            className="flex transition-all ease-in duration-200 hover:scale-110 bg-white rounded-xl shadow-md flex-col border relative min-w-[210px] w-full max-w-[322.5px] h-full min-h-[210px] p-4 items-center justify-between"
           >
             <span className="absolute top-1 text-xs opacity-30">No.{pokemon.id}</span>
             <span className="flex pt-1.5 justify-center w-full">{pokemon.name}</span>
@@ -40,7 +45,11 @@ export default function PokemonList() {
 
             <div className="flex w-full gap-2 flex-nowrap">
               {pokemon.typeList.map(type => (
-                <span className="w-full border py-1 text-sm rounded-lg flex justify-center" key={type.name}>
+                <span
+                  style={{ backgroundColor: `${matchTypeToColor(type.name)}` }}
+                  className="w-full text-white py-1 opacity-80 shadow-lg text-sm rounded-lg flex justify-center"
+                  key={type.name}
+                >
                   {type.name}
                 </span>
               ))}
@@ -48,13 +57,7 @@ export default function PokemonList() {
           </div>
         )),
       )}
-      <button
-        onClick={() => {
-          fetchNextPage();
-        }}
-      >
-        더보기
-      </button>
+      <div ref={targetRef}> </div>
     </div>
   );
 }
