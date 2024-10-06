@@ -57,18 +57,33 @@ export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
 
 // 포켓몬 랜덤 이미지(로딩, 퀴즈)
 let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
+
 export const getPokemonRandomImage = async (language = 'ko') => {
   if (defaultNumber === null) {
-    // 마지막 포켓몬 번호 1025라서 1~1025 랜던 번호
-    defaultNumber = Math.floor(Math.random() * 1025 + 1);
+    // 1세대 포켓몬만 가져오기
+    defaultNumber = Math.floor(Math.random() * 151 + 1);
   }
 
-  const pokemonData = await fetchPokemonData(defaultNumber);
-  const speciesData = await fetchSpeciesData(defaultNumber);
-  const pokemonFlavor = getFlavorText(speciesData, language);
-  const pokemonName = getPokemonName(speciesData, language);
-  const pokemonRandomImage =
-    pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
-    pokemonData.sprites.front_default;
-  return { pokemonRandomImage, pokemonName, pokemonFlavor };
+  const fetchPokemon = async (num: number) => {
+    const [pokemonData, speciesData] = await Promise.all([fetchPokemonData(num), fetchSpeciesData(num)]);
+    const pokemonHint = getFlavorText(speciesData, language);
+    const pokemonName = getPokemonName(speciesData, language);
+
+    const pokemonRandomImage =
+      pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
+      pokemonData.sprites.front_default;
+
+    return { pokemonRandomImage, pokemonName, pokemonHint };
+  };
+
+  let result = await fetchPokemon(defaultNumber);
+
+  // pokemonHint(설명)가 없는 포켓몬이면 다시 호출
+  if (!result.pokemonHint) {
+    // 새로운 포켓몬 번호 생성
+    defaultNumber = Math.floor(Math.random() * 151 + 1);
+    result = await fetchPokemon(defaultNumber);
+  }
+
+  return result;
 };
