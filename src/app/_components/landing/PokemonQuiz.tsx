@@ -1,9 +1,9 @@
 'use client';
 
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import Image from 'next/image';
-import { getPokemonRandomImage } from '../../../lib/api/api';
+import { getRandomNumber, getPokemonRandomImage } from '../../../lib/api/api';
 
 export default function PokemonQuiz() {
   const FILTER_ON = 'filter brightness-0'; // 포켓몬 숨기기
@@ -11,15 +11,16 @@ export default function PokemonQuiz() {
   const [userInput, setUserInput] = useState<string>('');
   const [quizResult, setQuizResult] = useState<boolean>(false);
   const [quizResultText, setQuizResultText] = useState<string>('');
-
+  const [randomNumber, setRandomNumber] = useState<number>(getRandomNumber(1, 151));
+  const queryClient = useQueryClient();
   const { data, isLoading, isError, refetch } = useQuery({
-    queryKey: ['randomPokemon'],
+    queryKey: ['randomPokemon', randomNumber],
     queryFn: async () => {
-      const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage();
+      const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage(randomNumber);
       return { pokemonName, pokemonRandomImage, pokemonHint };
     },
     refetchOnWindowFocus: false,
-    staleTime: 0,
+    staleTime: 1000 * 60 * 5,
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,7 +46,9 @@ export default function PokemonQuiz() {
 
   const handleResetQuiz = () => {
     setQuizResult(false);
-    refetch();
+    const newRandomNumber = getRandomNumber(1, 151); // 랜덤 숫자 생성
+    setRandomNumber(newRandomNumber);
+    queryClient.invalidateQueries({ queryKey: ['randomPokemon', newRandomNumber] }); // 새로운 쿼리 무효화
   };
 
   return (
@@ -59,7 +62,7 @@ export default function PokemonQuiz() {
         </button>
       )}
       <Image
-        className={`${quizResult ? FILTER_OUT : FILTER_ON} mt-3 w-[130px] lg:w-[240px]`}
+        className={`${quizResult ? 'filter brightness-100' : 'filter brightness-0'} mt-3 w-[130px] lg:w-[240px]`}
         src={data?.pokemonRandomImage}
         width={250}
         height={250}

@@ -1,27 +1,12 @@
-import { HydrationBoundary, dehydrate } from '@tanstack/react-query';
 import DraggableMenuTrigger from './_components/draggableSearchMenu/DraggableMenuTrigger';
 import PokemonQuiz from './_components/landing/PokemonQuiz';
-import getQueryClient from '@/lib/api/getQueryClient';
-import { getPokemonRandomImage } from '@/lib/api/api';
 import Link from 'next/link';
 
 export default async function Landing() {
-  const queryClient = getQueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ['randomPokemon'],
-    queryFn: async () => {
-      const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage();
-      return { pokemonName, pokemonRandomImage, pokemonHint };
-    },
-    staleTime: 0,
-  });
-
-  const dehydratedState = dehydrate(queryClient);
   return (
     <div>
       <DraggableMenuTrigger />
-      <div className="flex flex-col justify-between items-center gap-8 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full min-h-[470px] sm:min-h-[500px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
+      <div className="flex flex-col justify-between items-center gap-8 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full min-h-[500px] sm:min-h-[700px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
         <div className="w-full mt-[-20px] sm:mt-[-30px]">
           <h1 className="title-line text-2xl sm:text-5xl lg:text-6xl text-center text-[#F9DC42]">
             오늘의 포켓몬은 뭘까요?
@@ -34,9 +19,7 @@ export default async function Landing() {
         >
           포켓몬 도감
         </Link>
-        <HydrationBoundary state={dehydratedState}>
-          <PokemonQuiz />
-        </HydrationBoundary>
+        <PokemonQuiz />
       </div>
     </div>
   );
