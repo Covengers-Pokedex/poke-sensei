@@ -55,7 +55,19 @@ export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
   return pokemonAllList as PokemonInfo[];
 };
 
-// 포켓몬 랜덤 이미지(로딩, 퀴즈)
+// 포켓몬 로딩 이미지
+export const getLoadingImage = async (number: number) => {
+  try {
+    const pokemonData = await fetchPokemonData(number);
+    const { pokemonImage } = getImages(pokemonData);
+
+    return pokemonImage;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 포켓몬 퀴즈 정보(이름, 이미지, 설명)
 let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
 
 export const getPokemonRandomImage = async (language = 'ko') => {
