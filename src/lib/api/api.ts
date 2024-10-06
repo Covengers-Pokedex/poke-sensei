@@ -67,35 +67,25 @@ export const getLoadingImage = async (number: number) => {
   }
 };
 
+// 랜덤 숫자 생성
+export const getRandomNumber = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
 // 포켓몬 퀴즈 정보(이름, 이미지, 설명)
-let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
+export const getPokemonRandomImage = async (number: number, language = 'ko') => {
+  const [pokemonData, speciesData] = await Promise.all([fetchPokemonData(number), fetchSpeciesData(number)]);
+  let pokemonHint = getFlavorText(speciesData, language);
+  const pokemonName = getPokemonName(speciesData, language);
+  const pokemonRandomImage =
+    pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
+    pokemonData.sprites.front_default;
+  console.log(pokemonHint);
 
-export const getPokemonRandomImage = async (language = 'ko') => {
-  if (defaultNumber === null) {
-    // 1세대 포켓몬만 가져오기
-    defaultNumber = Math.floor(Math.random() * 151 + 1);
+  if (!pokemonHint) {
+    const pokemonDataRefetch = await fetchSpeciesData(number);
+    pokemonHint = getFlavorText(pokemonDataRefetch, language);
   }
 
-  const fetchPokemon = async (num: number) => {
-    const [pokemonData, speciesData] = await Promise.all([fetchPokemonData(num), fetchSpeciesData(num)]);
-    const pokemonHint = getFlavorText(speciesData, language);
-    const pokemonName = getPokemonName(speciesData, language);
-
-    const pokemonRandomImage =
-      pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
-      pokemonData.sprites.front_default;
-
-    return { pokemonRandomImage, pokemonName, pokemonHint };
-  };
-
-  let result = await fetchPokemon(defaultNumber);
-
-  // pokemonHint(설명)가 없는 포켓몬이면 다시 호출
-  if (!result.pokemonHint) {
-    // 새로운 포켓몬 번호 생성
-    defaultNumber = Math.floor(Math.random() * 151 + 1);
-    result = await fetchPokemon(defaultNumber);
-  }
-
-  return result;
+  return { pokemonRandomImage, pokemonName, pokemonHint };
 };
