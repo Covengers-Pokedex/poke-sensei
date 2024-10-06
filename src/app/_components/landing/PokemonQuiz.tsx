@@ -4,6 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import Image from 'next/image';
 import { getRandomNumber, getPokemonRandomImage } from '../../../lib/api/api';
+import classNames from 'classnames';
 
 export default function PokemonQuiz() {
   const [userInput, setUserInput] = useState<string>('');
@@ -60,7 +61,7 @@ export default function PokemonQuiz() {
         </button>
       )}
       <Image
-        className={`${quizResult ? 'filter brightness-100' : 'filter brightness-0'} mt-3 w-[130px] lg:w-[240px]`}
+        className={classNames('mt-3 w-[130px] lg:w-[240px] filter', quizResult ? 'brightness-100' : 'brightness-0')}
         src={data?.pokemonRandomImage}
         width={250}
         height={250}
