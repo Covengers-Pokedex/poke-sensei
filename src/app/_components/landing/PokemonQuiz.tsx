@@ -6,14 +6,12 @@ import Image from 'next/image';
 import { getRandomNumber, getPokemonRandomImage } from '../../../lib/api/api';
 
 export default function PokemonQuiz() {
-  const FILTER_ON = 'filter brightness-0'; // 포켓몬 숨기기
-  const FILTER_OUT = 'filter brightness-100'; // 포켓몬 숨기기
   const [userInput, setUserInput] = useState<string>('');
   const [quizResult, setQuizResult] = useState<boolean>(false);
   const [quizResultText, setQuizResultText] = useState<string>('');
   const [randomNumber, setRandomNumber] = useState<number>(getRandomNumber(1, 151));
   const queryClient = useQueryClient();
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: ['randomPokemon', randomNumber],
     queryFn: async () => {
       const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage(randomNumber);
@@ -48,7 +46,7 @@ export default function PokemonQuiz() {
     setQuizResult(false);
     const newRandomNumber = getRandomNumber(1, 151); // 랜덤 숫자 생성
     setRandomNumber(newRandomNumber);
-    queryClient.invalidateQueries({ queryKey: ['randomPokemon', newRandomNumber] }); // 새로운 쿼리 무효화
+    queryClient.invalidateQueries({ queryKey: ['randomPokemon', newRandomNumber] }); // 이전 쿼리 무효화
   };
 
   return (
