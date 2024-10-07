@@ -6,11 +6,6 @@ const useInfiniteScroll = (loadMore: () => void, hasMore: boolean | undefined) =
   const scrollYRef = useRef(0);
 
   useEffect(() => {
-    // 이전 옵저버가 존재하면 정리
-    if (observerRef.current) {
-      observerRef.current.disconnect();
-    }
-
     observerRef.current = new IntersectionObserver(
       entries => {
         entries.forEach(async entry => {
@@ -36,16 +31,6 @@ const useInfiniteScroll = (loadMore: () => void, hasMore: boolean | undefined) =
       observerRef.current?.disconnect();
     };
   }, [loadMore, hasMore]);
-
-  useEffect(() => {
-    const currentTarget = targetRef.current;
-    if (!hasMore) {
-      if (currentTarget) {
-        observerRef.current?.unobserve(currentTarget);
-      }
-      observerRef.current?.disconnect();
-    }
-  }, [hasMore]);
 
   useEffect(() => {
     window.scrollTo(0, scrollYRef.current);
