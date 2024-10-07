@@ -12,8 +12,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="ko">
+      <body className="bg-[#A8D8A8]">
         <div id="portal" />
         <div>{children}</div>
       </body>

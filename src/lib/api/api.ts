@@ -55,17 +55,36 @@ export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
   return pokemonAllList as PokemonInfo[];
 };
 
-// 포켓몬 랜덤 이미지(로딩, 퀴즈)
-let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
-export const getPokemonRandomImage = async () => {
-  if (defaultNumber === null) {
-    // 마지막 포켓몬 번호 1025라서 1~1025 랜던 번호
-    defaultNumber = Math.floor(Math.random() * 1025 + 1);
-  }
+// 포켓몬 로딩 이미지
+export const getLoadingImage = async (number: number) => {
+  try {
+    const pokemonData = await fetchPokemonData(number);
+    const { pokemonImage } = getImages(pokemonData);
 
-  const pokemonData = await fetchPokemonData(defaultNumber);
+    return pokemonImage;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 랜덤 숫자 생성
+export const getRandomNumber = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+// 포켓몬 퀴즈 정보(이름, 이미지, 설명)
+export const getPokemonRandomImage = async (number: number, language = 'ko') => {
+  const [pokemonData, speciesData] = await Promise.all([fetchPokemonData(number), fetchSpeciesData(number)]);
+  let pokemonHint = getFlavorText(speciesData, language);
+  const pokemonName = getPokemonName(speciesData, language);
   const pokemonRandomImage =
     pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
     pokemonData.sprites.front_default;
-  return pokemonRandomImage as string;
+
+  if (!pokemonHint) {
+    const pokemonDataRefetch = await fetchSpeciesData(number);
+    pokemonHint = getFlavorText(pokemonDataRefetch, language);
+  }
+
+  return { pokemonRandomImage, pokemonName, pokemonHint };
 };

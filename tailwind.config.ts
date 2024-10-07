@@ -38,6 +38,10 @@ const config: Config = {
         background: 'var(--background)',
         foreground: 'var(--foreground)',
       },
+      fontFamily: {
+        Galmuri9: ['Galmuri9', 'sans-serif'],
+        Galmuri7: ['Galmuri7', 'sans-serif'],
+      },
     },
   },
   plugins: [],
