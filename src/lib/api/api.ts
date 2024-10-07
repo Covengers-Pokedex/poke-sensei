@@ -80,7 +80,6 @@ export const getPokemonRandomImage = async (number: number, language = 'ko') => 
   const pokemonRandomImage =
     pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
     pokemonData.sprites.front_default;
-  console.log(pokemonHint);
 
   if (!pokemonHint) {
     const pokemonDataRefetch = await fetchSpeciesData(number);

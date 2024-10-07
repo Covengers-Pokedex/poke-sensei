@@ -15,7 +15,6 @@ export const getPokemonGenus = (speciesData: any, language: string): string | nu
 // 설명 데이터 추출
 export const getFlavorText = (speciesData: any, language: string): string | null => {
   const flavorText = speciesData.flavor_text_entries.find((flavor: any) => flavor.language.name === language);
-  console.log(flavorText);
   return flavorText ? flavorText.flavor_text.replace(/\n/g, ' ') : null;
 };
 
