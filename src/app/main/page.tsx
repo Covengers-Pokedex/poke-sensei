@@ -16,7 +16,7 @@ export default async function MainPage() {
 
   const dehydratedState = dehydrate(queryClient);
   return (
-    <div className="max-w-[1200px]  mb-0 xl:mx-auto mt-20 rounded-xl px-5 xl:px-10 h-full bg-gray-200">
+    <div className="max-w-[1200px]  mb-0 xl:mx-auto mt-20 rounded-xl px-5 xl:px-10 h-full bg-[#F2F4F6]">
       <SearchSection />
       <HydrationBoundary state={dehydratedState}>
         <PokemonList />

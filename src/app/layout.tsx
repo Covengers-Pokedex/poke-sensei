@@ -15,8 +15,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="bg-[#A8D8A8]">
-        <div id="portal" />
-        <div>{children}</div>
+        <Providers>
+          <div id="portal" />
+          <div>{children}</div>
+        </Providers>
       </body>
     </html>
   );
