@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { getRandomNumber, getPokemonRandomImage } from '../../../lib/api/api';
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ export default function PokemonQuiz() {
   const [quizResultText, setQuizResultText] = useState<string>('');
   const [randomNumber, setRandomNumber] = useState<number>(getRandomNumber(1, 151));
   const queryClient = useQueryClient();
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const { data, isLoading, isError } = useQuery({
     queryKey: ['randomPokemon', randomNumber],
     queryFn: async () => {
@@ -35,6 +36,19 @@ export default function PokemonQuiz() {
     }
   };
 
+  const handleResetQuiz = () => {
+    setQuizResult(false);
+    const newRandomNumber = getRandomNumber(1, 151); // 랜덤 숫자 생성
+    setRandomNumber(newRandomNumber);
+    queryClient.invalidateQueries({ queryKey: ['randomPokemon', newRandomNumber] }); // 이전 쿼리 무효화
+  };
+
+  useEffect(() => {
+    if (quizResult) {
+      buttonRef.current?.focus();
+    }
+  }, [quizResult]);
+
   if (isLoading) {
     return <div>로딩중...</div>;
   }
@@ -43,23 +57,8 @@ export default function PokemonQuiz() {
     return <div>에러입니다.</div>;
   }
 
-  const handleResetQuiz = () => {
-    setQuizResult(false);
-    const newRandomNumber = getRandomNumber(1, 151); // 랜덤 숫자 생성
-    setRandomNumber(newRandomNumber);
-    queryClient.invalidateQueries({ queryKey: ['randomPokemon', newRandomNumber] }); // 이전 쿼리 무효화
-  };
-
   return (
     <>
-      {quizResult && (
-        <button
-          onClick={handleResetQuiz}
-          className="absolute top-12 sm:top-10 text-sm sm:text-[16px] left-3 translate-y-[-50%] px-3 rounded-lg bg-[#D9D9D9] shadow-[2px_4px_4px_rgba(0,0,0,0.2)] transition-all hover:bg-[#F9DC42] leading-[30px] h-[30px] sm:leading-[35px] sm:h-[35px]"
-        >
-          다시 풀기
-        </button>
-      )}
       <Image
         className={classNames('mt-3 w-[130px] lg:w-[240px] filter', quizResult ? 'brightness-100' : 'brightness-0')}
         src={data?.pokemonRandomImage}
@@ -71,9 +70,13 @@ export default function PokemonQuiz() {
         {quizResult && <p className="text-xl sm:text-2xl leading-9">{data?.pokemonName}</p>}
         <p className="text-l w-full text-center break-keep">{data?.pokemonHint}</p>
         {quizResult && <p className="text-center text-lg sm:text-xl leading-9 break-keep">{quizResultText}</p>}
-        {quizResult || (
-          <div className="relative w-full text-center">
-            <form onSubmit={handleSubmit} className="flex justify-center items-center gap-3">
+
+        <div className="relative w-full text-center">
+          <form
+            onSubmit={quizResult ? handleResetQuiz : handleSubmit}
+            className="flex justify-center items-center gap-3"
+          >
+            {quizResult || (
               <input
                 type="text"
                 placeholder="포켓몬을 맞춰보세요!"
@@ -83,15 +86,17 @@ export default function PokemonQuiz() {
                 }}
                 className="w-full max-w-80 h-10 p-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white"
               />
-              <button
-                type="submit"
-                className="h-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white"
-              >
-                제출
-              </button>
-            </form>
-          </div>
-        )}
+            )}
+
+            <button
+              type="submit"
+              ref={buttonRef}
+              className="h-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none"
+            >
+              {quizResult ? '다시 풀기' : '제출'}
+            </button>
+          </form>
+        </div>
       </div>
     </>
   );
