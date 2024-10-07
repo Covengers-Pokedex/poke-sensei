@@ -41,7 +41,6 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     console.error(error);
   }
 };
-
 // 포켓몬 도감 리스트 데이터
 // Todo 더보기 버튼 클릭시 offset와 limit로 추가 데이터 불러오도록 하기
 export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
@@ -55,6 +54,14 @@ export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
   return pokemonAllList as PokemonInfo[];
 };
 
+
+// 포켓몬 랜덤 이미지(로딩, 퀴즈)
+let defaultNumber: number | null = null; // 두번 호출되어 서로 다른 데이터를 호출하는 현상 방지 코드
+export const getPokemonRandomImage = async () => {
+  if (defaultNumber === null) {
+    // 마지막 포켓몬 번호 1025라서 1~1025 랜던 번호
+    defaultNumber = Math.floor(Math.random() * 1025 + 1);
+    
 // 포켓몬 로딩 이미지
 export const getLoadingImage = async (number: number) => {
   try {
@@ -81,10 +88,12 @@ export const getPokemonRandomImage = async (number: number, language = 'ko') => 
     pokemonData.sprites.versions['generation-v']['black-white'].animated.front_default ||
     pokemonData.sprites.front_default;
 
+
   if (!pokemonHint) {
     const pokemonDataRefetch = await fetchSpeciesData(number);
     pokemonHint = getFlavorText(pokemonDataRefetch, language);
   }
 
   return { pokemonRandomImage, pokemonName, pokemonHint };
+
 };
