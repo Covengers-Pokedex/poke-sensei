@@ -17,13 +17,16 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: Se
     <>
       {!isHidden && (
         <div className="pointer-events-auto">
-          <BackDrop closeModal={onCloseMenuClick} backdropBgColor="#000000" />
+          <BackDrop
+            className={classNames(isOpenMenu ? 'animate-backdropFadeIn' : 'animate-backdropFadeOut')}
+            closeModal={onCloseMenuClick}
+            backdropBgColor="#000000"
+          />
           <div className="absolute left-1/2 top-1/4 -translate-x-1/2 modal-z-index">
             <div
               className={classNames(
                 'flex gap-4 flex-col items-center',
                 isOpenMenu ? 'animate-fadeInBottom' : 'animate-fadeOutBottom',
-                isHidden && 'hidden',
               )}
             >
               <button onClick={onCloseMenuClick} className="absolute right-1 top-0 font-black">

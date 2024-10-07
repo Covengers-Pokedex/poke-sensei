@@ -29,10 +29,28 @@ const config: Config = {
             opacity: '0',
           },
         },
+        'backdrop-fade-in': {
+          '0%': {
+            opacity: '0',
+          },
+          '100%': {
+            opacity: '0.3',
+          },
+        },
+        'backdrop-fade-out': {
+          '0%': {
+            opacity: '0.3',
+          },
+          '100%': {
+            opacity: '0',
+          },
+        },
       },
       animation: {
         fadeInBottom: 'fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
         fadeOutBottom: 'fade-out-bottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        backdropFadeIn: 'backdrop-fade-in 0.5s ease-out both',
+        backdropFadeOut: 'backdrop-fade-out 0.5s ease-out both',
       },
       colors: {
         background: 'var(--background)',
