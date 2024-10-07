@@ -6,10 +6,11 @@ import { useRef, useState } from 'react';
 import SearchMenuContainer from './SearchMenuContainer';
 import classNames from 'classnames';
 import Portal from '../modal/Portal';
+import { useToggle } from '@/hooks/useToggle';
 
 export default function DraggableMenuTrigger() {
   const [isDragging, setIsDragging] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const { toggleValue, switchToggle, turnOffToggle } = useToggle();
   const dragControls = useDragControls();
   const constraintsRef = useRef(null);
   const menuContainer = useRef(null);
@@ -17,14 +18,14 @@ export default function DraggableMenuTrigger() {
   const handleMenuDisplayClick = () => {
     // 드래그가 아니라 클릭이 일어날 경우에만 메뉴가 열리도록 분기 처리
     if (!isDragging) {
-      setIsOpen(prevState => !prevState);
+      switchToggle();
     }
   };
 
   return (
     <Portal elementId="draggable">
       <div ref={constraintsRef} className="backdrop pointer-events-none draggable-z-index">
-        <SearchMenuContainer isOpenMenu={isOpen} onCloseMenuClick={handleMenuDisplayClick} />
+        <SearchMenuContainer isOpenMenu={toggleValue} onCloseMenuClick={turnOffToggle} />
         <motion.div
           ref={menuContainer}
           dragControls={dragControls}
