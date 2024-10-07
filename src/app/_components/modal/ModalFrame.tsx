@@ -16,7 +16,7 @@ export default function ModalFrame({ isOpenModal, closeModal, children, backdrop
   return (
     <>
       {!isHidden && (
-        <Portal>
+        <Portal elementId="modal">
           <BackDrop closeModal={closeModal} backdropBgColor={backdropBgColor} />
           <div className="fixed modal-z-index viewport-center">
             <div className={classNames(isOpenModal ? 'animate-fadeInBottom' : 'animate-fadeOutBottom')}>{children}</div>

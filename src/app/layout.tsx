@@ -14,7 +14,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div id="portal" />
+        <div id="draggable" />
+        <div id="modal" />
         <div>{children}</div>
       </body>
     </html>
