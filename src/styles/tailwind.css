@@ -3,8 +3,31 @@
 @tailwind utilities;
 
 @layer utilities {
-  .absolute-center {
-    /* 모바일 화면에서는 포켓몬 이미지 때문에 정중앙보다 약간 위로 올라오는 것이 편할 것이라 생각함*/
-    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-3/4 md:-translate-y-1/2;
+  .backdrop {
+    @apply fixed top-0 left-0 h-[100dvh] w-[100dvw];
   }
+  .viewport-center {
+    @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .draggable-z-index {
+    z-index: 1;
+  }
+  .modal-backdrop-z-index {
+    z-index: 2;
+  }
+  .modal-z-index {
+    z-index: 3;
+  }
+}
+
+.title-line {
+  font-family: 'Galmuri7';
+  /* 제목 텍스트의 외곽선 추가 */
+  text-shadow:
+    -4px 0px #3361a8,
+    0px 4px #3361a8,
+    4px 0px #3361a8,
+    0px -4px #3361a8;
+  /* 재목 텍스트의 그림자 추가 */
+  filter: drop-shadow(-5px 4px 0px rgba(0, 0, 0, 1));
 }
