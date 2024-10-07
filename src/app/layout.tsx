@@ -20,6 +20,8 @@ export default function RootLayout({
     <html lang="ko">
       <body className="bg-[#A8D8A8]">
         <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+        <div id="portal" />
+        <div>{children}</div>
       </body>
     </html>
   );
