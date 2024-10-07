@@ -29,7 +29,11 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: Se
                 isOpenMenu ? 'animate-fadeInBottom' : 'animate-fadeOutBottom',
               )}
             >
-              <button onClick={onCloseMenuClick} className="absolute right-1 top-0 font-black">
+              <button
+                onClick={onCloseMenuClick}
+                // x가 픽셀 느낌을 위해 아이콘이 아니라 단순 소문자다보니 문자가 아래로 치우쳐 있어 글자의 중앙 정렬을 수동으로 정렬함
+                className="absolute right-0 top-0 font-black bg-white pb-[4px] pl-[10px] pr-[8px] rounded-full"
+              >
                 x
               </button>
               <Image src={defaultPokemonImage} alt="포켓몬 이미지" height={75} width={75} unoptimized priority />
