@@ -1,8 +1,13 @@
+'use client';
+
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import DraggableMenuTrigger from './_components/draggableSearchMenu/DraggableMenuTrigger';
 import PokemonQuiz from './_components/landing/PokemonQuiz';
 import Link from 'next/link';
+import { useState } from 'react';
 
-export default async function Landing() {
+export default function Landing() {
+  const [queryClient] = useState(() => new QueryClient());
   return (
     <div>
       <DraggableMenuTrigger />
@@ -19,7 +24,9 @@ export default async function Landing() {
         >
           포켓몬 도감
         </Link>
-        <PokemonQuiz />
+        <QueryClientProvider client={queryClient}>
+          <PokemonQuiz />
+        </QueryClientProvider>
       </div>
     </div>
   );
