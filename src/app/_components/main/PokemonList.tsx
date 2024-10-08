@@ -1,27 +1,13 @@
 'use client';
 import Image from 'next/image';
 import monsterBall from '@/images/items/poke-ball.webp';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { getPokemonAllList } from '@/lib/api/api';
 import matchTypeToColor from '@/utils/matchTypeToColor';
 import useInfiniteScroll from '@/hooks/useInfinityScroll';
-import { useState } from 'react';
+import usePokemonList from '@/hooks/usePokemonList';
 
 export default function PokemonList() {
-  const [hasMore, setHasMore] = useState(true);
+  const { pokemonData, fetchNextPage, hasMore } = usePokemonList();
 
-  const { data: pokemonData, fetchNextPage } = useInfiniteQuery({
-    queryKey: ['pokemon'],
-    queryFn: ({ pageParam }) => getPokemonAllList({ offset: pageParam, limit: 20 }),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length >= 20) {
-        return allPages.length * 20;
-      }
-      setHasMore(false);
-      return undefined;
-    },
-  });
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
     fetchNextPage();
     saveScrollPosition();
