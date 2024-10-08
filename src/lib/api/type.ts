@@ -62,6 +62,10 @@ export interface GetPokemonListParams {
   limit: number;
 }
 
+export interface GetPokemonTypeListParams extends GetPokemonListParams {
+  number: number;
+}
+
 export interface Ability {
   flavor: string;
   name: string;

@@ -1,5 +1,5 @@
-import { fetchPokemonData, fetchSpeciesData, fetchEvolutionData, fetchPokemonListData } from './fetch';
-import { GetPokemonParams, PokemonInfo, Language } from './type';
+import { fetchPokemonData, fetchSpeciesData, fetchEvolutionData, fetchPokemonListData, fetchTypeData } from './fetch';
+import { GetPokemonParams, PokemonInfo, Language, GetPokemonListParams, GetPokemonTypeListParams } from './type';
 import axiosInstance from './instance';
 import {
   getPokemonName,
@@ -8,15 +8,16 @@ import {
   getPokemonTypes,
   getImages,
   getAbilities,
+  getTypeList,
 } from './getPokemonData';
 
 // 포켓몬 한마리의 데이터
 export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => {
   try {
     const pokemonData = await fetchPokemonData(number);
-    const speciesData = await fetchSpeciesData(number);
-
-    const { id, weight, height, abilities, types } = pokemonData;
+    const { id, weight, height, abilities, types, species } = pokemonData;
+    const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0];
+    const speciesData = await fetchSpeciesData(speciesNumber);
 
     const name = getPokemonName(speciesData, language);
     const genus = getPokemonGenus(speciesData, language);
@@ -41,9 +42,10 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     console.error(error);
   }
 };
+
 // 포켓몬 도감 리스트 데이터
 // Todo 더보기 버튼 클릭시 offset와 limit로 추가 데이터 불러오도록 하기
-export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
+export const getPokemonAllList = async ({ offset = 0, limit = 20 }: GetPokemonListParams) => {
   // offset: 몇번째 부터 불러올지 정하는 값, limit: 몇개의 데이터를 불러올지 정하는 값
   const pokemonAllListResponse = await fetchPokemonListData({ offset, limit });
   const pokemonPromises: PokemonInfo[] = pokemonAllListResponse.results.map((result: Language) => {
@@ -52,6 +54,39 @@ export const getPokemonAllList = async ({ offset = 0, limit = 20 }) => {
   });
   const pokemonAllList = await Promise.all(pokemonPromises);
   return pokemonAllList as PokemonInfo[];
+};
+
+// 포켓몬 로딩 이미지
+export const getLoadingImage = async (number: number) => {
+  try {
+    const pokemonData = await fetchPokemonData(number);
+    const { pokemonImage } = getImages(pokemonData);
+
+    return pokemonImage;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// 포켓몬 타입 필터 포켓몬 리스트(해당 타입 숫자를 넣으면 타입에 관련된 포켓몬 리스트 노출)
+export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: GetPokemonTypeListParams) => {
+  try {
+    const typeData = await fetchTypeData(number);
+    const pokemonData = await getTypeList(typeData, axiosInstance);
+    const pokemonIdList = pokemonData
+      .slice(offset, offset + limit) // 기본으로 데이터 20개씩 가져오고 offset를 20씩 늘려주면 그 후로 포켓몬 리스트를 20개씩 가져올 수 있다.
+      .map((pokemonData: any) => pokemonData.data.id);
+
+    const pokemonList = await Promise.all(
+      pokemonIdList.map((pokemonId: any) => {
+        return getPokemonInfo({ number: pokemonId, language: 'ko' });
+      }),
+    );
+
+    return pokemonList;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // 랜덤 숫자 생성
