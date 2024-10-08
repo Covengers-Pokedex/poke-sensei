@@ -6,6 +6,14 @@ export const getPokemonName = (speciesData: any, language: string): string | nul
   return pokemonName ? pokemonName.name : null;
 };
 
+// 타입에 따른 포켓몬 리스트 추출
+export const getTypeList = async (typeData: any, axiosInstance: any) => {
+  const pokemonTypeList = await Promise.all(
+    typeData.map((type: any) => axiosInstance.get(`pokemon/${type.pokemon.name}`)),
+  );
+  return pokemonTypeList || null;
+};
+
 // 분류 데이터 추출
 export const getPokemonGenus = (speciesData: any, language: string): string | null => {
   const pokemonGenera = speciesData.genera.find((name: PokemonLanguage) => name.language.name === language);

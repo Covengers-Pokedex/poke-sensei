@@ -37,3 +37,12 @@ export const fetchEvolutionData = async (number: number) => {
     console.error(error);
   }
 };
+
+export const fetchTypeData = async (number: number) => {
+  try {
+    const response = await axiosInstance.get(`${END_POINT.type}${number}`);
+    return response.data.pokemon;
+  } catch (error) {
+    console.error(error);
+  }
+};
