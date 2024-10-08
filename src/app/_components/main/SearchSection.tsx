@@ -1,11 +1,10 @@
 'use client';
-import { PokemonTypeWithColor } from '@/lib/api/type';
 import convertHexToRGBA from '@/utils/convertHexToRGBA';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
-import { useHidden } from '@/hooks/useHidden';
+import { TYPE_BY_COLOR } from '@/lib/constant';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -30,7 +29,7 @@ const item = {
 export default function SearchSection() {
   const [activedTypes, setActivedTypes] = useState<string[]>([]);
   const { toggleValue, switchToggle } = useToggle();
-
+  console.log(activedTypes);
   const handleResetButton = () => {
     setActivedTypes([]);
   };
@@ -75,25 +74,29 @@ export default function SearchSection() {
           animate="show"
           className="grid gap-3 pt-5 grid-cols-6 "
         >
-          {Object.entries(PokemonTypeWithColor).map(([type, color]) => (
-            <motion.div variants={item} key={type} className="relative h-[40px] w-full">
+          {Object.entries(TYPE_BY_COLOR).map(([typeKey, typeInfo]) => (
+            <motion.div variants={item} key={typeKey} className="relative h-[40px] w-full">
               <motion.button
-                initial={{ top: '0', boxShadow: `0px 7px 2px ${convertHexToRGBA(color, 0.6)}`, opacity: '0.5' }}
+                initial={{
+                  top: '0',
+                  boxShadow: `0px 7px 2px ${convertHexToRGBA(typeInfo.color, 0.6)}`,
+                  opacity: '0.5',
+                }}
                 animate={
-                  activedTypes.includes(type)
-                    ? { top: '7px', boxShadow: `0px 0px 2px ${convertHexToRGBA(color, 0.6)}`, opacity: '1' }
-                    : { top: '0', boxShadow: `0px 7px 2px ${convertHexToRGBA(color, 0.6)}`, opacity: '0.5' }
+                  activedTypes.includes(typeKey)
+                    ? { top: '7px', boxShadow: `0px 0px 2px ${convertHexToRGBA(typeInfo.color, 0.6)}`, opacity: '1' }
+                    : { top: '0', boxShadow: `0px 7px 2px ${convertHexToRGBA(typeInfo.color, 0.6)}`, opacity: '0.5' }
                 }
                 whileHover={{ opacity: '1' }}
                 transition={{ duration: 0.2 }}
                 onClick={() => {
-                  handleTypeButton(type);
+                  handleTypeButton(typeKey);
                 }}
                 className={classNames('rounded-md w-full flex absolute justify-center py-1.5 text-white')}
-                style={{ backgroundColor: color }}
-                key={type}
+                style={{ backgroundColor: typeInfo.color }}
+                key={typeKey}
               >
-                {type}
+                {typeInfo['ko']}
               </motion.button>
             </motion.div>
           ))}

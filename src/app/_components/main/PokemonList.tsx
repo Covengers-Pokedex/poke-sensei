@@ -1,20 +1,21 @@
 'use client';
 import Image from 'next/image';
 import monsterBall from '@/images/items/poke-ball.webp';
-import matchTypeToColor from '@/utils/matchTypeToColor';
+
 import useInfiniteScroll from '@/hooks/useInfinityScroll';
 import usePokemonList from '@/hooks/usePokemonList';
+import koreanTypeToColor from '@/utils/koreanTypeToColor';
 
 export default function PokemonList() {
-  const { pokemonData, fetchNextPage, hasMore } = usePokemonList();
+  const { allPokemonData, fetchAllPokemonNextPage, hasMore } = usePokemonList();
 
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
-    fetchNextPage();
+    fetchAllPokemonNextPage();
     saveScrollPosition();
   }, hasMore);
   return (
     <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
-      {pokemonData?.pages.map(pokemonList =>
+      {allPokemonData?.pages.map(pokemonList =>
         pokemonList.map(pokemon => (
           <div
             key={pokemon.id}
@@ -32,7 +33,7 @@ export default function PokemonList() {
             <div className="flex w-full gap-2 flex-nowrap">
               {pokemon.typeList.map(type => (
                 <span
-                  style={{ backgroundColor: `${matchTypeToColor(type.name)}` }}
+                  style={{ backgroundColor: `${koreanTypeToColor(type.name)}` }}
                   className="w-full text-white py-1 opacity-80 shadow-lg text-sm rounded-lg flex justify-center"
                   key={type.name}
                 >
