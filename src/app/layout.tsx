@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import '@/styles/globals.css';
+import Providers from './_components/Providers';
 
 export const metadata: Metadata = {
   title: '포켓몬 도감',
