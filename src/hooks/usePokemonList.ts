@@ -1,11 +1,11 @@
 import { getPokemonAllList } from '@/lib/api/api';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
 const usePokemonList = () => {
   const [hasMore, setHasMore] = useState(true);
 
-  const { data: pokemonData, fetchNextPage } = useInfiniteQuery({
+  const { data: pokemonData, fetchNextPage } = useSuspenseInfiniteQuery({
     queryKey: ['pokemon'],
     queryFn: ({ pageParam }) => getPokemonAllList({ offset: pageParam, limit: 20 }),
     initialPageParam: 0,
@@ -17,6 +17,7 @@ const usePokemonList = () => {
       return undefined;
     },
   });
+
   return { pokemonData, fetchNextPage, hasMore };
 };
 export default usePokemonList;
