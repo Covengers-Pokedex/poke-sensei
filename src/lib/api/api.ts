@@ -16,7 +16,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
   try {
     const pokemonData = await fetchPokemonData(number);
     const { id, weight, height, abilities, types, species } = pokemonData;
-    const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0];
+    const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0]; // 포켓몬 설명 데이터를 가져오는 url에서 쿼리(고유 번호)만 가져오는 정규식
     const speciesData = await fetchSpeciesData(speciesNumber);
 
     const name = getPokemonName(speciesData, language);
