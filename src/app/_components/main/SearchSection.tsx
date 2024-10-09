@@ -53,8 +53,8 @@ export default function SearchSection() {
       <div className="flex gap-3">
         <button
           className={classNames(
-            toggleValue ? 'bg-gray-200 shadow-none top-1' : 'bg-white',
-            ' px-5 py-3 flex hover:bg-gray-200 active:shadow-none active:top-1 justify-center relative rounded-xl items-center shadow-xl',
+            toggleValue ? 'bg-gray-200 shadow-none top-1' : 'bg-white shadow-xl',
+            ' px-5 py-3 flex hover:bg-gray-200 active:shadow-none active:top-1 justify-center relative rounded-xl items-center ',
           )}
           onClick={switchToggle}
         >
