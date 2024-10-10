@@ -31,3 +31,12 @@
   /* 재목 텍스트의 그림자 추가 */
   filter: drop-shadow(-5px 4px 0px rgba(0, 0, 0, 1));
 }
+
+.outline-text {
+  text-shadow:
+    1px 1px 0 #ffffff,
+    -1px -1px 0 #ffffff,
+    1px -1px 0 #ffffff,
+    -1px 1px 0 #ffffff;
+  color: #000000; /* 텍스트 색상 */
+}

@@ -93,7 +93,7 @@ export default function PokemonQuiz() {
               ref={buttonRef}
               className="h-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none"
             >
-              {quizResult ? '다시 풀기' : '제출'}
+              {quizResult ? '다시 풀기 ⏎' : '제출'}
             </button>
           </form>
         </div>
