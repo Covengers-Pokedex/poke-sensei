@@ -7,12 +7,13 @@ import { PokemonInfo, PokemonTypeWithColor } from '@/lib/api/type';
 
 interface PokemonModalProps {
   turnOffToggle: () => void;
+  pokemonNumber: number;
 }
 
-export default function PokemonModal({ turnOffToggle }: PokemonModalProps) {
+export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonModalProps) {
   const [tabActive, setTabActive] = useState<string>('info');
   const [shiny, setShiny] = useState<boolean>(false);
-  const [number, setNumber] = useState<number>(1);
+  const [number, setNumber] = useState<number>(pokemonNumber);
 
   const { data, isLoading, isError } = useQuery<PokemonInfo>({
     queryKey: ['pokemon', number],
