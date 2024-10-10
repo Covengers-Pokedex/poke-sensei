@@ -6,7 +6,7 @@ import koreanTypeToColor from '@/utils/koreanTypeToColor';
 import { MutableRefObject } from 'react';
 interface PokemonLIstProps {
   pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
-  targetRef: MutableRefObject<HTMLDivElement | null>;
+  targetRef?: MutableRefObject<HTMLDivElement | null>;
 }
 
 export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps) {
@@ -41,7 +41,7 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps
           </div>
         )),
       )}
-      <div ref={targetRef}> </div>
+      {targetRef && <div ref={targetRef}> </div>}
     </>
   );
 }

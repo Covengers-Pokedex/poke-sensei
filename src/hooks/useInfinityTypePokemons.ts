@@ -3,6 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 function useInfinityTypePokemons() {
+  //타입별 데이터 관리
   const [hasMoreType, setHasMoreType] = useState(false);
   const [activedTypeNum, setActivedTypeNum] = useState<number | null>(null);
   const handleResetButton = () => {

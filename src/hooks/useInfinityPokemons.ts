@@ -3,6 +3,7 @@ import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 const useInfinityPokemons = () => {
+  //전체 포켓몬 데이터 관리
   const [hasMore, setHasMore] = useState(true);
 
   const {

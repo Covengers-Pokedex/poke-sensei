@@ -5,6 +5,7 @@ import usePokemonList from '@/hooks/useInfinityPokemons';
 import SearchSection from './SearchSection';
 import usePokemonTypeList from '@/hooks/useInfinityTypePokemons';
 import PokemonList from './PokemonList';
+import useSearchPokemon from '@/hooks/useSearchPokemon';
 
 export default function PokedexMain() {
   const { allPokemonData, fetchAllPokemonNextPage, hasMore } = usePokemonList();
@@ -16,7 +17,7 @@ export default function PokedexMain() {
     fetchTypePokemonNextPage,
     hasMoreType,
   } = usePokemonTypeList();
-
+  const { searchedPokemon, handleSearchValue, inputRef, handleResetSearchedPokemon } = useSearchPokemon();
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
     saveScrollPosition();
     fetchAllPokemonNextPage();
@@ -36,13 +37,19 @@ export default function PokedexMain() {
         activedTypeNum={activedTypeNum}
         handleTypeButton={handleTypeButton}
         handleResetButton={handleResetButton}
+        handleSearchValue={handleSearchValue}
+        inputRef={inputRef}
+        handleResetSearchedPokemon={handleResetSearchedPokemon}
       />
       <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
-        {activedTypeNum === null ? (
+        {activedTypeNum === null && searchedPokemon === null && (
           <PokemonList pokemonData={allPokemonData} targetRef={targetRef} />
-        ) : (
+        )}
+        {!!activedTypeNum && searchedPokemon === null && (
           <PokemonList pokemonData={typePokemonData} targetRef={typeTargetRef} />
         )}
+        {searchedPokemon && <PokemonList pokemonData={searchedPokemon} />}
+        {searchedPokemon === false && <div>없음</div>}
       </div>
     </>
   );

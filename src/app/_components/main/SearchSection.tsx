@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { TYPE_BY_COLOR } from '@/lib/constant';
+import { FormEvent, RefObject } from 'react';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -30,17 +31,41 @@ interface SearchSectionProps {
   activedTypeNum: number | null;
   handleTypeButton: (type: number) => void;
   handleResetButton: () => void;
+  handleSearchValue: (event: FormEvent<HTMLFormElement>) => void;
+  inputRef: RefObject<HTMLInputElement>;
+  handleResetSearchedPokemon: () => void;
 }
 
-export default function SearchSection({ activedTypeNum, handleTypeButton, handleResetButton }: SearchSectionProps) {
+export default function SearchSection({
+  handleSearchValue,
+  activedTypeNum,
+  handleTypeButton,
+  handleResetButton,
+  inputRef,
+  handleResetSearchedPokemon,
+}: SearchSectionProps) {
   const { toggleValue, switchToggle } = useToggle();
 
   return (
     <div className="pt-20">
-      <form className="flex w-full justify-center  gap-1 pb-10">
+      <form
+        onSubmit={e => {
+          handleResetSearchedPokemon();
+          handleResetButton();
+          handleSearchValue(e);
+        }}
+        className="flex w-full justify-center  gap-1 pb-10"
+      >
         <div className="flex h-12 w-[60%] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
-          <input placeholder="찾으실 포켓몬 이름을 입력하세요." className=" w-full px-3 py-1 outline-none" />
-          <button className="w-16 h-full  rounded-md bg-gray-200 shadow-xl">검색</button>
+          <input
+            ref={inputRef}
+            name="pokemonName"
+            placeholder="찾으실 포켓몬 이름을 입력하세요."
+            className=" w-full px-3 py-1 outline-none"
+          />
+          <button type="submit" className="w-16 h-full  rounded-md bg-gray-200 shadow-xl">
+            검색
+          </button>
         </div>
       </form>
       <div className="flex gap-3">
@@ -54,7 +79,10 @@ export default function SearchSection({ activedTypeNum, handleTypeButton, handle
           {toggleValue ? '타입 접기' : '타입 열기'}
         </button>
         <button
-          onClick={handleResetButton}
+          onClick={() => {
+            handleResetButton();
+            handleResetSearchedPokemon();
+          }}
           className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
         >
           초기화
@@ -83,6 +111,7 @@ export default function SearchSection({ activedTypeNum, handleTypeButton, handle
                 whileHover={{ opacity: '1' }}
                 transition={{ duration: 0.2 }}
                 onClick={() => {
+                  handleResetSearchedPokemon();
                   handleTypeButton(typeInfo.num);
                 }}
                 className={classNames('rounded-md w-full flex absolute justify-center py-1.5 text-white')}
