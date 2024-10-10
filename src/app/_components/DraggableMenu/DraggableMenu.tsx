@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useDragControls } from 'framer-motion';
-import MonsterBall from './MonsterBall';
+import MonsterBall from '@/app/_components/draggableSearchMenu/MonsterBall';
 import { useRef, useState } from 'react';
 import SearchMenu from './SearchMenu';
 import classNames from 'classnames';

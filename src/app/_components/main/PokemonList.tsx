@@ -1,22 +1,19 @@
-'use client';
+import { PokemonInfo } from '@/lib/api/type';
+import { InfiniteData } from '@tanstack/react-query';
 import Image from 'next/image';
 import monsterBall from '@/images/items/poke-ball.webp';
-
-import useInfiniteScroll from '@/hooks/useInfinityScroll';
-import usePokemonList from '@/hooks/usePokemonList';
 import koreanTypeToColor from '@/utils/koreanTypeToColor';
+import { MutableRefObject } from 'react';
+interface PokemonLIstProps {
+  pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
+  targetRef: MutableRefObject<HTMLDivElement | null>;
+}
 
-export default function PokemonList() {
-  const { allPokemonData, fetchAllPokemonNextPage, hasMore } = usePokemonList();
-
-  const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
-    fetchAllPokemonNextPage();
-    saveScrollPosition();
-  }, hasMore);
+export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps) {
   return (
-    <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
-      {allPokemonData?.pages.map(pokemonList =>
-        pokemonList.map(pokemon => (
+    <>
+      {pokemonData?.pages.map(pokemonList =>
+        pokemonList?.map(pokemon => (
           <div
             key={pokemon.id}
             className="flex transition-all ease-in duration-200 hover:scale-110 bg-white rounded-xl shadow-md flex-col border relative min-w-[210px] w-full max-w-[322.5px] h-full min-h-[210px] p-4 items-center justify-between"
@@ -45,6 +42,6 @@ export default function PokemonList() {
         )),
       )}
       <div ref={targetRef}> </div>
-    </div>
+    </>
   );
 }

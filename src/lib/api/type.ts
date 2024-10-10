@@ -42,7 +42,10 @@ export interface GetPokemonListParams {
 }
 
 export interface GetPokemonTypeListParams extends GetPokemonListParams {
-  number: number;
+  number: number | null;
+}
+export interface GetPokemonTypeAllListParams extends GetPokemonListParams {
+  numbers: number[];
 }
 
 export interface Ability {

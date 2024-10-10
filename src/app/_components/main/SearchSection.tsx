@@ -1,7 +1,6 @@
 'use client';
 import convertHexToRGBA from '@/utils/convertHexToRGBA';
 import classNames from 'classnames';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { TYPE_BY_COLOR } from '@/lib/constant';
@@ -26,21 +25,15 @@ const item = {
   hidden: { y: 150, opacity: 0, transition: { duration: 0.3 } },
   show: { y: 0, opacity: 1, transition: { duration: 0.3 } },
 };
-export default function SearchSection() {
-  const [activedTypes, setActivedTypes] = useState<string[]>([]);
-  const { toggleValue, switchToggle } = useToggle();
-  console.log(activedTypes);
-  const handleResetButton = () => {
-    setActivedTypes([]);
-  };
 
-  const handleTypeButton = (type: string) => {
-    if (activedTypes.includes(type)) {
-      setActivedTypes(prev => prev.filter(prevType => prevType !== type));
-      return;
-    }
-    setActivedTypes(prev => [...prev, type]);
-  };
+interface SearchSectionProps {
+  activedTypeNum: number | null;
+  handleTypeButton: (type: number) => void;
+  handleResetButton: () => void;
+}
+
+export default function SearchSection({ activedTypeNum, handleTypeButton, handleResetButton }: SearchSectionProps) {
+  const { toggleValue, switchToggle } = useToggle();
 
   return (
     <div className="pt-20">
@@ -83,14 +76,14 @@ export default function SearchSection() {
                   opacity: '0.5',
                 }}
                 animate={
-                  activedTypes.includes(typeKey)
+                  activedTypeNum === typeInfo.num
                     ? { top: '7px', boxShadow: `0px 0px 2px ${convertHexToRGBA(typeInfo.color, 0.6)}`, opacity: '1' }
                     : { top: '0', boxShadow: `0px 7px 2px ${convertHexToRGBA(typeInfo.color, 0.6)}`, opacity: '0.5' }
                 }
                 whileHover={{ opacity: '1' }}
                 transition={{ duration: 0.2 }}
                 onClick={() => {
-                  handleTypeButton(typeKey);
+                  handleTypeButton(typeInfo.num);
                 }}
                 className={classNames('rounded-md w-full flex absolute justify-center py-1.5 text-white')}
                 style={{ backgroundColor: typeInfo.color }}
