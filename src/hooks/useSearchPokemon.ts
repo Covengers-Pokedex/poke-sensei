@@ -38,6 +38,8 @@ function useSearchPokemon() {
       }
     },
     enabled: !!searchValue,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
   return { searchValue, searchedPokemon, handleSearchValue, inputRef, handleResetSearchedPokemon };
 }

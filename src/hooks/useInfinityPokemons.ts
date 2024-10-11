@@ -20,6 +20,8 @@ const useInfinityPokemons = () => {
       }
       return undefined;
     },
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
   useEffect(() => {
     if (hasNextPage === false) {

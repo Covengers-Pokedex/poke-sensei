@@ -29,6 +29,8 @@ function useInfinityTypePokemons() {
       return undefined;
     },
     enabled: activedTypeNum !== null,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
   useEffect(() => {
     if (hasNextPage === false) {
