@@ -16,8 +16,6 @@ export default function RootLayout({
     <html lang="en">
       <body className="bg-[#A8D8A8]">
         <Providers>
-          {/* 오버레이 로딩 컴포넌트를 렌더링하는 포탈을 열기 위한 엘리먼트 */}
-          <div id="loading" />
           {/* 드래그 가능한 몬스터볼 컴포넌트를 렌더링하는 포탈을 열기 위한 엘리먼트 */}
           <div id="draggable" />
           {/* 모달 컴포넌트를 렌더링하는 포탈을 열기 위한 엘리먼트 */}
