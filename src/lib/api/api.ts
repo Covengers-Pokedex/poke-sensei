@@ -1,5 +1,12 @@
 import { fetchPokemonData, fetchSpeciesData, fetchEvolutionData, fetchPokemonListData, fetchTypeData } from './fetch';
-import { GetPokemonParams, PokemonInfo, Language, GetPokemonListParams, GetPokemonTypeListParams } from './type';
+import {
+  GetPokemonParams,
+  PokemonInfo,
+  Language,
+  GetPokemonListParams,
+  GetPokemonTypeListParams,
+  GetPokemonTypeAllListParams,
+} from './type';
 import axiosInstance from './instance';
 import {
   getPokemonName,
@@ -87,6 +94,9 @@ export const getLoadingImage = async (number: number) => {
 // 포켓몬 타입 필터 포켓몬 리스트(해당 타입 숫자를 넣으면 타입에 관련된 포켓몬 리스트 노출)
 export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: GetPokemonTypeListParams) => {
   try {
+    if (number === null) {
+      return [];
+    }
     const typeData = await fetchTypeData(number);
     const pokemonData = await getTypeList(typeData, axiosInstance);
     const pokemonIdList = pokemonData
@@ -99,7 +109,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
       }),
     );
 
-    return pokemonList;
+    return pokemonList as PokemonInfo[];
   } catch (error) {
     console.error(error);
   }
