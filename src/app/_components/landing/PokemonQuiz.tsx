@@ -5,7 +5,7 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { getRandomNumber, getPokemonRandomImage } from '../../../lib/api/api';
 import classNames from 'classnames';
-import Loading from '@/app/loading';
+import RandomPokemonLoading from '../loading/RandomPokemonLoading';
 
 export default function PokemonQuiz() {
   const [userInput, setUserInput] = useState<string>('');
@@ -51,7 +51,7 @@ export default function PokemonQuiz() {
   }, [quizResult]);
 
   if (isLoading) {
-    return <Loading />;
+    return <RandomPokemonLoading />;
   }
 
   if (isError) {
