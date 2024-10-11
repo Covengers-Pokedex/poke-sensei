@@ -37,8 +37,8 @@ export interface GetPokemonParams {
 }
 
 export interface GetPokemonListParams {
-  offset: number;
-  limit: number;
+  offset: number | undefined;
+  limit: number | undefined;
 }
 
 export interface GetPokemonTypeListParams extends GetPokemonListParams {
@@ -59,6 +59,8 @@ export interface PokemonInfo {
   height: number;
   image: string;
   name: string;
+  genus: string;
+  flavor: string;
   shiny: string;
   abilityList: Ability[];
   typeList: PokemonLanguage[];

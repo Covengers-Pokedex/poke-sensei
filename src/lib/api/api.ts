@@ -23,7 +23,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
   try {
     const pokemonData = await fetchPokemonData(number);
     const { id, weight, height, abilities, types, species } = pokemonData;
-    const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0];
+    const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0]; // 포켓몬 설명 데이터를 가져오는 url에서 쿼리(고유 번호)만 가져오는 정규식
     const speciesData = await fetchSpeciesData(speciesNumber);
 
     const name = getPokemonName(speciesData, language);
@@ -33,10 +33,14 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     const { pokemonImage, pokemonShinyImage } = getImages(pokemonData);
     const abilityList = await getAbilities(abilities, axiosInstance, language);
 
+    // 체중과 신장 값을 10으로 나눈다
+    const formattedWeight = weight < 10 ? (weight / 10).toFixed(1) : weight / 10;
+    const formattedHeight = height < 10 ? (height / 10).toFixed(1) : height / 10;
+
     return {
       id,
-      weight,
-      height,
+      weight: formattedWeight,
+      height: formattedHeight,
       name,
       genus,
       flavor,
@@ -47,6 +51,18 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     } as PokemonInfo;
   } catch (error) {
     console.error(error);
+    return {
+      id: 0,
+      weight: 0,
+      height: 0,
+      name: '알 수 없음',
+      genus: '알 수 없음',
+      flavor: '알 수 없음',
+      typeList: [],
+      image: '',
+      shiny: '',
+      abilityList: [],
+    } as PokemonInfo;
   }
 };
 
