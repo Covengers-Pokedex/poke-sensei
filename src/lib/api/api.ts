@@ -105,11 +105,6 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
   }
 };
 
-// 랜덤 숫자 생성
-export const getRandomNumber = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
 // 포켓몬 퀴즈 정보(이름, 이미지, 설명)
 export const getPokemonRandomImage = async (number: number, language = 'ko') => {
   const [pokemonData, speciesData] = await Promise.all([fetchPokemonData(number), fetchSpeciesData(number)]);

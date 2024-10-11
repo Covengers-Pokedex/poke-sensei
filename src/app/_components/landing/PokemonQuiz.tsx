@@ -3,7 +3,8 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { getRandomNumber, getPokemonRandomImage } from '../../../lib/api/api';
+import { getPokemonRandomImage } from '../../../lib/api/api';
+import { getRandomNumber } from '@/lib/api/utils/randomNumber';
 import classNames from 'classnames';
 
 export default function PokemonQuiz() {
