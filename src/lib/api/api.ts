@@ -9,6 +9,7 @@ import {
   getImages,
   getAbilities,
   getTypeList,
+  getEvolutionList,
 } from './getPokemonData';
 
 // 포켓몬 한마리의 데이터
@@ -18,13 +19,17 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     const { id, weight, height, abilities, types, species } = pokemonData;
     const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0]; // 포켓몬 설명 데이터를 가져오는 url에서 쿼리(고유 번호)만 가져오는 정규식
     const speciesData = await fetchSpeciesData(speciesNumber);
+    const evolutionNumber = speciesData.evolution_chain.url.match(/(\d+)(?=\/?$)/)[0];
+    const evolutionData = await fetchEvolutionData(evolutionNumber);
 
+    const evolution = await getEvolutionList(evolutionData, axiosInstance);
     const name = getPokemonName(speciesData, language);
     const genus = getPokemonGenus(speciesData, language);
     const flavor = getFlavorText(speciesData, language);
     const typeList = await getPokemonTypes(types, axiosInstance, language);
     const { pokemonImage, pokemonShinyImage } = getImages(pokemonData);
     const abilityList = await getAbilities(abilities, axiosInstance, language);
+    console.log(evolution);
 
     // 체중과 신장 값을 10으로 나눈다
     const formattedWeight = weight < 10 ? (weight / 10).toFixed(1) : weight / 10;
@@ -41,6 +46,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
       image: pokemonImage,
       shiny: pokemonShinyImage,
       abilityList,
+      evolutionList: evolution,
     } as PokemonInfo;
   } catch (error) {
     console.error(error);
@@ -55,6 +61,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
       image: '',
       shiny: '',
       abilityList: [],
+      evolutionList: [],
     } as PokemonInfo;
   }
 };
@@ -89,6 +96,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
   try {
     const typeData = await fetchTypeData(number);
     const pokemonData = await getTypeList(typeData, axiosInstance);
+    const pokemonIdAllList = pokemonData.map(pokemon => pokemon.data.id);
     const pokemonIdList = pokemonData
       .slice(offset, offset + limit) // 기본으로 데이터 20개씩 가져오고 offset를 20씩 늘려주면 그 후로 포켓몬 리스트를 20개씩 가져올 수 있다.
       .map((pokemonData: any) => pokemonData.data.id);
@@ -99,7 +107,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
       }),
     );
 
-    return pokemonList;
+    return { pokemonList, pokemonIdAllList };
   } catch (error) {
     console.error(error);
   }

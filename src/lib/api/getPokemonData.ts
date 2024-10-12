@@ -65,3 +65,39 @@ export const getAbilities = async (abilities: PokemonAbility[], axiosInstance: a
     };
   });
 };
+
+// 진화 단계 데이터 추출
+export const getEvolutionList = async (evolutionData: any, axiosInstance: any) => {
+  if (!evolutionData.chain.evolves_to?.length) {
+    console.log('No further evolutions.');
+    return null;
+  }
+
+  const evolutionList = [];
+
+  const nameData = await axiosInstance.get(evolutionData.chain?.species.url);
+  const imageData = await axiosInstance.get(`pokemon/${evolutionData.chain?.species.name}`);
+  const { pokemonImage } = getImages(imageData.data);
+  const pokemonName = getPokemonName(nameData.data, 'ko');
+  evolutionList.push({ pokemonImage, pokemonName });
+
+  if (evolutionData.chain.evolves_to.length > 0) {
+    const nameData = await axiosInstance.get(evolutionData.chain.evolves_to[0]?.species.url);
+    const imageData = await axiosInstance.get(`pokemon/${evolutionData.chain.evolves_to[0]?.species.name}`);
+    const { pokemonImage } = getImages(imageData.data);
+    const pokemonName = getPokemonName(nameData.data, 'ko');
+    evolutionList.push({ pokemonImage, pokemonName });
+  }
+
+  if (evolutionData.chain.evolves_to[0].evolves_to.length > 0) {
+    const nameData = await axiosInstance.get(evolutionData.chain.evolves_to[0].evolves_to[0]?.species.url);
+    const imageData = await axiosInstance.get(
+      `pokemon/${evolutionData.chain.evolves_to[0].evolves_to[0]?.species.name}`,
+    );
+    const { pokemonImage } = getImages(imageData.data);
+    const pokemonName = getPokemonName(nameData.data, 'ko');
+    evolutionList.push({ pokemonImage, pokemonName });
+  }
+
+  return evolutionList;
+};

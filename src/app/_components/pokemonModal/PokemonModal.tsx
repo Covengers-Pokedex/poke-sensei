@@ -2,8 +2,9 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-import { getPokemonInfo } from '@/lib/api/api';
+import { getPokemonInfo, getPokemonTypeList } from '@/lib/api/api';
 import { PokemonInfo, PokemonTypeWithColor } from '@/lib/api/type';
+import test from '@/images/items/monster-ball.png';
 
 interface PokemonModalProps {
   turnOffToggle: () => void;
@@ -18,11 +19,12 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
   const { data, isLoading, isError } = useQuery<PokemonInfo>({
     queryKey: ['pokemon', number],
     queryFn: async () => {
-      const { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList } = await getPokemonInfo({
-        number,
-        language: 'ko',
-      });
-      return { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList };
+      const { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList, evolutionList } =
+        await getPokemonInfo({
+          number,
+          language: 'ko',
+        });
+      return { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList, evolutionList };
     },
     staleTime: 1000 * 60 * 5,
     placeholderData: keepPreviousData, // 데이터 요청이 성공할 때까지 이전 데이터를 보여준다.
@@ -44,7 +46,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
     return <div>에러...</div>;
   }
   return (
-    <div className="relative w-[700px] h-[650px] bg-[#F0F0F0] rounded-2xl p-4">
+    <div className="relative w-[360px] sm:w-[500px] md:w-[700px] h-[650px] bg-[#F0F0F0] rounded-2xl p-2 md:p-4">
       {/* 이전 버튼 */}
       <button
         type="button"
@@ -76,21 +78,21 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
       <div className="flex flex-col justify-between h-full bg-[#79C9FA] rounded-2xl">
         <div>
           <div className="relative pt-5 mb-5">
-            <h2 className="title-line !font-Galmuri9 text-4xl text-center text-[#F9DC42]">
+            <h2 className="title-line !font-Galmuri9 text-center text-[#F9DC42] text-2xl md:text-4xl">
               #{formattedId} {data?.name}
             </h2>
             <button type="button" className="absolute top-5 right-5 text-2xl" onClick={turnOffToggle}>
               x
             </button>
           </div>
-          <div className="flex justify-center items-center gap-3">
+          <div className="flex justify-center items-center gap-1 sm:gap-3">
             {data?.typeList.map((type, index) => {
               const typeColor = PokemonTypeWithColor[type.name as keyof typeof PokemonTypeWithColor];
               return (
                 <button
                   type="button"
                   key={index}
-                  className="w-28 rounded-md flex justify-center py-1.5 text-white"
+                  className="w-20 text-sm md:text-base md:w-28 rounded-md flex justify-center py-1.5 text-white"
                   style={{ backgroundColor: typeColor }}
                 >
                   {type.name}
@@ -104,6 +106,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
             src={pokemonImage || `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png`}
             width={150}
             height={150}
+            className="w-[100px] md:w-[150px]"
             alt={data?.name ? `${data.name} 이미지` : '포켓몬 이미지'}
           />
         </div>
@@ -115,7 +118,10 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
                 onClick={() => {
                   setTabActive('info');
                 }}
-                className={classNames('w-24 h-8 rounded-t-lg', tabActive === 'info' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]')}
+                className={classNames(
+                  'w-16 sm:w-24 h-8 text-sm sm:text-base rounded-t-lg',
+                  tabActive === 'info' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
+                )}
               >
                 정보
               </button>
@@ -125,7 +131,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
                   setTabActive('evolution');
                 }}
                 className={classNames(
-                  'w-24 h-8 rounded-t-lg',
+                  'w-[70px] sm:w-24 h-8 text-sm sm:text-base rounded-t-lg',
                   tabActive === 'evolution' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
                 )}
               >
@@ -137,7 +143,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
                   setTabActive('ability');
                 }}
                 className={classNames(
-                  'w-24 h-8 rounded-t-lg',
+                  'w-16 sm:w-24 h-8 text-sm sm:text-base rounded-t-lg',
                   tabActive === 'ability' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
                 )}
               >
@@ -146,7 +152,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
             </div>
             <button
               type="button"
-              className="flex justify-center items-center gap-3 mr-3 outline-text"
+              className="flex justify-center items-center text-sm sm:text-base gap-2 sm:gap-3 mr-2 sm:mr-3 outline-text"
               onClick={() => {
                 setShiny(!shiny);
               }}
@@ -162,12 +168,12 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
               이로치
             </button>
           </div>
-          <div className="flex flex-col justify-between w-full h-[150px] bg-black bg-opacity-50 rounded-b-2xl px-3 py-2 text-white">
+          <div className="flex flex-col justify-between w-full h-[180px] sm:h-[150px] bg-black bg-opacity-50 rounded-b-2xl px-3 py-2 text-sm sm:text-base text-white">
             {tabActive === 'info' && (
               <>
                 <p className="break-keep">{data?.flavor}</p>
                 <div>
-                  <ul className="flex items-center gap-3">
+                  <ul className="flex items-center gap-3 text-xs sm:text-base">
                     <li>분류 - {data?.genus}</li>
                     <li>신장 - {data?.height}m</li>
                     <li>무게 - {data?.weight}kg</li>
@@ -175,13 +181,32 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
                 </div>
               </>
             )}
-            {tabActive === 'evolution' && <div className="">진화 트리</div>}
+            {tabActive === 'evolution' && (
+              <ul className="h-full flex justify-center items-center gap-5 md:gap-14">
+                {data?.evolutionList.map((evolution: any) => {
+                  return (
+                    <li key={evolution.pokemonName} className="relative w-32">
+                      <span className="relative flex flex-col justify-center items-center pb-4 z-10">
+                        <Image src={evolution.pokemonImage} width={70} height={60} alt="포켓몬 이미지" />
+                      </span>
+                      <Image
+                        src={test}
+                        width={400}
+                        height={400}
+                        alt="포켓몬 이미지"
+                        className="absolute w-[300px] top-[50%] translate-y-[-50%] opacity-80"
+                      />
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
             {tabActive === 'ability' && (
               <div className="">
                 <ul>
                   {data?.abilityList.map(ability => {
                     return (
-                      <li key={ability.name} className="break-keep">
+                      <li key={ability.name} className="break-keep mb-1">
                         {ability.name} - {ability.flavor}
                       </li>
                     );
