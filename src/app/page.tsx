@@ -1,16 +1,15 @@
-'use client';
-
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import DraggableMenuTrigger from './_components/draggableSearchMenu/DraggableMenuTrigger';
+import { dehydrate, HydrationBoundary, QueryClient } from '@tanstack/react-query';
 import PokemonQuiz from './_components/landing/PokemonQuiz';
 import Link from 'next/link';
-import { useState } from 'react';
+import { getLoadingPokemonImage } from '@/lib/api/api';
 
-export default function Landing() {
-  const [queryClient] = useState(() => new QueryClient());
+export default async function Landing() {
+  const queryClient = new QueryClient();
+  // 랜덤 포켓몬을 네트워크 요청으로 받아 표출할 로딩용 컴포넌트를 위한 prefetchQuery
+  await queryClient.prefetchQuery({ queryKey: ['loading'], queryFn: getLoadingPokemonImage });
+
   return (
     <div>
-      <DraggableMenuTrigger />
       <div className="flex flex-col justify-between items-center gap-8 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full min-h-[500px] sm:min-h-[700px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
         <div className="w-full mt-[-20px] sm:mt-[-30px]">
           <h1 className="title-line text-2xl sm:text-5xl lg:text-6xl text-center text-[#F9DC42]">
@@ -24,9 +23,9 @@ export default function Landing() {
         >
           포켓몬 도감
         </Link>
-        <QueryClientProvider client={queryClient}>
+        <HydrationBoundary state={dehydrate(queryClient)}>
           <PokemonQuiz />
-        </QueryClientProvider>
+        </HydrationBoundary>
       </div>
     </div>
   );
