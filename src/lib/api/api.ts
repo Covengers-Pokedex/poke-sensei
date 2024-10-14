@@ -9,7 +9,9 @@ import {
   getImages,
   getAbilities,
   getTypeList,
+  getEvolutionList,
 } from './getPokemonData';
+import { getRandomNumber } from '@/utils/randomNumber';
 
 // 포켓몬 한마리의 데이터
 export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => {
@@ -18,7 +20,10 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     const { id, weight, height, abilities, types, species } = pokemonData;
     const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0]; // 포켓몬 설명 데이터를 가져오는 url에서 쿼리(고유 번호)만 가져오는 정규식
     const speciesData = await fetchSpeciesData(speciesNumber);
+    const evolutionNumber = speciesData.evolution_chain.url.match(/(\d+)(?=\/?$)/)[0];
+    const evolutionData = await fetchEvolutionData(evolutionNumber);
 
+    const evolution = await getEvolutionList(evolutionData, axiosInstance);
     const name = getPokemonName(speciesData, language);
     const genus = getPokemonGenus(speciesData, language);
     const flavor = getFlavorText(speciesData, language);
@@ -41,6 +46,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
       image: pokemonImage,
       shiny: pokemonShinyImage,
       abilityList,
+      evolutionList: evolution,
     } as PokemonInfo;
   } catch (error) {
     console.error(error);
@@ -55,6 +61,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
       image: '',
       shiny: '',
       abilityList: [],
+      evolutionList: [],
     } as PokemonInfo;
   }
 };
@@ -89,6 +96,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
   try {
     const typeData = await fetchTypeData(number);
     const pokemonData = await getTypeList(typeData, axiosInstance);
+    const pokemonIdAllList = pokemonData.map(pokemon => pokemon.data.id);
     const pokemonIdList = pokemonData
       .slice(offset, offset + limit) // 기본으로 데이터 20개씩 가져오고 offset를 20씩 늘려주면 그 후로 포켓몬 리스트를 20개씩 가져올 수 있다.
       .map((pokemonData: any) => pokemonData.data.id);
@@ -99,15 +107,10 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
       }),
     );
 
-    return pokemonList;
+    return { pokemonList, pokemonIdAllList };
   } catch (error) {
     console.error(error);
   }
-};
-
-// 랜덤 숫자 생성
-export const getRandomNumber = (min: number, max: number) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
 // 로딩용 랜덤 포켓몬 이미지 생성

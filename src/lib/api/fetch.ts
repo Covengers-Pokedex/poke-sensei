@@ -29,7 +29,7 @@ export const fetchSpeciesData = async (number: number | string) => {
   }
 };
 
-export const fetchEvolutionData = async (number: number) => {
+export const fetchEvolutionData = async (number: number | string) => {
   try {
     const response = await axiosInstance.get(`${END_POINT.evolution}${number}`);
     return response.data;
