@@ -11,6 +11,7 @@ import {
   getTypeList,
   getEvolutionList,
 } from './getPokemonData';
+import { getRandomNumber } from '@/utils/randomNumber';
 
 // 포켓몬 한마리의 데이터
 export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => {
@@ -29,7 +30,6 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
     const typeList = await getPokemonTypes(types, axiosInstance, language);
     const { pokemonImage, pokemonShinyImage } = getImages(pokemonData);
     const abilityList = await getAbilities(abilities, axiosInstance, language);
-    console.log(evolution);
 
     // 체중과 신장 값을 10으로 나눈다
     const formattedWeight = weight < 10 ? (weight / 10).toFixed(1) : weight / 10;
@@ -111,6 +111,12 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
   } catch (error) {
     console.error(error);
   }
+};
+
+// 로딩용 랜덤 포켓몬 이미지 생성
+export const getLoadingPokemonImage = async () => {
+  const randomNumber = getRandomNumber(1, 649);
+  return await getLoadingImage(randomNumber);
 };
 
 // 포켓몬 퀴즈 정보(이름, 이미지, 설명)

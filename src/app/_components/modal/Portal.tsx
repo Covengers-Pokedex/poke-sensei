@@ -1,9 +1,11 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
+type PortalElementId = 'draggable' | 'modal' | 'loading';
+
 interface PortalProps {
   children: ReactNode;
-  elementId: string;
+  elementId: PortalElementId;
 }
 
 export default function Portal({ children, elementId }: PortalProps) {

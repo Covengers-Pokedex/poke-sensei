@@ -5,7 +5,11 @@ import { useState } from 'react';
 const usePokemonList = () => {
   const [hasMore, setHasMore] = useState(true);
 
-  const { data: pokemonData, fetchNextPage } = useSuspenseInfiniteQuery({
+  const {
+    data: pokemonData,
+    fetchNextPage,
+    isFetchingNextPage,
+  } = useSuspenseInfiniteQuery({
     queryKey: ['pokemon'],
     queryFn: ({ pageParam }) => getPokemonAllList({ offset: pageParam, limit: 20 }),
     initialPageParam: 0,
@@ -18,6 +22,6 @@ const usePokemonList = () => {
     },
   });
 
-  return { pokemonData, fetchNextPage, hasMore };
+  return { pokemonData, fetchNextPage, hasMore, isFetchingNextPage };
 };
 export default usePokemonList;

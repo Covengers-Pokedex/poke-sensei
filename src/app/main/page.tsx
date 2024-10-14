@@ -1,7 +1,7 @@
 import getQueryClient from '@/utils/getQueryClient';
 import DraggableMenuTrigger from '../_components/draggableSearchMenu/DraggableMenuTrigger';
 import PokemonList from '../_components/main/PokemonList';
-import { getPokemonAllList } from '@/lib/api/api';
+import { getLoadingPokemonImage, getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import SearchSection from '../_components/main/SearchSection';
 export default async function MainPage() {
@@ -13,6 +13,9 @@ export default async function MainPage() {
     queryFn: () => getPokemonAllList({ offset: undefined, limit: undefined }),
     initialPageParam: 0,
   });
+
+  // 로딩시 보여줄 랜덤 포켓몬 이미지 prefetch
+  await queryClient.prefetchQuery({ queryKey: ['loading'], queryFn: getLoadingPokemonImage });
 
   const dehydratedState = dehydrate(queryClient);
   return (
