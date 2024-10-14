@@ -2,13 +2,13 @@
 
 import { motion, useDragControls } from 'framer-motion';
 import MonsterBall from './MonsterBall';
-import { useRef, useState } from 'react';
+import { ReactNode, useRef, useState } from 'react';
 import SearchMenuContainer from './SearchMenuContainer';
 import classNames from 'classnames';
 import Portal from '../modal/Portal';
 import { useToggle } from '@/hooks/useToggle';
 
-export default function DraggableMenuTrigger() {
+export default function DraggableMenu({ children }: { children: ReactNode }) {
   const [isDragging, setIsDragging] = useState(false);
   const { toggleValue, switchToggle, turnOffToggle } = useToggle();
   const dragControls = useDragControls();
@@ -25,7 +25,9 @@ export default function DraggableMenuTrigger() {
   return (
     <Portal elementId="draggable">
       <div ref={constraintsRef} className="backdrop pointer-events-none draggable-z-index">
-        <SearchMenuContainer isOpenMenu={toggleValue} onCloseMenuClick={turnOffToggle} />
+        <SearchMenuContainer isOpenMenu={toggleValue} onCloseMenuClick={turnOffToggle}>
+          {children}
+        </SearchMenuContainer>
         <motion.div
           ref={menuContainer}
           dragControls={dragControls}

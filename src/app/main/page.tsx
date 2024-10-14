@@ -1,9 +1,9 @@
 import getQueryClient from '@/utils/getQueryClient';
-import DraggableMenuTrigger from '../_components/draggableSearchMenu/DraggableMenuTrigger';
 import PokemonList from '../_components/main/PokemonList';
 import { getLoadingPokemonImage, getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import SearchSection from '../_components/main/SearchSection';
+import DraggableMenu from '../_components/draggableSearchMenu/DraggableMenu';
 export default async function MainPage() {
   const queryClient = getQueryClient();
 
@@ -23,7 +23,9 @@ export default async function MainPage() {
       <SearchSection />
       <HydrationBoundary state={dehydratedState}>
         <PokemonList />
-        <DraggableMenuTrigger />
+        <DraggableMenu>
+          <div>내부 컨텐츠</div>
+        </DraggableMenu>
       </HydrationBoundary>
     </div>
   );
