@@ -24,10 +24,10 @@
   font-family: 'Galmuri7';
   /* 제목 텍스트의 외곽선 추가 */
   text-shadow:
-    -4px 0px #3361a8,
-    0px 4px #3361a8,
-    4px 0px #3361a8,
-    0px -4px #3361a8;
+    -3px 0px #3361a8,
+    0px 3px #3361a8,
+    3px 0px #3361a8,
+    0px -3px #3361a8;
   /* 재목 텍스트의 그림자 추가 */
   filter: drop-shadow(-5px 4px 0px rgba(0, 0, 0, 1));
 }

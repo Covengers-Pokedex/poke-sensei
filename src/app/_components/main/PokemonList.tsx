@@ -8,10 +8,24 @@ interface PokemonLIstProps {
   pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
   targetRef?: MutableRefObject<HTMLDivElement | null>;
 }
+import RandomPokemonLoading from '../loading/RandomPokemonLoading';
+
+export default function PokemonList() {
+  const { pokemonData, fetchNextPage, hasMore, isFetchingNextPage } = usePokemonList();
+
+  const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
+    fetchNextPage();
+    saveScrollPosition();
+  }, hasMore);
 
 export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps) {
   return (
-    <>
+    <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
+      {isFetchingNextPage && (
+        <div className="backdrop modal-z-index bg-[rgba(168,216,168,0.9)]">
+          <RandomPokemonLoading />
+        </div>
+      )}
       {pokemonData?.pages.map(pokemonList =>
         pokemonList?.map(pokemon => (
           <div

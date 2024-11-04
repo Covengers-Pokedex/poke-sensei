@@ -1,9 +1,9 @@
 import getQueryClient from '@/utils/getQueryClient';
-import DraggableMenuTrigger from '../_components/draggableSearchMenu/DraggableMenuTrigger';
 import PokedexMain from '../_components/main/PokedexMain';
-import { getPokemonAllList } from '@/lib/api/api';
+import { getLoadingPokemonImage, getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import Link from 'next/link';
+import DraggableMenu from '../_components/draggableSearchMenu/DraggableMenu';
 
 export default async function MainPage() {
   const queryClient = getQueryClient();
@@ -14,6 +14,9 @@ export default async function MainPage() {
     queryFn: () => getPokemonAllList({ offset: 0, limit: 20 }),
     initialPageParam: 0,
   });
+
+  // 로딩시 보여줄 랜덤 포켓몬 이미지 prefetch
+  await queryClient.prefetchQuery({ queryKey: ['loading'], queryFn: getLoadingPokemonImage });
 
   const dehydratedState = dehydrate(queryClient);
   return (
@@ -30,7 +33,9 @@ export default async function MainPage() {
       <div className="flex flex-col w-full">
         <HydrationBoundary state={dehydratedState}>
           <PokedexMain />
-          <DraggableMenuTrigger />
+          <DraggableMenu>
+            <div>내부 컨텐츠</div>
+          </DraggableMenu>
         </HydrationBoundary>
       </div>
     </div>

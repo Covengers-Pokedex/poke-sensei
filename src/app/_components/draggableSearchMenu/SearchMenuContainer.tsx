@@ -1,16 +1,18 @@
 import classNames from 'classnames';
-import SearchMenuContent from './SearchMenuContent';
 import Image from 'next/image';
 import defaultPokemonImage from '@/images/pokemon/pikachu.gif';
 import { useHidden } from '@/hooks/useHidden';
 import BackDrop from '../modal/BackDrop';
+import SearchMenuContent from './SearchMenuContent';
+import { ReactNode } from 'react';
 
 interface SearchMenuContainerProps {
   isOpenMenu: boolean;
   onCloseMenuClick: () => void;
+  children: ReactNode;
 }
 
-export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: SearchMenuContainerProps) {
+export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick, children }: SearchMenuContainerProps) {
   const { isHidden } = useHidden(isOpenMenu);
 
   return (
@@ -37,7 +39,7 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick }: Se
                 x
               </button>
               <Image src={defaultPokemonImage} alt="포켓몬 이미지" height={75} width={75} unoptimized priority />
-              <SearchMenuContent />
+              <SearchMenuContent>{children}</SearchMenuContent>
             </div>
           </div>
         </div>
