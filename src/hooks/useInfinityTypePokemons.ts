@@ -20,7 +20,10 @@ function useInfinityTypePokemons() {
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ['pokemon', activedTypeNum],
-    queryFn: ({ pageParam }) => getPokemonTypeList({ number: activedTypeNum, offset: pageParam, limit: 20 }),
+    queryFn: async ({ pageParam }) => {
+      const data = await getPokemonTypeList({ number: activedTypeNum, offset: pageParam, limit: 20 });
+      return data?.pokemonList;
+    },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage && lastPage.length >= 20) {
@@ -39,6 +42,7 @@ function useInfinityTypePokemons() {
       setHasMoreType(true);
     }
   }, [hasNextPage]);
+
   return {
     activedTypeNum,
     handleResetButton,

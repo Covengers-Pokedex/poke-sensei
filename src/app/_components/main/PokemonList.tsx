@@ -4,21 +4,24 @@ import Image from 'next/image';
 import monsterBall from '@/images/items/poke-ball.webp';
 import koreanTypeToColor from '@/utils/koreanTypeToColor';
 import { MutableRefObject } from 'react';
-interface PokemonLIstProps {
+import RandomPokemonLoading from '../loading/RandomPokemonLoading';
+import usePokemonList from '@/hooks/usePokemonList';
+import useInfiniteScroll from '@/hooks/useInfinityScroll';
+import classNames from 'classnames';
+
+interface PokemonListProps {
   pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
   targetRef?: MutableRefObject<HTMLDivElement | null>;
 }
-import RandomPokemonLoading from '../loading/RandomPokemonLoading';
 
-export default function PokemonList() {
-  const { pokemonData, fetchNextPage, hasMore, isFetchingNextPage } = usePokemonList();
+export default function PokemonList({ pokemonData, targetRef }: PokemonListProps) {
+  const { fetchNextPage, hasMore, isFetchingNextPage } = usePokemonList();
 
-  const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
+  const { saveScrollPosition } = useInfiniteScroll(() => {
     fetchNextPage();
     saveScrollPosition();
   }, hasMore);
 
-export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps) {
   return (
     <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
       {isFetchingNextPage && (
@@ -35,8 +38,8 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps
             <span className="absolute top-1 text-xs opacity-30">No.{pokemon.id}</span>
             <span className="flex pt-1.5 justify-center w-full">{pokemon.name}</span>
 
-            <button className="w-[30px] h-[30px] absolute top-[21px] right-2">
-              <Image className="opacity-50" src={monsterBall} alt="즐겨찾기" fill />
+            <button className={classNames('w-[30px] opacity-50 h-[30px] absolute top-[21px] right-2')}>
+              <Image src={monsterBall} alt="즐겨찾기" fill />
             </button>
 
             <Image src={pokemon.image} alt="포켓몬 이미지" width={50} height={50} />
@@ -55,7 +58,7 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonLIstProps
           </div>
         )),
       )}
-      {targetRef && <div ref={targetRef}> </div>}
-    </>
+      {targetRef && <div ref={targetRef}></div>}
+    </div>
   );
 }

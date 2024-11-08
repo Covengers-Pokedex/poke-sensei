@@ -102,7 +102,7 @@ export const getLoadingImage = async (number: number) => {
 export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: GetPokemonTypeListParams) => {
   try {
     if (number === null) {
-      return [];
+      return { pokemonList: [], pokemonIdAllList: [] };
     }
     const typeData = await fetchTypeData(number);
     const pokemonData = await getTypeList(typeData, axiosInstance);
