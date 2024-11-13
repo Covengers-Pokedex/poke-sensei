@@ -21,6 +21,9 @@ function useInfinityTypePokemons() {
   } = useInfiniteQuery({
     queryKey: ['pokemon', activedTypeNum],
     queryFn: async ({ pageParam }) => {
+      if (activedTypeNum === null) {
+        return [];
+      }
       const data = await getPokemonTypeList({ number: activedTypeNum, offset: pageParam, limit: 20 });
       return data?.pokemonList;
     },
