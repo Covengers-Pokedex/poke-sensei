@@ -41,16 +41,14 @@ export default function PokedexMain() {
         inputRef={inputRef}
         handleResetSearchedPokemon={handleResetSearchedPokemon}
       />
-      <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
-        {activedTypeNum === null && searchedPokemon === null && (
-          <PokemonList pokemonData={allPokemonData} targetRef={targetRef} />
-        )}
-        {!!activedTypeNum && searchedPokemon === null && (
-          <PokemonList pokemonData={typePokemonData} targetRef={typeTargetRef} />
-        )}
-        {searchedPokemon && <PokemonList pokemonData={searchedPokemon} />}
-        {searchedPokemon === false && <div>없음</div>}
-      </div>
+      {activedTypeNum === null && searchedPokemon === null && (
+        <PokemonList pokemonData={allPokemonData} targetRef={targetRef} />
+      )}
+      {!!activedTypeNum && searchedPokemon === null && (
+        <PokemonList pokemonData={typePokemonData} targetRef={typeTargetRef} />
+      )}
+      {searchedPokemon && <PokemonList pokemonData={searchedPokemon} />}
+      {searchedPokemon === false && <div>없음</div>}
     </>
   );
 }
