@@ -61,7 +61,7 @@ export default function SearchSection({
             ref={inputRef}
             name="pokemonName"
             placeholder="찾으실 포켓몬 이름을 입력하세요."
-            className=" w-full px-3 py-1 outline-none"
+            className=" w-full bg-transparent px-3 py-1 outline-none"
           />
           <button type="submit" className="w-16 h-full  rounded-md bg-gray-200 shadow-xl">
             검색
