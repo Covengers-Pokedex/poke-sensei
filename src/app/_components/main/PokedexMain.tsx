@@ -1,14 +1,21 @@
 'use client';
 
 import useInfiniteScroll from '@/hooks/useInfinityScroll';
-import usePokemonList from '@/hooks/useInfinityPokemons';
+import useInfinityPokemons from '@/hooks/useInfinityPokemons';
 import SearchSection from './SearchSection';
-import usePokemonTypeList from '@/hooks/useInfinityTypePokemons';
+import useInfinityTypePokemons from '@/hooks/useInfinityTypePokemons';
 import PokemonList from './PokemonList';
 import useSearchPokemon from '@/hooks/useSearchPokemon';
+import RandomPokemonLoading from '../loading/RandomPokemonLoading';
 
 export default function PokedexMain() {
-  const { allPokemonData, fetchAllPokemonNextPage, hasMore } = usePokemonList();
+  const {
+    allPokemonData,
+    fetchNextPage: fetchAllPokemonNextPage,
+    hasMore,
+    isFetchingNextPage: isFetchingPokemon,
+  } = useInfinityPokemons();
+
   const {
     activedTypeNum,
     handleTypeButton,
@@ -16,8 +23,11 @@ export default function PokedexMain() {
     typePokemonData,
     fetchTypePokemonNextPage,
     hasMoreType,
-  } = usePokemonTypeList();
+    isFetchingNextPage: isFetchingType,
+  } = useInfinityTypePokemons();
+
   const { searchedPokemon, handleSearchValue, inputRef, handleResetSearchedPokemon } = useSearchPokemon();
+
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
     saveScrollPosition();
     fetchAllPokemonNextPage();
@@ -33,6 +43,11 @@ export default function PokedexMain() {
   );
   return (
     <>
+      {(isFetchingPokemon || isFetchingType) && (
+        <div className="backdrop modal-z-index bg-[rgba(168,216,168,0.9)]">
+          <RandomPokemonLoading />
+        </div>
+      )}
       <SearchSection
         activedTypeNum={activedTypeNum}
         handleTypeButton={handleTypeButton}

@@ -1,15 +1,14 @@
 import { getPokemonAllList } from '@/lib/api/api';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const useInfinityPokemons = () => {
-  //전체 포켓몬 데이터 관리
+const useInfinityPokemon = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const {
     data: allPokemonData,
-    fetchNextPage: fetchAllPokemonNextPage,
-    hasNextPage,
+    fetchNextPage,
+    isFetchingNextPage,
   } = useSuspenseInfiniteQuery({
     queryKey: ['pokemon'],
     queryFn: ({ pageParam }) => getPokemonAllList({ offset: pageParam, limit: 20 }),
@@ -18,18 +17,11 @@ const useInfinityPokemons = () => {
       if (lastPage.length >= 20) {
         return allPages.length * 20;
       }
+      setHasMore(false);
       return undefined;
     },
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
   });
-  useEffect(() => {
-    if (hasNextPage === false) {
-      setHasMore(false);
-    } else {
-      setHasMore(true);
-    }
-  }, [hasNextPage]);
-  return { allPokemonData, fetchAllPokemonNextPage, hasMore };
+
+  return { allPokemonData, fetchNextPage, hasMore, isFetchingNextPage };
 };
-export default useInfinityPokemons;
+export default useInfinityPokemon;

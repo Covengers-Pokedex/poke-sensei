@@ -17,6 +17,7 @@ function useInfinityTypePokemons() {
   const {
     data: typePokemonData,
     fetchNextPage: fetchTypePokemonNextPage,
+    isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: ['pokemon', activedTypeNum],
@@ -53,6 +54,7 @@ function useInfinityTypePokemons() {
     typePokemonData,
     fetchTypePokemonNextPage,
     hasMoreType,
+    isFetchingNextPage,
   };
 }
 export default useInfinityTypePokemons;
