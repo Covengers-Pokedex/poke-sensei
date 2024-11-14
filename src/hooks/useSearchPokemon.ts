@@ -1,8 +1,8 @@
 import { getPokemonInfo } from '@/lib/api/api';
 import { PokemonInfo } from '@/lib/api/type';
-import { INITIAL_INFINITE_DATA } from '@/lib/constant';
+
 import { InfiniteData, useQuery } from '@tanstack/react-query';
-import { ChangeEvent, FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef, useState } from 'react';
 
 function useSearchPokemon() {
   //검색된 데이터 관리
@@ -21,7 +21,7 @@ function useSearchPokemon() {
     setSearchValue(name);
     if (inputRef.current) inputRef.current.value = '';
   };
-  const { data: searchedPokemonData } = useQuery({
+  const { data } = useQuery({
     queryKey: ['pokemon', searchValue],
     queryFn: async () => {
       const response = await getPokemonInfo({ number: searchValue, language: 'ko' });

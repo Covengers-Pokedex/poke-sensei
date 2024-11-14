@@ -2,6 +2,7 @@ import { getPokemonAllList } from '@/lib/api/api';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
+//파일명 변경 usePokemonList =>
 const useInfinityPokemon = () => {
   const [hasMore, setHasMore] = useState(true);
 
