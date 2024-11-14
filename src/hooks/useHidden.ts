@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+// TODO: 범용성을 위해, 딜레이 파라미터로 받기
 export const useHidden = (isOpen: boolean) => {
   const [isHidden, setIsHidden] = useState(() => !isOpen);
 

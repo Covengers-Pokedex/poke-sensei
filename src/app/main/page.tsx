@@ -8,6 +8,7 @@ export default async function MainPage() {
   const queryClient = getQueryClient();
 
   // 서버에서 데이터를 미리 가져옴
+  // TODO: 쿼리키 상수화
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['pokemon'],
     queryFn: () => getPokemonAllList({ offset: undefined, limit: undefined }),
