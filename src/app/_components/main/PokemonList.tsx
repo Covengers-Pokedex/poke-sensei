@@ -19,7 +19,7 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonListProps
           pokemon.id ? (
             <div
               key={pokemon.id}
-              className="flex transition-all ease-in duration-200 hover:scale-110 bg-white rounded-xl shadow-md flex-col border relative min-w-[210px] w-full max-w-[322.5px] h-full min-h-[210px] p-4 items-center justify-between"
+              className="flex cursor-pointer transition-all ease-in duration-200 hover:scale-110 bg-white rounded-xl shadow-md flex-col border relative min-w-[210px] w-full max-w-[322.5px] h-full min-h-[210px] p-4 items-center justify-between"
             >
               <span className="absolute top-1 text-xs opacity-30">No.{pokemon.id}</span>
               <span className="flex pt-1.5 justify-center w-full">{pokemon.name}</span>
