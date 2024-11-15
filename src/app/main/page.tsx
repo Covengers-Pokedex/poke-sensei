@@ -4,13 +4,13 @@ import { getLoadingPokemonImage, getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import SearchSection from '../_components/main/SearchSection';
 import DraggableMenu from '../_components/draggableSearchMenu/DraggableMenu';
+import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 export default async function MainPage() {
   const queryClient = getQueryClient();
 
   // 서버에서 데이터를 미리 가져옴
-  // TODO: 쿼리키 상수화
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ['pokemon'],
+    queryKey: [POKEMON_QUERY_KEY],
     queryFn: () => getPokemonAllList({ offset: undefined, limit: undefined }),
     initialPageParam: 0,
   });
