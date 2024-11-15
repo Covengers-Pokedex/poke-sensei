@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-// TODO: 범용성을 위해, 딜레이 파라미터로 받기
-export const useHidden = (isOpen: boolean) => {
+export const useHidden = (isOpen: boolean, delay: number = 500) => {
   const [isHidden, setIsHidden] = useState(() => !isOpen);
 
   useEffect(() => {
@@ -13,7 +12,7 @@ export const useHidden = (isOpen: boolean) => {
     } else {
       // 바로 hidden 속성이 추가 되면 닫히는 애니메이션을 보여줄 수 없으므로,
       // isOpen이 false가 되면 애니메이션 시간동안 hidden 속성의 추가를 딜레이한다.
-      timer = setTimeout(() => setIsHidden(true), 500);
+      timer = setTimeout(() => setIsHidden(true), delay);
     }
 
     return () => clearTimeout(timer); // 중복 타이머 세팅으로 의도치않은 에러를 막기 위한 클린업 함수
