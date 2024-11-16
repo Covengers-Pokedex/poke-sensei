@@ -32,24 +32,51 @@ export default function Toast({ id, type, message }: ToastProps) {
 
   return (
     <div
-      className={classNames('px-4 py-3 shadow-md rounded-lg max-w-[90dvw] text-lg font-bold', {
-        'border border-green-400 bg-green-100 text-green-400': type === 'success',
-        'border border-yellow-400 bg-white text-yellow-400': type === 'warn',
-        'border border-red-400 bg-red-100 text-red-400': type === 'error',
+      className={classNames('w-fit max-w-[90dvw] px-4 py-3 shadow-md rounded-lg text-xs font-bold md:text-lg', {
+        'border border-green-500 bg-green-50 text-green-500': type === 'success',
+        'border border-yellow-500 bg-white text-yellow-500': type === 'warn',
+        'border border-red-500 bg-red-50 text-red-500': type === 'error',
         'animate-fadeIn': !isExit,
         'animate-fadeOut': isExit,
       })}
     >
       <div className="flex items-center w-full gap-1.5">
         {ToastIcon[type]}
-        <p className="overflow-hidden text-ellipsis whitespace-nowrap">{message}</p>
+        <div className="overflow-hidden text-ellipsis whitespace-nowrap">{message}</div>
       </div>
     </div>
   );
 }
 
 const ToastIcon: Record<ToastTypes, ReactNode> = {
-  success: <Image src={iconSuccess} alt="성공 메시지 아이콘" height={25} width={25} priority />,
-  warn: <Image src={iconWarn} alt="경고 메시지 아이콘" height={25} width={25} className="filter-yellow" priority />,
-  error: <Image src={iconError} alt="실패 메시지 아이콘" height={25} width={25} priority />,
+  success: (
+    <Image
+      src={iconSuccess}
+      alt="성공 메시지 아이콘"
+      height={25}
+      width={25}
+      className="h-5 w-5 md:h-[25px] md:w-[25px]"
+      priority
+    />
+  ),
+  warn: (
+    <Image
+      src={iconWarn}
+      alt="경고 메시지 아이콘"
+      height={25}
+      width={25}
+      className="filter-yellow h-5 w-5 md:h-[25px] md:w-[25px]"
+      priority
+    />
+  ),
+  error: (
+    <Image
+      src={iconError}
+      alt="실패 메시지 아이콘"
+      className="h-5 w-5 md:h-[25px] md:w-[25px]"
+      height={25}
+      width={25}
+      priority
+    />
+  ),
 };
