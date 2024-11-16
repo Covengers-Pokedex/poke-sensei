@@ -31,33 +31,41 @@ export default function ModalTabContent({ pokemonData, tabActive, language }: Mo
       )}
       {tabActive === 'evolution' && (
         <ul className="h-full flex justify-center items-center gap-5 md:gap-14">
-          {pokemonData?.evolutionList.map((evolution: any) => {
-            return (
-              <li key={evolution.pokemonName} className="relative w-32">
-                <span className="relative flex flex-col justify-center items-center pb-4 z-10">
-                  <Image src={evolution.pokemonImage} width={70} height={60} alt="포켓몬 이미지" />
-                </span>
-                <Image
-                  src={MonsterBallImage}
-                  width={400}
-                  height={400}
-                  alt="포켓몬 이미지"
-                  className="absolute w-[300px] top-[50%] translate-y-[-50%] opacity-80"
-                />
-              </li>
-            );
-          })}
+          {pokemonData?.evolutionList?.length > 0 ? (
+            pokemonData.evolutionList.map((evolution: any) => {
+              return (
+                <li key={evolution.pokemonName} className="relative w-32">
+                  <span className="relative flex flex-col justify-center items-center pb-4 z-10">
+                    <Image src={evolution.pokemonImage} width={70} height={60} alt="포켓몬 이미지" />
+                  </span>
+                  <Image
+                    src={MonsterBallImage}
+                    width={400}
+                    height={400}
+                    alt="포켓몬 이미지"
+                    className="absolute w-[300px] top-[50%] translate-y-[-50%] opacity-80"
+                  />
+                </li>
+              );
+            })
+          ) : (
+            <li>진화 트리가 없습니다.</li>
+          )}
         </ul>
       )}
       {tabActive === 'ability' && (
         <ul>
-          {pokemonData?.abilityList.map((ability: any) => {
-            return (
-              <li key={ability.name} className="break-keep mb-1">
-                {ability.name} - {ability.flavor}
-              </li>
-            );
-          })}
+          {pokemonData?.abilityList?.length > 0 ? (
+            pokemonData.abilityList.map((ability: any) => {
+              return (
+                <li key={ability.name} className="break-keep mb-1">
+                  {ability.name} - {ability.flavor}
+                </li>
+              );
+            })
+          ) : (
+            <li>특성이 없습니다.</li>
+          )}
         </ul>
       )}
     </div>
