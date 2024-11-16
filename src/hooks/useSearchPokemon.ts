@@ -1,3 +1,4 @@
+import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 import { getPokemonInfo } from '@/lib/api/api';
 import { PokemonInfo } from '@/lib/api/type';
 
@@ -22,7 +23,7 @@ function useSearchPokemon() {
     if (inputRef.current) inputRef.current.value = '';
   };
   const { data } = useQuery({
-    queryKey: ['pokemon', searchValue],
+    queryKey: [POKEMON_QUERY_KEY, searchValue],
     queryFn: async () => {
       const response = await getPokemonInfo({ number: searchValue, language: 'ko' });
       if (!response) {

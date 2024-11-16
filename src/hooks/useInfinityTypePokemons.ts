@@ -1,3 +1,4 @@
+import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 import { getPokemonTypeList } from '@/lib/api/api';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -20,7 +21,7 @@ function useInfinityTypePokemons() {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['pokemon', activedTypeNum],
+    queryKey: [POKEMON_QUERY_KEY, activedTypeNum],
     queryFn: async ({ pageParam }) => {
       if (activedTypeNum === null) {
         return [];
