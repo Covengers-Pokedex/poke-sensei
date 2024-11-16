@@ -9,6 +9,10 @@
   .viewport-center {
     @apply top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
+  .filter-yellow {
+    filter: brightness(0) saturate(100%) invert(60%) sepia(80%) saturate(584%) hue-rotate(358deg) brightness(102%)
+      contrast(109%);
+  }
   .draggable-z-index {
     z-index: 1;
   }
@@ -17,6 +21,9 @@
   }
   .modal-z-index {
     z-index: 3;
+  }
+  .toast-z-index {
+    z-index: 4;
   }
 }
 

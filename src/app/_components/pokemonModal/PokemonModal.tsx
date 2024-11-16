@@ -6,6 +6,7 @@ import ModalTitle from './components/ModalTitle';
 import ModalImage from './components/ModalImage';
 import ModalTabMenu from './components/ModalTabMenu';
 import ModalTabContent from './components/ModalTabContent';
+import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 
 interface PokemonModalProps {
   turnOffToggle: () => void;
@@ -18,7 +19,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
   const [number, setNumber] = useState<number>(pokemonNumber);
 
   const { data, isError } = useQuery<PokemonInfo>({
-    queryKey: ['pokemon', number],
+    queryKey: [POKEMON_QUERY_KEY, number],
     queryFn: async () => {
       const { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList, evolutionList } =
         await getPokemonInfo({

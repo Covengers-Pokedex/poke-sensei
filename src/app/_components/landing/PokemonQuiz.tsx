@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import RandomPokemonLoading from '../loading/RandomPokemonLoading';
 import { MAX_4TH_GEN_POKEMON_ID } from '@/lib/constant/constant';
 import Link from 'next/link';
+import { RANDOM_QUERY_KEY } from '@/constants/queryKeys';
 
 export default function PokemonQuiz() {
   const [userInput, setUserInput] = useState<string>('');
@@ -19,7 +20,7 @@ export default function PokemonQuiz() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ['randomPokemon', randomNumber],
+    queryKey: [RANDOM_QUERY_KEY, randomNumber],
     queryFn: async () => {
       const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage(randomNumber);
       return { pokemonName, pokemonRandomImage, pokemonHint };
@@ -45,7 +46,7 @@ export default function PokemonQuiz() {
     setQuizResult(false);
     const newRandomNumber = getRandomNumber(1, 151); // 랜덤 숫자 생성
     setRandomNumber(newRandomNumber);
-    queryClient.invalidateQueries({ queryKey: ['randomPokemon', newRandomNumber] }); // 이전 쿼리 무효화
+    queryClient.invalidateQueries({ queryKey: [RANDOM_QUERY_KEY, newRandomNumber] }); // 이전 쿼리 무효화
   };
 
   useEffect(() => {

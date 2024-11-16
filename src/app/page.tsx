@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { getLoadingPokemonImage } from '@/lib/api/api';
 import pokemonDex from '@/images/items/pokemon-dex.png';
 import Image from 'next/image';
+import { LOADING_QUERY_KEY } from '@/constants/queryKeys';
 
 export default async function Landing() {
   const queryClient = new QueryClient();
   // 랜덤 포켓몬을 네트워크 요청으로 받아 표출할 로딩용 컴포넌트를 위한 prefetchQuery
-  await queryClient.prefetchQuery({ queryKey: ['loading'], queryFn: getLoadingPokemonImage });
+  await queryClient.prefetchQuery({ queryKey: [LOADING_QUERY_KEY], queryFn: getLoadingPokemonImage });
 
   return (
     <div className="flex justify-center items-center w-screen h-screen px-3 sm:px-5">

@@ -1,9 +1,9 @@
-export default function SearchMenuContent() {
+import { ReactNode } from 'react';
+
+export default function SearchMenuContent({ children }: { children: ReactNode }) {
   return (
-    <div className="w-72 border rounded-md p-3 bg-white">
-      <section className="flex flex-col items-center">
-        <h4>어떤 포켓몬을 찾아볼까요?</h4>
-      </section>
+    <div className="border rounded-md p-3 bg-white">
+      <>{children}</>
     </div>
   );
 }
