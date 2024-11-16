@@ -9,15 +9,12 @@ export const metadata: Metadata = {
     icon: '/favicon.ico', // 파비콘 경로
   },
   metadataBase: new URL('https://poke-sensei.vercel.app'),
-
   openGraph: {
-    title: 'Poke-Sensei!',
-    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
-    url: 'https://poke-sensei.vercel.app',
     siteName: 'Poke-Sensei',
-    locale: 'ko-KR',
-    type: 'website',
-    images: '/ogImage.png',
+    title: 'Poke-Sensei',
+    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
+    images: '/ogImage.jpg',
+    url: 'https://poke-sensei.vercel.app', // 페이지 URL
   },
 };
 
