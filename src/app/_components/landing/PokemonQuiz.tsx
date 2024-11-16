@@ -16,6 +16,7 @@ export default function PokemonQuiz() {
   const [randomNumber, setRandomNumber] = useState<number>(getRandomNumber(1, 151));
   const queryClient = useQueryClient();
   const buttonRef = useRef<HTMLButtonElement>(null);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: [RANDOM_QUERY_KEY, randomNumber],
     queryFn: async () => {
