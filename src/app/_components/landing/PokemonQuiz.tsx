@@ -101,7 +101,7 @@ export default function PokemonQuiz() {
             <button
               type="submit"
               ref={buttonRef}
-              className="h-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none"
+              className="h-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none hover:bg-gray-200"
             >
               {quizResult ? '다시 풀기 ⏎' : '제출'}
             </button>
@@ -109,7 +109,7 @@ export default function PokemonQuiz() {
             {quizResult && (
               <Link
                 href="/main"
-                className="h-10 leading-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none"
+                className="h-10 leading-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none hover:bg-gray-200"
               >
                 포켓몬 도감
               </Link>
