@@ -12,7 +12,7 @@ import {
   getEvolutionList,
 } from './getPokemonData';
 import { getRandomNumber } from '@/utils/randomNumber';
-import { MAX_4TH_GEN_POKEMON_ID } from '../constant/constant';
+import { MAX_4TH_GEN_POKEMON_ID } from '@/constants/pokemonMaxId';
 
 // 포켓몬 한마리의 데이터
 export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => {

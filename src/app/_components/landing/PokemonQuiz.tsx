@@ -7,9 +7,9 @@ import { getPokemonRandomImage } from '../../../lib/api/api';
 import { getRandomNumber } from '@/utils/randomNumber';
 import classNames from 'classnames';
 import RandomPokemonLoading from '../loading/RandomPokemonLoading';
-import { MAX_4TH_GEN_POKEMON_ID } from '@/lib/constant/constant';
 import Link from 'next/link';
 import { RANDOM_QUERY_KEY } from '@/constants/queryKeys';
+import { MAX_4TH_GEN_POKEMON_ID } from '@/constants/pokemonMaxId';
 
 export default function PokemonQuiz() {
   const [userInput, setUserInput] = useState<string>('');
