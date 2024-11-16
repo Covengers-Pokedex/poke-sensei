@@ -3,7 +3,7 @@ import convertHexToRGBA from '@/utils/convertHexToRGBA';
 import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
-import { TYPE_BY_COLOR } from '@/lib/constant';
+import { TYPE_BY_COLOR } from '@/constants/mappingTypeColor';
 import { FormEvent, RefObject } from 'react';
 
 const staggerContainer = {

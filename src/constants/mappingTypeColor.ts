@@ -18,8 +18,3 @@ export const TYPE_BY_COLOR = {
   steel: { num: 9, ko: '강철', en: 'steel', color: '#B7B7CE' },
   fairy: { num: 18, ko: '페어리', en: 'fairy', color: '#D685AD' },
 };
-
-export const INITIAL_INFINITE_DATA = {
-  pages: [],
-  pageParams: [],
-};
