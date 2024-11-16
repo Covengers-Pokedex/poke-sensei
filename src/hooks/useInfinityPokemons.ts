@@ -1,3 +1,4 @@
+import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 import { getPokemonAllList } from '@/lib/api/api';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
@@ -11,7 +12,7 @@ const useInfinityPokemon = () => {
     fetchNextPage,
     isFetchingNextPage,
   } = useSuspenseInfiniteQuery({
-    queryKey: ['pokemon'],
+    queryKey: [POKEMON_QUERY_KEY],
     queryFn: ({ pageParam }) => getPokemonAllList({ offset: pageParam, limit: 20 }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {

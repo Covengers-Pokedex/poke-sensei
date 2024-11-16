@@ -69,6 +69,14 @@ const config: Config = {
             transform: 'translateX(-0.6px) rotate(-1.2deg)',
           },
         },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
       },
       animation: {
         fadeInBottom: 'fade-in-bottom 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
@@ -76,10 +84,8 @@ const config: Config = {
         backdropFadeIn: 'backdrop-fade-in 0.5s ease-out both',
         backdropFadeOut: 'backdrop-fade-out 0.5s ease-out both',
         wobbleHorBottom: 'wobble-hor-bottom 0.7s infinite ease-out both',
-      },
-      colors: {
-        background: 'var(--background)',
-        foreground: 'var(--foreground)',
+        fadeIn: 'fadeIn 0.6s ease-in-out',
+        fadeOut: 'fadeOut 0.6s ease-in-out',
       },
       fontFamily: {
         Galmuri9: ['Galmuri9', 'sans-serif'],
