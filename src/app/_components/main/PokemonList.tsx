@@ -1,10 +1,9 @@
 import { PokemonInfo } from '@/lib/api/type';
 import { InfiniteData } from '@tanstack/react-query';
 import Image from 'next/image';
-import monsterBall from '@/images/items/poke-ball.webp';
 import koreanTypeToColor from '@/utils/koreanTypeToColor';
 import { MutableRefObject } from 'react';
-import classNames from 'classnames';
+import PokePicker from './PokePicker';
 
 interface PokemonListProps {
   pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
@@ -24,9 +23,7 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonListProps
               <span className="absolute top-1 text-xs opacity-30">No.{pokemon.id}</span>
               <span className="flex pt-1.5 justify-center w-full">{pokemon.name}</span>
 
-              <button className={classNames('w-[30px] opacity-50 h-[30px] absolute top-[21px] right-2')}>
-                <Image src={monsterBall} alt="즐겨찾기" fill />
-              </button>
+              <PokePicker id={pokemon.id} name={pokemon.name} />
 
               <Image src={pokemon.image} alt="포켓몬 이미지" width={50} height={50} />
 
