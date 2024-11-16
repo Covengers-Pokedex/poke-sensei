@@ -1,9 +1,11 @@
 import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 import { getPokemonTypeList } from '@/lib/api/api';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
 function useInfinityTypePokemons() {
+  const { language } = useLanguageStore();
   //타입별 데이터 관리
   const [hasMoreType, setHasMoreType] = useState(false);
   const [activedTypeNum, setActivedTypeNum] = useState<number | null>(null);
@@ -21,12 +23,12 @@ function useInfinityTypePokemons() {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: [POKEMON_QUERY_KEY, activedTypeNum],
+    queryKey: [POKEMON_QUERY_KEY, activedTypeNum, language],
     queryFn: async ({ pageParam }) => {
       if (activedTypeNum === null) {
         return [];
       }
-      const data = await getPokemonTypeList({ number: activedTypeNum, offset: pageParam, limit: 20 });
+      const data = await getPokemonTypeList({ number: activedTypeNum, offset: pageParam, limit: 20, language });
       return data?.pokemonList;
     },
     initialPageParam: 0,

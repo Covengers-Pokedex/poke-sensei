@@ -52,7 +52,7 @@ export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => 
 
 // 포켓몬 도감 리스트 데이터
 // Todo 더보기 버튼 클릭시 offset와 limit로 추가 데이터 불러오도록 하기
-export const getPokemonAllList = async ({ offset = 0, limit = 20 }: GetPokemonListParams) => {
+export const getPokemonAllList = async ({ offset = 0, limit = 20, language }: GetPokemonListParams) => {
   // 494번 이후 부터는 불러오지 않음
   if (offset > MAX_4TH_GEN_POKEMON_ID) {
     return [];
@@ -65,7 +65,7 @@ export const getPokemonAllList = async ({ offset = 0, limit = 20 }: GetPokemonLi
   const pokemonAllListResponse = await fetchPokemonListData({ offset, limit: requestLimit });
   const pokemonPromises: PokemonInfo[] = pokemonAllListResponse.results.map((result: Language) => {
     const pokemonQuery = result.name;
-    return getPokemonInfo({ number: pokemonQuery, language: 'ko' });
+    return getPokemonInfo({ number: pokemonQuery, language: language });
   });
   const pokemonAllList = await Promise.all(pokemonPromises);
   return pokemonAllList as PokemonInfo[];
@@ -84,7 +84,7 @@ export const getLoadingImage = async (number: number) => {
 };
 
 // 포켓몬 타입 필터 포켓몬 리스트(해당 타입 숫자를 넣으면 타입에 관련된 포켓몬 리스트 노출)
-export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: GetPokemonTypeListParams) => {
+export const getPokemonTypeList = async ({ number, limit = 20, offset = 0, language }: GetPokemonTypeListParams) => {
   try {
     const typeData = await fetchTypeData(number);
     const pokemonData = await getTypeList(typeData, axiosInstance);
@@ -95,7 +95,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
 
     const pokemonList = await Promise.all(
       pokemonIdList.map((pokemonId: any) => {
-        return getPokemonInfo({ number: pokemonId, language: 'ko' });
+        return getPokemonInfo({ number: pokemonId, language: language });
       }),
     );
 
