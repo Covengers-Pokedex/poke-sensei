@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://poke-sensei.vercel.app'),
 
   openGraph: {
-    title: 'Poke-Sensei',
+    title: 'Poke-Sensei!',
     description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
     url: 'https://poke-sensei.vercel.app',
     siteName: 'Poke-Sensei',
