@@ -8,6 +8,7 @@ import PokemonList from './PokemonList';
 import useSearchPokemon from '@/hooks/useSearchPokemon';
 import RandomPokemonLoading from '../loading/RandomPokemonLoading';
 import DraggableMenu from '../draggableSearchMenu/DraggableMenu';
+import { NOT_FOUND_POKEMON } from '@/constants/searchNotFound';
 
 /**PokemonList 컴포넌트를 UI화 하기위해 컨테이너 컴포넌트를 하나 만들어 관심사를 분리했습니다.
  * 민찬님이 작성해주신 로딩 컴포넌트를 해당 컴포넌트로 이동시켰습니다
@@ -30,7 +31,15 @@ export default function PokedexMain() {
     isFetchingNextPage: isFetchingType,
   } = useInfinityTypePokemons();
 
-  const { searchedPokemon, handleSearchValue, inputRef, handleResetSearchedPokemon } = useSearchPokemon();
+  const {
+    searchedPokemon,
+    handleSubmit,
+    handleInputChange,
+    searchValue,
+    handleResetSearchedPokemon,
+    filteredPokemon,
+    handleClickFilteredPokemon,
+  } = useSearchPokemon();
 
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
     saveScrollPosition();
@@ -53,12 +62,15 @@ export default function PokedexMain() {
         </div>
       )}
       <SearchSection
+        searchValue={searchValue}
+        handleInputChange={handleInputChange}
         activedTypeNum={activedTypeNum}
         handleTypeButton={handleTypeButton}
         handleResetButton={handleResetButton}
-        handleSearchValue={handleSearchValue}
-        inputRef={inputRef}
+        handleSubmit={handleSubmit}
         handleResetSearchedPokemon={handleResetSearchedPokemon}
+        filteredPokemon={filteredPokemon.length > 0 ? filteredPokemon : NOT_FOUND_POKEMON}
+        handleClickFilteredPokemon={handleClickFilteredPokemon}
       />
       {activedTypeNum === null && searchedPokemon === null && (
         <PokemonList pokemonData={allPokemonData} targetRef={targetRef} />
@@ -70,11 +82,12 @@ export default function PokedexMain() {
       {searchedPokemon === false && <div>없음</div>}
       <DraggableMenu>
         <SearchSection
+          searchValue={searchValue}
+          handleInputChange={handleInputChange}
           activedTypeNum={activedTypeNum}
           handleTypeButton={handleTypeButton}
           handleResetButton={handleResetButton}
-          handleSearchValue={handleSearchValue}
-          inputRef={inputRef}
+          handleSubmit={handleSubmit}
           handleResetSearchedPokemon={handleResetSearchedPokemon}
           isModal
         />

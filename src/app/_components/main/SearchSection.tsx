@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { TYPE_BY_COLOR } from '@/constants/mappingTypeColor';
-import { FormEvent, RefObject } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { FilteredPokemonArr } from '@/types/filteredPokemon';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -31,38 +32,47 @@ interface SearchSectionProps {
   activedTypeNum: number | null;
   handleTypeButton: (type: number) => void;
   handleResetButton: () => void;
-  handleSearchValue: (event: FormEvent<HTMLFormElement>) => void;
-  inputRef: RefObject<HTMLInputElement>;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleResetSearchedPokemon: () => void;
+  searchValue: string;
+  filteredPokemon?: FilteredPokemonArr[];
   isModal?: boolean;
+  handleClickFilteredPokemon?: (value: FilteredPokemonArr) => void;
 }
 
 export default function SearchSection({
-  handleSearchValue,
+  handleSubmit,
   activedTypeNum,
   handleTypeButton,
   handleResetButton,
-  inputRef,
+  handleInputChange,
+  filteredPokemon = [],
+  searchValue,
   handleResetSearchedPokemon,
+  handleClickFilteredPokemon = () => {},
   isModal = false,
 }: SearchSectionProps) {
+  const [hoverIndex, setHoverIndex] = useState(0);
   const { toggleValue, switchToggle } = useToggle();
-
   const showButton = isModal || (!isModal && toggleValue);
+  const visibleFiltered = filteredPokemon.slice(0, 5);
 
+  const handleHoverIndex = () => {};
   return (
     <div>
       <form
         onSubmit={e => {
           handleResetSearchedPokemon();
           handleResetButton();
-          handleSearchValue(e);
+          handleSubmit(e);
         }}
-        className={classNames('flex w-full justify-center  gap-1', isModal ? 'pb-5' : 'pb-10')}
+        className={classNames('relative flex w-full justify-center  gap-1', isModal ? 'pb-5' : 'pb-10')}
       >
         <div className="flex h-12 w-full max-w-[500px] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
           <input
-            ref={inputRef}
+            onChange={handleInputChange}
+            value={searchValue}
             name="pokemonName"
             placeholder={isModal ? '포켓몬 검색' : '찾으실 포켓몬 이름을 입력하세요.'}
             className=" w-full bg-transparent px-3 py-1 outline-none"
@@ -71,6 +81,37 @@ export default function SearchSection({
             검색
           </button>
         </div>
+        {filteredPokemon.length > 0 && searchValue && (
+          <div className="flex bg-gray-50 opacity-90 border-gray-300 border  rounded-xl overflow-hidden flex-col z-10 w-full absolute top-[60px] left-1/2 -translate-x-1/2  max-w-[500px] ">
+            {visibleFiltered.map((pokemonName, index) => (
+              <button
+                type="button"
+                onClick={() => {
+                  handleClickFilteredPokemon(pokemonName);
+                }}
+                onMouseEnter={() => setHoverIndex(index)}
+                onMouseLeave={() => setHoverIndex(0)}
+                className={classNames(
+                  'w-full border-b border-gray-400 last:border-none flex items-center  py-3 px-10',
+                  hoverIndex === index ? 'bg-gray-200' : 'bg-gray-50',
+                )}
+                key={pokemonName.en}
+              >
+                {pokemonName['ko'].split('').map((word, index) => {
+                  //포켓몬 이름과 input value를 한글자씩 쪼개서 글자가 포함되어있는지 확인
+                  const isHighlighted = searchValue.split('').some(searchWord => searchWord === word);
+                  return isHighlighted ? (
+                    <span className="text-blue-600" key={`${pokemonName['en']}-${index}`}>
+                      {word}
+                    </span>
+                  ) : (
+                    <span key={`${pokemonName['en']}-${index}`}>{word}</span>
+                  );
+                })}
+              </button>
+            ))}
+          </div>
+        )}
       </form>
       {!isModal && (
         <div className="flex gap-3">
