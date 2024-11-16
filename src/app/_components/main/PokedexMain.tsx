@@ -7,7 +7,8 @@ import useInfinityTypePokemons from '@/hooks/useInfinityTypePokemons';
 import PokemonList from './PokemonList';
 import useSearchPokemon from '@/hooks/useSearchPokemon';
 import RandomPokemonLoading from '../loading/RandomPokemonLoading';
-import MyFavoriteButton from '../pokemonModal/MyFavoriteButton';
+import MyFavoriteButton from '../button/MyFavoriteButton';
+import LanguageToggleButton from '../button/LanguageToggleButton';
 
 /**PokemonList 컴포넌트를 UI화 하기위해 컨테이너 컴포넌트를 하나 만들어 관심사를 분리했습니다.
  * 민찬님이 작성해주신 로딩 컴포넌트를 해당 컴포넌트로 이동시켰습니다
@@ -52,6 +53,8 @@ export default function PokedexMain() {
           <RandomPokemonLoading />
         </div>
       )}
+
+      <LanguageToggleButton />
       <MyFavoriteButton />
       <SearchSection
         activedTypeNum={activedTypeNum}
