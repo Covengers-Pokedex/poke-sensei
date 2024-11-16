@@ -3,11 +3,12 @@ import { getPokemonAllList } from '@/lib/api/api';
 import { useSuspenseInfiniteQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
-const usePokemonList = () => {
+//파일명 변경 usePokemonList =>
+const useInfinityPokemon = () => {
   const [hasMore, setHasMore] = useState(true);
 
   const {
-    data: pokemonData,
+    data: allPokemonData,
     fetchNextPage,
     isFetchingNextPage,
   } = useSuspenseInfiniteQuery({
@@ -23,6 +24,6 @@ const usePokemonList = () => {
     },
   });
 
-  return { pokemonData, fetchNextPage, hasMore, isFetchingNextPage };
+  return { allPokemonData, fetchNextPage, hasMore, isFetchingNextPage };
 };
-export default usePokemonList;
+export default useInfinityPokemon;
