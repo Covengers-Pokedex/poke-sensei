@@ -34,6 +34,7 @@ interface SearchSectionProps {
   handleSearchValue: (event: FormEvent<HTMLFormElement>) => void;
   inputRef: RefObject<HTMLInputElement>;
   handleResetSearchedPokemon: () => void;
+  isModal?: boolean;
 }
 
 export default function SearchSection({
@@ -43,24 +44,27 @@ export default function SearchSection({
   handleResetButton,
   inputRef,
   handleResetSearchedPokemon,
+  isModal = false,
 }: SearchSectionProps) {
   const { toggleValue, switchToggle } = useToggle();
 
+  const showButton = isModal || (!isModal && toggleValue);
+
   return (
-    <div className="pt-20">
+    <div>
       <form
         onSubmit={e => {
           handleResetSearchedPokemon();
           handleResetButton();
           handleSearchValue(e);
         }}
-        className="flex w-full justify-center  gap-1 pb-10"
+        className={classNames('flex w-full justify-center  gap-1', isModal ? 'pb-5' : 'pb-10')}
       >
-        <div className="flex h-12 w-[60%] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
+        <div className="flex h-12 w-full max-w-[500px] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
           <input
             ref={inputRef}
             name="pokemonName"
-            placeholder="찾으실 포켓몬 이름을 입력하세요."
+            placeholder={isModal ? '포켓몬 검색' : '찾으실 포켓몬 이름을 입력하세요.'}
             className=" w-full bg-transparent px-3 py-1 outline-none"
           />
           <button type="submit" className="w-16 h-full  rounded-md bg-gray-200 shadow-xl">
@@ -68,32 +72,34 @@ export default function SearchSection({
           </button>
         </div>
       </form>
-      <div className="flex gap-3">
-        <button
-          className={classNames(
-            toggleValue ? 'bg-gray-200 shadow-none top-1' : 'bg-white shadow-xl',
-            ' px-5 py-3 flex hover:bg-gray-200 active:shadow-none active:top-1 justify-center relative rounded-xl items-center ',
-          )}
-          onClick={switchToggle}
-        >
-          {toggleValue ? '타입 접기' : '타입 열기'}
-        </button>
-        <button
-          onClick={() => {
-            handleResetButton();
-            handleResetSearchedPokemon();
-          }}
-          className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
-        >
-          초기화
-        </button>
-      </div>
-      {toggleValue && (
+      {!isModal && (
+        <div className="flex gap-3">
+          <button
+            className={classNames(
+              toggleValue ? 'bg-gray-200 shadow-none top-1' : 'bg-white shadow-xl',
+              ' px-5 py-3 flex hover:bg-gray-200 active:shadow-none active:top-1 justify-center relative rounded-xl items-center ',
+            )}
+            onClick={switchToggle}
+          >
+            {toggleValue ? '타입 접기' : '타입 열기'}
+          </button>
+          <button
+            onClick={() => {
+              handleResetButton();
+              handleResetSearchedPokemon();
+            }}
+            className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
+          >
+            초기화
+          </button>
+        </div>
+      )}
+      {showButton && (
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           animate="show"
-          className="grid gap-3 pt-5 grid-cols-6 "
+          className={classNames('grid gap-3 pt-5', isModal ? 'grid-cols-3' : 'grid-cols-6')}
         >
           {Object.entries(TYPE_BY_COLOR).map(([typeKey, typeInfo]) => (
             <motion.div variants={item} key={typeKey} className="relative h-[40px] w-full">

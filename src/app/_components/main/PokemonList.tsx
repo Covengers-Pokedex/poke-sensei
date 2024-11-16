@@ -25,11 +25,17 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonListProps
               <span className="flex pt-1.5 justify-center w-full">{pokemon.name}</span>
 
               <button className={classNames('w-[30px] opacity-50 h-[30px] absolute top-[21px] right-2')}>
-                <Image src={monsterBall} alt="즐겨찾기" fill />
+                <Image src={monsterBall} alt="즐겨찾기" fill sizes="30px" />
               </button>
-
-              <Image src={pokemon.image} alt="포켓몬 이미지" width={50} height={50} />
-
+              <div className="h-full w-full relative">
+                <Image
+                  src={pokemon.image}
+                  className="object-contain py-5"
+                  alt="포켓몬 이미지"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 30vw"
+                />
+              </div>
               <div className="flex w-full gap-2 flex-nowrap">
                 {pokemon.typeList.map(type => (
                   <span

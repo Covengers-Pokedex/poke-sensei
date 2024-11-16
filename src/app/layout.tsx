@@ -14,7 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-[#A8D8A8]">
+      <body className="bg-[#A8D8A8] px-6">
         <Providers>
           {/* 드래그 가능한 몬스터볼 컴포넌트를 렌더링하는 포탈을 열기 위한 엘리먼트 */}
           <div id="draggable" />

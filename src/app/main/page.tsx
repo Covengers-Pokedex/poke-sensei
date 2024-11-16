@@ -3,7 +3,6 @@ import PokedexMain from '../_components/main/PokedexMain';
 import { getLoadingPokemonImage, getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import Link from 'next/link';
-import DraggableMenu from '../_components/draggableSearchMenu/DraggableMenu';
 
 export default async function MainPage() {
   const queryClient = getQueryClient();
@@ -20,8 +19,8 @@ export default async function MainPage() {
 
   const dehydratedState = dehydrate(queryClient);
   return (
-    <div className="flex flex-col justify-between relative items-center gap-8 m-auto mt-10 w-full min-h-[500px] sm:min-h-[700px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
-      <div className="w-full mt-[-20px] sm:mt-[-30px]">
+    <div className="flex flex-col justify-between relative items-center gap-8 m-auto mt-10 w-full min-h-[500px] sm:min-h-[700px] pb-6 pt-[50px] sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
+      <div className="w-full mt-[-70px] sm:mt-[-80px]">
         <h1 className="title-line text-2xl sm:text-5xl lg:text-6xl text-center text-[#F9DC42]">포켓몬 도감</h1>
       </div>
       <Link
@@ -33,9 +32,6 @@ export default async function MainPage() {
       <div className="flex flex-col w-full">
         <HydrationBoundary state={dehydratedState}>
           <PokedexMain />
-          <DraggableMenu>
-            <div>내부 컨텐츠</div>
-          </DraggableMenu>
         </HydrationBoundary>
       </div>
     </div>
