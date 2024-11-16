@@ -4,20 +4,20 @@ import Providers from './_components/Providers';
 
 export const metadata: Metadata = {
   title: 'Poke-Sensei',
-  description: '이 포켓몬 몰라? 도감 보고 공부해!',
+  description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
   icons: {
     icon: '/favicon.ico', // 파비콘 경로
   },
   openGraph: {
     title: 'Poke-Sensei',
-    description: '이 포켓몬 몰라? 도감 보고 공부해!',
-    url: 'https://poke-sensei.vercel.app/', // 페이지 URL
+    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
+    url: 'https://poke-sensei.vercel.app', // 페이지 URL
     type: 'website',
     images: [
       {
         url: '/og-image.png', // OG 이미지 경로
-        width: 1200,
-        height: 630,
+        width: 502,
+        height: 423,
         alt: 'og-image',
       },
     ],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image', // 트위터 카드 유형
     title: 'Poke-Sensei',
-    description: '이 포켓몬 몰라? 도감 보고 공부해!',
+    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
     images: ['/og-image.png'], // 트위터 공유 이미지
   },
 };
