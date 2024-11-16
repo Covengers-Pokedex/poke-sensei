@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import ModalFrame from '../modal/ModalFrame';
 import PokemonModal from '../pokemonModal/PokemonModal';
 import { useToggle } from '@/hooks/useToggle';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 
 interface PokemonListProps {
   pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
@@ -15,6 +16,7 @@ interface PokemonListProps {
 }
 
 export default function PokemonList({ pokemonData, targetRef }: PokemonListProps) {
+  const { language } = useLanguageStore();
   const [pokemonId, setPokemonId] = useState<number>(0);
   const { toggleValue, switchToggle, turnOffToggle } = useToggle();
 
@@ -32,7 +34,6 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonListProps
       <ModalFrame isOpenModal={toggleValue} closeModal={turnOffToggle} backdropBgColor="#000000">
         <PokemonModal turnOffToggle={turnOffToggle} pokemonNumber={pokemonId} />
       </ModalFrame>
-
       {pokemonData?.pages.map(pokemonList =>
         pokemonList?.map(pokemon =>
           pokemon.id ? (
@@ -55,7 +56,7 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonListProps
               <div className="flex w-full gap-2 flex-nowrap">
                 {pokemon.typeList.map(type => (
                   <span
-                    style={{ backgroundColor: `${koreanTypeToColor(type.name)}` }}
+                    style={{ backgroundColor: `${koreanTypeToColor(type.name, language)}` }}
                     className="w-full text-white py-1 opacity-80 shadow-lg text-sm rounded-lg flex justify-center"
                     key={type.name}
                   >
