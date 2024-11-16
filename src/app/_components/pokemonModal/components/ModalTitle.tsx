@@ -1,18 +1,27 @@
 import { PokemonTypeWithColor } from '@/lib/api/type';
+import monsterBall from '@/images/items/poke-ball.webp';
+import Image from 'next/image';
 
 interface ModalTitleProps {
-  pokemonData: any;
-  onTurnOffToggle: () => void;
+  pokemonData?: any;
+  onTurnOffToggle?: () => void;
+  modalTitle?: string;
 }
 
-export default function ModalTitle({ pokemonData, onTurnOffToggle }: ModalTitleProps) {
+export default function ModalTitle({ pokemonData, onTurnOffToggle, modalTitle }: ModalTitleProps) {
   const formattedId = pokemonData ? String(pokemonData.id).padStart(3, '0') : '000';
   return (
     <div>
-      <div className="relative pt-5 mb-5">
+      <div className="flex items-center justify-center relative pt-5 mb-5">
         <h2 className="title-line !font-Galmuri9 text-center text-[#F9DC42] text-2xl md:text-4xl">
-          #{formattedId} {pokemonData?.name}
+          {modalTitle ? modalTitle : `#${formattedId} ${pokemonData?.name}`}
         </h2>
+        {modalTitle === undefined && (
+          <button>
+            <Image className="opacity-50" width={50} height={50} src={monsterBall} alt="즐겨찾기" />
+          </button>
+        )}
+
         <button type="button" className="absolute top-5 right-5 text-2xl" onClick={onTurnOffToggle}>
           x
         </button>
