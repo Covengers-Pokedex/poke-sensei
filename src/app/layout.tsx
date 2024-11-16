@@ -20,6 +20,8 @@ export default function RootLayout({
           <div id="draggable" />
           {/* 모달 컴포넌트를 렌더링하는 포탈을 열기 위한 엘리먼트 */}
           <div id="modal" />
+          {/* 전역에서 사용 가능한 토스트를 렌더링하는 포탈을 열기 위한 엘리먼트 */}
+          <div id="toast" />
           <div>{children}</div>
         </Providers>
       </body>
