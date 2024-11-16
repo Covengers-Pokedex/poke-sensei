@@ -17,7 +17,7 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
   const [shiny, setShiny] = useState<boolean>(false);
   const [number, setNumber] = useState<number>(pokemonNumber);
 
-  const { data, isLoading, isError } = useQuery<PokemonInfo>({
+  const { data, isError } = useQuery<PokemonInfo>({
     queryKey: ['pokemon', number],
     queryFn: async () => {
       const { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList, evolutionList } =
@@ -36,15 +36,11 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
     setTabActive('info');
   }, []);
 
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
-
   if (isError) {
     return <div>에러...</div>;
   }
   return (
-    <div className="relative w-[360px] sm:w-[500px] md:w-[700px] h-[650px] bg-[#F0F0F0] rounded-2xl p-2 md:p-4">
+    <div className="relative w-screen max-w-[90%] sm:max-w-[500px] md:max-w-[700px] h-[75vh] bg-[#F0F0F0] rounded-2xl mx-auto p-2 md:p-4">
       <div className="flex flex-col justify-between h-full bg-[#79C9FA] rounded-2xl">
         <ModalTitle pokemonData={data} onTurnOffToggle={turnOffToggle} />
         <ModalImage pokemonData={data} number={number} setNumber={setNumber} shiny={shiny} />
