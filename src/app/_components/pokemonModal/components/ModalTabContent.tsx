@@ -1,12 +1,14 @@
 import Image from 'next/image';
 import MonsterBallImage from '@/images/items/monster-ball.png';
+import { LanguageTypes } from '@/types/language';
 
 interface ModalTabContentProps {
   pokemonData: any;
   tabActive: string;
+  language: LanguageTypes;
 }
 
-export default function ModalTabContent({ pokemonData, tabActive }: ModalTabContentProps) {
+export default function ModalTabContent({ pokemonData, tabActive, language }: ModalTabContentProps) {
   return (
     <div className="flex flex-col justify-between w-full h-[180px] sm:h-[150px] bg-black bg-opacity-50 rounded-b-2xl px-3 py-2 text-sm sm:text-base text-white">
       {tabActive === 'info' && (
@@ -14,9 +16,15 @@ export default function ModalTabContent({ pokemonData, tabActive }: ModalTabCont
           <p className="break-keep">{pokemonData?.flavor}</p>
           <div>
             <ul className="flex items-center gap-3 text-xs sm:text-base">
-              <li>분류 - {pokemonData?.genus}</li>
-              <li>신장 - {pokemonData?.height}m</li>
-              <li>무게 - {pokemonData?.weight}kg</li>
+              <li>
+                {language === 'ko' ? '분류' : 'genus'} - {pokemonData?.genus}
+              </li>
+              <li>
+                {language === 'ko' ? '신장' : 'height'} - {pokemonData?.height}m
+              </li>
+              <li>
+                {language === 'ko' ? '무게' : 'weight'} - {pokemonData?.weight}kg
+              </li>
             </ul>
           </div>
         </>

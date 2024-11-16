@@ -7,6 +7,7 @@ import ModalImage from './components/ModalImage';
 import ModalTabMenu from './components/ModalTabMenu';
 import ModalTabContent from './components/ModalTabContent';
 import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 
 interface PokemonModalProps {
   turnOffToggle: () => void;
@@ -14,17 +15,18 @@ interface PokemonModalProps {
 }
 
 export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonModalProps) {
+  const { language } = useLanguageStore();
   const [tabActive, setTabActive] = useState<string>('info');
   const [shiny, setShiny] = useState<boolean>(false);
   const [number, setNumber] = useState<number>(pokemonNumber);
 
   const { data, isError } = useQuery<PokemonInfo>({
-    queryKey: [POKEMON_QUERY_KEY, number],
+    queryKey: [POKEMON_QUERY_KEY, number, language],
     queryFn: async () => {
       const { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList, evolutionList } =
         await getPokemonInfo({
           number,
-          language: 'ko',
+          language: language,
         });
       return { id, weight, height, name, genus, flavor, typeList, image, shiny, abilityList, evolutionList };
     },
@@ -43,11 +45,17 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
   return (
     <div className="relative w-screen max-w-[90%] sm:max-w-[500px] md:max-w-[700px] h-[75vh] bg-[#F0F0F0] rounded-2xl mx-auto p-2 md:p-4">
       <div className="flex flex-col justify-between h-full bg-[#79C9FA] rounded-2xl">
-        <ModalTitle pokemonData={data} onTurnOffToggle={turnOffToggle} />
+        <ModalTitle pokemonData={data} onTurnOffToggle={turnOffToggle} language={language} />
         <ModalImage pokemonData={data} number={number} setNumber={setNumber} shiny={shiny} />
         <div>
-          <ModalTabMenu tabActive={tabActive} setTabActive={setTabActive} shiny={shiny} setShiny={setShiny} />
-          <ModalTabContent pokemonData={data} tabActive={tabActive} />
+          <ModalTabMenu
+            tabActive={tabActive}
+            setTabActive={setTabActive}
+            shiny={shiny}
+            setShiny={setShiny}
+            language={language}
+          />
+          <ModalTabContent pokemonData={data} tabActive={tabActive} language={language} />
         </div>
       </div>
     </div>

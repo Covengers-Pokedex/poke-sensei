@@ -1,3 +1,4 @@
+import { LanguageTypes } from '@/types/language';
 import classNames from 'classnames';
 
 interface ModalTabMenuProps {
@@ -5,9 +6,10 @@ interface ModalTabMenuProps {
   setTabActive: React.Dispatch<React.SetStateAction<string>>;
   shiny: boolean;
   setShiny: React.Dispatch<React.SetStateAction<boolean>>;
+  language: LanguageTypes;
 }
 
-export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny }: ModalTabMenuProps) {
+export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny, language }: ModalTabMenuProps) {
   return (
     <div className="flex justify-between items-center gap-3">
       <div>
@@ -17,11 +19,11 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny 
             setTabActive('info');
           }}
           className={classNames(
-            'w-16 sm:w-24 h-8 text-sm sm:text-base rounded-t-lg',
+            'w-[70px] sm:w-[110px] h-8 text-sm sm:text-base rounded-t-lg',
             tabActive === 'info' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
           )}
         >
-          정보
+          {language === 'ko' ? '정보' : 'information'}
         </button>
         <button
           type="button"
@@ -33,7 +35,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny 
             tabActive === 'evolution' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
           )}
         >
-          진화트리
+          {language === 'ko' ? '진화트리' : 'evolution'}
         </button>
         <button
           type="button"
@@ -45,7 +47,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny 
             tabActive === 'ability' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
           )}
         >
-          특성
+          {language === 'ko' ? '특성' : 'ability'}
         </button>
       </div>
       <button
@@ -63,7 +65,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny 
             )}
           />
         </span>
-        이로치
+        {language === 'ko' ? '이로치' : 'shiny'}
       </button>
     </div>
   );

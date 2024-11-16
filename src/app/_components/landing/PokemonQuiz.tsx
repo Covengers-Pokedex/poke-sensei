@@ -10,8 +10,11 @@ import RandomPokemonLoading from '../loading/RandomPokemonLoading';
 import Link from 'next/link';
 import { RANDOM_QUERY_KEY } from '@/constants/queryKeys';
 import { MAX_4TH_GEN_POKEMON_ID } from '@/constants/pokemonMaxId';
+import LanguageToggleButton from '../button/LanguageToggleButton';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 
 export default function PokemonQuiz() {
+  const { language } = useLanguageStore();
   const [userInput, setUserInput] = useState<string>('');
   const [quizResult, setQuizResult] = useState<boolean>(false);
   const [quizResultText, setQuizResultText] = useState<string>('');
@@ -20,31 +23,36 @@ export default function PokemonQuiz() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: [RANDOM_QUERY_KEY, randomNumber],
+    queryKey: [RANDOM_QUERY_KEY, randomNumber, language],
     queryFn: async () => {
-      const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage(randomNumber);
+      const { pokemonName, pokemonRandomImage, pokemonHint } = await getPokemonRandomImage(randomNumber, language);
       return { pokemonName, pokemonRandomImage, pokemonHint };
     },
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
   });
 
+  const retryText = language === 'ko' ? '다시 풀기 ⏎' : 'Retry';
+  const submitText = language === 'ko' ? '제출' : 'Submit';
+  const successText = language === 'ko' ? '정답입니다! 포켓몬 마스터인가요?' : 'Correct! Are you a Pokémon master?';
+  const failText = language === 'ko' ? '틀렸습니다... 도감 보고 공부하세요!' : 'Incorrect... Study the Pokédex!';
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (userInput === data?.pokemonName) {
       setQuizResult(true);
       setUserInput('');
-      setQuizResultText('정답입니다! 포켓몬 마스터인가요?');
+      setQuizResultText(successText);
     } else {
       setQuizResult(true);
       setUserInput('');
-      setQuizResultText('틀렸습니다... 도감 보고 공부하세요!');
+      setQuizResultText(failText);
     }
   };
 
   const handleResetQuiz = () => {
     setQuizResult(false);
-    const newRandomNumber = getRandomNumber(1, 151); // 랜덤 숫자 생성
+    const newRandomNumber = getRandomNumber(1, MAX_4TH_GEN_POKEMON_ID); // 랜덤 숫자 생성
     setRandomNumber(newRandomNumber);
     queryClient.invalidateQueries({ queryKey: [RANDOM_QUERY_KEY, newRandomNumber] }); // 이전 쿼리 무효화
   };
@@ -54,6 +62,14 @@ export default function PokemonQuiz() {
       buttonRef.current?.focus();
     }
   }, [quizResult]);
+
+  useEffect(() => {
+    if (quizResult) {
+      setQuizResultText(successText);
+    } else {
+      setQuizResultText(failText);
+    }
+  }, [language]);
 
   if (isLoading) {
     return <RandomPokemonLoading />;
@@ -65,6 +81,7 @@ export default function PokemonQuiz() {
 
   return (
     <>
+      <LanguageToggleButton />
       <Image
         className={classNames(
           'mt-3 w-auto h-40 sm:h-48 md:h-56 lg:h-64 filter object-contain',
@@ -89,7 +106,7 @@ export default function PokemonQuiz() {
             {quizResult || (
               <input
                 type="text"
-                placeholder="포켓몬을 맞춰보세요!"
+                placeholder={language === 'ko' ? '포켓몬을 맞춰보세요!' : 'Guess the Pokémon!'}
                 value={userInput}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   setUserInput(e.target.value);
@@ -103,7 +120,7 @@ export default function PokemonQuiz() {
               ref={buttonRef}
               className="h-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none hover:bg-gray-200"
             >
-              {quizResult ? '다시 풀기 ⏎' : '제출'}
+              {quizResult ? retryText : submitText}
             </button>
 
             {quizResult && (
@@ -111,7 +128,7 @@ export default function PokemonQuiz() {
                 href="/main"
                 className="h-10 leading-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none hover:bg-gray-200"
               >
-                포켓몬 도감
+                {language === 'ko' ? '포켓몬 도감' : 'Pokedex'}
               </Link>
             )}
           </form>
