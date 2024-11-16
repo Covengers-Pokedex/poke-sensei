@@ -7,14 +7,17 @@ import { getPokemonRandomImage } from '../../../lib/api/api';
 import { getRandomNumber } from '@/utils/randomNumber';
 import classNames from 'classnames';
 import RandomPokemonLoading from '../loading/RandomPokemonLoading';
+import { MAX_4TH_GEN_POKEMON_ID } from '@/lib/constant/constant';
+import Link from 'next/link';
 
 export default function PokemonQuiz() {
   const [userInput, setUserInput] = useState<string>('');
   const [quizResult, setQuizResult] = useState<boolean>(false);
   const [quizResultText, setQuizResultText] = useState<string>('');
-  const [randomNumber, setRandomNumber] = useState<number>(getRandomNumber(1, 151));
+  const [randomNumber, setRandomNumber] = useState<number>(getRandomNumber(1, MAX_4TH_GEN_POKEMON_ID));
   const queryClient = useQueryClient();
   const buttonRef = useRef<HTMLButtonElement>(null);
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ['randomPokemon', randomNumber],
     queryFn: async () => {
@@ -62,10 +65,14 @@ export default function PokemonQuiz() {
   return (
     <>
       <Image
-        className={classNames('mt-3 w-[130px] lg:w-[240px] filter', quizResult ? 'brightness-100' : 'brightness-0')}
+        className={classNames(
+          'mt-3 w-auto h-40 sm:h-48 md:h-56 lg:h-64 filter object-contain',
+          quizResult ? 'brightness-100' : 'brightness-0',
+        )}
         src={data?.pokemonRandomImage}
         width={250}
         height={250}
+        draggable={false}
         alt="포켓몬 이미지"
       />
       <div className="flex flex-col justify-center items-center w-full gap-3 sm:gap-5">
@@ -97,6 +104,15 @@ export default function PokemonQuiz() {
             >
               {quizResult ? '다시 풀기 ⏎' : '제출'}
             </button>
+
+            {quizResult && (
+              <Link
+                href="/main"
+                className="h-10 leading-10 min-w-[56px] px-3 rounded-lg shadow-[2px_4px_4px_rgba(0,0,0,0.2)] bg-white focus-visible:outline-none"
+              >
+                포켓몬 도감
+              </Link>
+            )}
           </form>
         </div>
       </div>
