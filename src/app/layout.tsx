@@ -8,25 +8,16 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico', // 파비콘 경로
   },
+  metadataBase: new URL('https://poke-sensei.vercel.app'),
+
   openGraph: {
-    title: 'Poke-Sensei',
+    title: 'Poke-Sensei!',
     description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
-    url: 'https://poke-sensei.vercel.app', // 페이지 URL
+    url: 'https://poke-sensei.vercel.app',
+    siteName: 'GiveMeFive!',
+    locale: 'ko-KR',
     type: 'website',
-    images: [
-      {
-        url: '/og-image.png', // OG 이미지 경로
-        width: 502,
-        height: 423,
-        alt: 'og-image',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image', // 트위터 카드 유형
-    title: 'Poke-Sensei',
-    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
-    images: ['/og-image.png'], // 트위터 공유 이미지
+    images: '/ogImage.png',
   },
 };
 
