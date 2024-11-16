@@ -3,8 +3,31 @@ import '@/styles/globals.css';
 import Providers from './_components/Providers';
 
 export const metadata: Metadata = {
-  title: '포켓몬 도감',
-  description: '세상의 모든 포켓몬이 여기에!',
+  title: 'Poke-Sensei',
+  description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
+  icons: {
+    icon: '/favicon.ico', // 파비콘 경로
+  },
+  openGraph: {
+    title: 'Poke-Sensei',
+    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
+    url: 'https://poke-sensei.vercel.app', // 페이지 URL
+    type: 'website',
+    images: [
+      {
+        url: '/og-image.png', // OG 이미지 경로
+        width: 502,
+        height: 423,
+        alt: 'og-image',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image', // 트위터 카드 유형
+    title: 'Poke-Sensei',
+    description: '이 포켓몬 몰라요? 도감 보고 공부하세요!',
+    images: ['/og-image.png'], // 트위터 공유 이미지
+  },
 };
 
 export default function RootLayout({
