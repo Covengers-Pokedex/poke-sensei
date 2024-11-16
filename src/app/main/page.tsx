@@ -5,6 +5,8 @@ import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import Link from 'next/link';
 import DraggableMenu from '../_components/draggableSearchMenu/DraggableMenu';
 import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
+import MyFavoriteButton from '../_components/pokemonModal/MyFavoriteButton';
+
 export default async function MainPage() {
   const queryClient = getQueryClient();
 
@@ -26,7 +28,7 @@ export default async function MainPage() {
       </div>
       <Link
         href="/"
-        className="absolute top-12 sm:top-10 text-sm sm:text-[16px] right-3 translate-y-[-50%] px-3 rounded-lg bg-[#D9D9D9] shadow-[2px_4px_4px_rgba(0,0,0,0.2)] transition-all hover:bg-[#F9DC42] leading-[30px] h-[30px] sm:leading-[35px] sm:h-[35px]"
+        className="absolute top-12 sm:top-11 right-28 sm:right-[120px] translate-y-[-50%] text-sm sm:text-[16px] px-3 rounded-lg bg-[#D9D9D9] shadow-[2px_4px_4px_rgba(0,0,0,0.2)] transition-all hover:bg-[#F9DC42] leading-[30px] h-[30px] sm:leading-[35px] sm:h-[35px]"
       >
         포켓몬 퀴즈
       </Link>
