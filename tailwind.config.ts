@@ -69,6 +69,28 @@ const config: Config = {
             transform: 'translateX(-0.6px) rotate(-1.2deg)',
           },
         },
+        'wobble-none-opacity': {
+          '0%': {
+            transform: 'translateX(0%)',
+            'transform-origin': ' 50% 50%',
+          },
+          '100%': { transform: 'translateX(0%)', 'transform-origin': ' 50% 50%' },
+          '15%': {
+            transform: 'translateX(-3px) rotate(-6deg)',
+          },
+          '30%': {
+            transform: 'translateX(1.5px) rotate(6deg)',
+          },
+          '45%': {
+            transform: 'translateX(-1.5px) rotate(-7.6deg)',
+          },
+          '60%': {
+            transform: 'translateX(0.9px) rotate(4.4deg)',
+          },
+          '75%': {
+            transform: 'translateX(-0.6px) rotate(-1.2deg)',
+          },
+        },
         fadeIn: {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
@@ -84,6 +106,7 @@ const config: Config = {
         backdropFadeIn: 'backdrop-fade-in 0.5s ease-out both',
         backdropFadeOut: 'backdrop-fade-out 0.5s ease-out both',
         wobbleHorBottom: 'wobble-hor-bottom 0.7s infinite ease-out both',
+        wobbleNoneOpacity: 'wobble-none-opacity 0.7s infinite ease-out both',
         fadeIn: 'fadeIn 0.6s ease-in-out',
         fadeOut: 'fadeOut 0.6s ease-in-out',
       },
