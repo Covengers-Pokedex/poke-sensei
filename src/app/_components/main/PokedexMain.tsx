@@ -81,9 +81,9 @@ export default function PokedexMain() {
         <PokemonList pokemonData={allPokemonData} targetRef={targetRef} />
       )}
       {!!activedTypeNum && searchedPokemon === null && (
-        <PokemonList pokemonData={typePokemonData} targetRef={typeTargetRef} />
+        <PokemonList pokemonData={typePokemonData} targetRef={typeTargetRef} carousel={false} />
       )}
-      {searchedPokemon && <PokemonList pokemonData={searchedPokemon} />}
+      {searchedPokemon && <PokemonList pokemonData={searchedPokemon} carousel={false} />}
       {searchedPokemon === false && <div>없음</div>}
       <DraggableMenu>
         <SearchSection
