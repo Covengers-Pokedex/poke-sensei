@@ -30,7 +30,7 @@ export default function PokePicker({ id, name }: PokePickerProps) {
         localStorage.setItem('pokebox', JSON.stringify([...pokebox, id]));
         party.sparkles(event.target as HTMLButtonElement, {
           count: 20,
-          speed: 120,
+          speed: 80,
           size: party.variation.range(0.8, 1.2),
         });
         addToast({ type: 'success', message: `${name}이(가) 포켓박스에 추가되었다!` });
