@@ -39,7 +39,7 @@ export default function SearchMenuContainer({ isOpenMenu, onCloseMenuClick, chil
                 x
               </button>
               <Image src={defaultPokemonImage} alt="포켓몬 이미지" height={75} width={75} unoptimized priority />
-              <SearchMenuContent>{children}</SearchMenuContent>
+              <SearchMenuContent searchMenuOff={onCloseMenuClick}>{children}</SearchMenuContent>
             </div>
           </div>
         </div>
