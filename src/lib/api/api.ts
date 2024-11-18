@@ -12,68 +12,60 @@ import {
   getEvolutionList,
 } from './getPokemonData';
 import { getRandomNumber } from '@/utils/randomNumber';
+import { MAX_4TH_GEN_POKEMON_ID } from '@/constants/pokemonMaxId';
 
 // 포켓몬 한마리의 데이터
 export const getPokemonInfo = async ({ number, language }: GetPokemonParams) => {
-  try {
-    const pokemonData = await fetchPokemonData(number);
-    const { id, weight, height, abilities, types, species } = pokemonData;
-    const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0]; // 포켓몬 설명 데이터를 가져오는 url에서 쿼리(고유 번호)만 가져오는 정규식
-    const speciesData = await fetchSpeciesData(speciesNumber);
-    const evolutionNumber = speciesData.evolution_chain.url.match(/(\d+)(?=\/?$)/)[0];
-    const evolutionData = await fetchEvolutionData(evolutionNumber);
+  const pokemonData = await fetchPokemonData(number);
+  const { id, weight, height, abilities, types, species } = pokemonData;
+  const speciesNumber = species.url.match(/(\d+)(?=\/?$)/)[0]; // 포켓몬 설명 데이터를 가져오는 url에서 쿼리(고유 번호)만 가져오는 정규식
+  const speciesData = await fetchSpeciesData(speciesNumber);
+  const evolutionNumber = speciesData.evolution_chain.url.match(/(\d+)(?=\/?$)/)[0];
+  const evolutionData = await fetchEvolutionData(evolutionNumber);
 
-    const evolution = await getEvolutionList(evolutionData, axiosInstance);
-    const name = getPokemonName(speciesData, language);
-    const genus = getPokemonGenus(speciesData, language);
-    const flavor = getFlavorText(speciesData, language);
-    const typeList = await getPokemonTypes(types, axiosInstance, language);
-    const { pokemonImage, pokemonShinyImage } = getImages(pokemonData);
-    const abilityList = await getAbilities(abilities, axiosInstance, language);
+  const evolution = await getEvolutionList(evolutionData, axiosInstance);
+  const name = getPokemonName(speciesData, language);
+  const genus = getPokemonGenus(speciesData, language);
+  const flavor = getFlavorText(speciesData, language);
+  const typeList = await getPokemonTypes(types, axiosInstance, language);
+  const { pokemonImage, pokemonShinyImage } = getImages(pokemonData);
+  const abilityList = await getAbilities(abilities, axiosInstance, language);
 
-    // 체중과 신장 값을 10으로 나눈다
-    const formattedWeight = weight < 10 ? (weight / 10).toFixed(1) : weight / 10;
-    const formattedHeight = height < 10 ? (height / 10).toFixed(1) : height / 10;
+  // 체중과 신장 값을 10으로 나눈다
+  const formattedWeight = weight < 10 ? (weight / 10).toFixed(1) : weight / 10;
+  const formattedHeight = height < 10 ? (height / 10).toFixed(1) : height / 10;
 
-    return {
-      id,
-      weight: formattedWeight,
-      height: formattedHeight,
-      name,
-      genus,
-      flavor,
-      typeList,
-      image: pokemonImage,
-      shiny: pokemonShinyImage,
-      abilityList,
-      evolutionList: evolution,
-    } as PokemonInfo;
-  } catch (error) {
-    console.error(error);
-    return {
-      id: 0,
-      weight: 0,
-      height: 0,
-      name: '알 수 없음',
-      genus: '알 수 없음',
-      flavor: '알 수 없음',
-      typeList: [],
-      image: '',
-      shiny: '',
-      abilityList: [],
-      evolutionList: [],
-    } as PokemonInfo;
-  }
+  return {
+    id,
+    weight: formattedWeight,
+    height: formattedHeight,
+    name,
+    genus,
+    flavor,
+    typeList,
+    image: pokemonImage,
+    shiny: pokemonShinyImage,
+    abilityList,
+    evolutionList: evolution,
+  } as PokemonInfo;
 };
 
 // 포켓몬 도감 리스트 데이터
 // Todo 더보기 버튼 클릭시 offset와 limit로 추가 데이터 불러오도록 하기
-export const getPokemonAllList = async ({ offset = 0, limit = 20 }: GetPokemonListParams) => {
+export const getPokemonAllList = async ({ offset = 0, limit = 20, language }: GetPokemonListParams) => {
+  // 494번 이후 부터는 불러오지 않음
+  if (offset > MAX_4TH_GEN_POKEMON_ID) {
+    return [];
+  }
+
+  // 493번에 맞게 limit 조정
+  const requestLimit = Math.min(limit, MAX_4TH_GEN_POKEMON_ID - offset);
+
   // offset: 몇번째 부터 불러올지 정하는 값, limit: 몇개의 데이터를 불러올지 정하는 값
-  const pokemonAllListResponse = await fetchPokemonListData({ offset, limit });
+  const pokemonAllListResponse = await fetchPokemonListData({ offset, limit: requestLimit });
   const pokemonPromises: PokemonInfo[] = pokemonAllListResponse.results.map((result: Language) => {
     const pokemonQuery = result.name;
-    return getPokemonInfo({ number: pokemonQuery, language: 'ko' });
+    return getPokemonInfo({ number: pokemonQuery, language: language });
   });
   const pokemonAllList = await Promise.all(pokemonPromises);
   return pokemonAllList as PokemonInfo[];
@@ -92,7 +84,7 @@ export const getLoadingImage = async (number: number) => {
 };
 
 // 포켓몬 타입 필터 포켓몬 리스트(해당 타입 숫자를 넣으면 타입에 관련된 포켓몬 리스트 노출)
-export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: GetPokemonTypeListParams) => {
+export const getPokemonTypeList = async ({ number, limit = 20, offset = 0, language }: GetPokemonTypeListParams) => {
   try {
     const typeData = await fetchTypeData(number);
     const pokemonData = await getTypeList(typeData, axiosInstance);
@@ -103,7 +95,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
 
     const pokemonList = await Promise.all(
       pokemonIdList.map((pokemonId: any) => {
-        return getPokemonInfo({ number: pokemonId, language: 'ko' });
+        return getPokemonInfo({ number: pokemonId, language: language });
       }),
     );
 
@@ -115,7 +107,7 @@ export const getPokemonTypeList = async ({ number, limit = 20, offset = 0 }: Get
 
 // 로딩용 랜덤 포켓몬 이미지 생성
 export const getLoadingPokemonImage = async () => {
-  const randomNumber = getRandomNumber(1, 649);
+  const randomNumber = getRandomNumber(1, MAX_4TH_GEN_POKEMON_ID);
   return await getLoadingImage(randomNumber);
 };
 

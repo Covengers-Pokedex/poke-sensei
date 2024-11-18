@@ -7,6 +7,8 @@ import useInfinityTypePokemons from '@/hooks/useInfinityTypePokemons';
 import PokemonList from './PokemonList';
 import useSearchPokemon from '@/hooks/useSearchPokemon';
 import RandomPokemonLoading from '../loading/RandomPokemonLoading';
+import MyFavoriteButton from '../button/MyFavoriteButton';
+import LanguageToggleButton from '../button/LanguageToggleButton';
 import DraggableMenu from '../draggableSearchMenu/DraggableMenu';
 import { NOT_FOUND_POKEMON } from '@/constants/searchNotFound';
 
@@ -61,6 +63,9 @@ export default function PokedexMain() {
           <RandomPokemonLoading />
         </div>
       )}
+
+      <LanguageToggleButton />
+      <MyFavoriteButton />
       <SearchSection
         searchValue={searchValue}
         handleInputChange={handleInputChange}
