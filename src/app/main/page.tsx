@@ -2,7 +2,6 @@ import getQueryClient from '@/utils/getQueryClient';
 import PokedexMain from '../_components/main/PokedexMain';
 import { getLoadingPokemonImage, getPokemonAllList } from '@/lib/api/api';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import DraggableMenu from '../_components/draggableSearchMenu/DraggableMenu';
 import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 import QuizButton from '../_components/button/QuizButton';
 import MainTitle from '../_components/main/MainTitle';
@@ -28,9 +27,6 @@ export default async function MainPage() {
       <div className="flex flex-col w-full">
         <HydrationBoundary state={dehydratedState}>
           <PokedexMain />
-          <DraggableMenu>
-            <div>내부 컨텐츠</div>
-          </DraggableMenu>
         </HydrationBoundary>
       </div>
     </div>
