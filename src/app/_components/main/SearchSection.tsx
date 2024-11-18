@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { TYPE_BY_COLOR } from '@/constants/mappingTypeColor';
 import { FormEvent, RefObject } from 'react';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -44,7 +45,11 @@ export default function SearchSection({
   inputRef,
   handleResetSearchedPokemon,
 }: SearchSectionProps) {
+  const { language } = useLanguageStore();
   const { toggleValue, switchToggle } = useToggle();
+
+  const typeOpen = language === 'ko' ? '타입 열기' : 'type open';
+  const typeClose = language === 'ko' ? '타입 접기' : 'type close';
 
   return (
     <div className="pt-20">
@@ -60,11 +65,11 @@ export default function SearchSection({
           <input
             ref={inputRef}
             name="pokemonName"
-            placeholder="찾으실 포켓몬 이름을 입력하세요."
+            placeholder={language === 'ko' ? '찾으실 포켓몬 이름을 입력하세요.' : 'Enter the Pokémon name.'}
             className=" w-full bg-transparent px-3 py-1 outline-none"
           />
-          <button type="submit" className="w-16 h-full  rounded-md bg-gray-200 shadow-xl">
-            검색
+          <button type="submit" className="w-20 h-full rounded-md bg-gray-200 shadow-xl">
+            {language === 'ko' ? '검색' : 'search'}
           </button>
         </div>
       </form>
@@ -76,7 +81,7 @@ export default function SearchSection({
           )}
           onClick={switchToggle}
         >
-          {toggleValue ? '타입 접기' : '타입 열기'}
+          {toggleValue ? typeClose : typeOpen}
         </button>
         <button
           onClick={() => {
@@ -85,7 +90,7 @@ export default function SearchSection({
           }}
           className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
         >
-          초기화
+          {language === 'ko' ? '초기화' : 'reset'}
         </button>
       </div>
       {toggleValue && (
@@ -118,7 +123,7 @@ export default function SearchSection({
                 style={{ backgroundColor: typeInfo.color }}
                 key={typeKey}
               >
-                {typeInfo['ko']}
+                {typeInfo[language]}
               </motion.button>
             </motion.div>
           ))}

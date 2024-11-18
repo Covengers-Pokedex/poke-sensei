@@ -1,3 +1,5 @@
+import { LanguageTypes } from '@/types/language';
+
 export enum PokemonTypeWithColor {
   노말 = '#A8A77A',
   불꽃 = '#EE8130',
@@ -57,13 +59,18 @@ export interface GetPokemonParams {
   language: string;
 }
 
-export interface GetPokemonListParams {
+export interface GetPokemonPageParams {
   offset?: number | undefined;
   limit?: number | undefined;
 }
 
-export interface GetPokemonTypeListParams extends GetPokemonListParams {
+export interface GetPokemonListParams extends GetPokemonPageParams {
+  language: LanguageTypes;
+}
+
+export interface GetPokemonTypeListParams extends GetPokemonPageParams {
   number: number;
+  language: LanguageTypes;
 }
 
 export interface Ability {
