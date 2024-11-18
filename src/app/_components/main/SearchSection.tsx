@@ -4,7 +4,9 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { TYPE_BY_COLOR } from '@/constants/mappingTypeColor';
-import { FormEvent, RefObject } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useLanguageStore } from '@/stores/useLanguageStore';
+import { FilteredPokemonArr } from '@/types/filteredPokemon';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -31,42 +33,90 @@ interface SearchSectionProps {
   activedTypeNum: number | null;
   handleTypeButton: (type: number) => void;
   handleResetButton: () => void;
-  handleSearchValue: (event: FormEvent<HTMLFormElement>) => void;
-  inputRef: RefObject<HTMLInputElement>;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   handleResetSearchedPokemon: () => void;
+  searchValue: string;
+  filteredPokemon?: FilteredPokemonArr[];
+  isModal?: boolean;
+  handleClickFilteredPokemon?: (value: FilteredPokemonArr) => void;
 }
 
 export default function SearchSection({
-  handleSearchValue,
+  handleSubmit,
   activedTypeNum,
   handleTypeButton,
   handleResetButton,
-  inputRef,
+  handleInputChange,
+  filteredPokemon = [],
+  searchValue,
   handleResetSearchedPokemon,
+  handleClickFilteredPokemon = () => {},
+  isModal = false,
 }: SearchSectionProps) {
+  const { language } = useLanguageStore();
+  const [hoverIndex, setHoverIndex] = useState(0);
   const { toggleValue, switchToggle } = useToggle();
 
+  const typeOpen = language === 'ko' ? '타입 열기' : 'type open';
+  const typeClose = language === 'ko' ? '타입 접기' : 'type close';
+  const showButton = isModal || (!isModal && toggleValue);
+  const visibleFiltered = filteredPokemon.slice(0, 5);
+
+  const handleHoverIndex = () => {};
   return (
-    <div className="pt-20">
+    <div>
       <form
         onSubmit={e => {
           handleResetSearchedPokemon();
           handleResetButton();
-          handleSearchValue(e);
+          handleSubmit(e);
         }}
-        className="flex w-full justify-center  gap-1 pb-10"
+        className={classNames('relative flex w-full justify-center  gap-1', isModal ? 'pb-5' : 'pb-10')}
       >
-        <div className="flex h-12 w-[60%] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
+        <div className="flex h-12 w-full max-w-[500px] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
           <input
-            ref={inputRef}
+            onChange={handleInputChange}
+            value={searchValue}
             name="pokemonName"
-            placeholder="찾으실 포켓몬 이름을 입력하세요."
+            placeholder={language === 'ko' ? '찾으실 포켓몬 이름을 입력하세요.' : 'Enter the Pokémon name.'}
             className=" w-full bg-transparent px-3 py-1 outline-none"
           />
-          <button type="submit" className="w-16 h-full  rounded-md bg-gray-200 shadow-xl">
-            검색
+          <button type="submit" className="w-20 h-full rounded-md bg-gray-200 shadow-xl">
+            {language === 'ko' ? '검색' : 'search'}
           </button>
         </div>
+        {filteredPokemon.length > 0 && searchValue && (
+          <div className="flex bg-gray-50 opacity-90 border-gray-300 border  rounded-xl overflow-hidden flex-col z-10 w-full absolute top-[60px] left-1/2 -translate-x-1/2  max-w-[500px] ">
+            {visibleFiltered.map((pokemonName, index) => (
+              <button
+                type="button"
+                onClick={() => {
+                  handleClickFilteredPokemon(pokemonName);
+                }}
+                onMouseEnter={() => setHoverIndex(index)}
+                onMouseLeave={() => setHoverIndex(0)}
+                className={classNames(
+                  'w-full border-b border-gray-400 last:border-none flex items-center  py-3 px-10',
+                  hoverIndex === index ? 'bg-gray-200' : 'bg-gray-50',
+                )}
+                key={pokemonName.en}
+              >
+                {pokemonName['ko'].split('').map((word, index) => {
+                  //포켓몬 이름과 input value를 한글자씩 쪼개서 글자가 포함되어있는지 확인
+                  const isHighlighted = searchValue.split('').some(searchWord => searchWord === word);
+                  return isHighlighted ? (
+                    <span className="text-blue-600" key={`${pokemonName['en']}-${index}`}>
+                      {word}
+                    </span>
+                  ) : (
+                    <span key={`${pokemonName['en']}-${index}`}>{word}</span>
+                  );
+                })}
+              </button>
+            ))}
+          </div>
+        )}
       </form>
       <div className="flex gap-3">
         <button
@@ -76,7 +126,7 @@ export default function SearchSection({
           )}
           onClick={switchToggle}
         >
-          {toggleValue ? '타입 접기' : '타입 열기'}
+          {toggleValue ? typeClose : typeOpen}
         </button>
         <button
           onClick={() => {
@@ -85,7 +135,7 @@ export default function SearchSection({
           }}
           className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
         >
-          초기화
+          {language === 'ko' ? '초기화' : 'reset'}
         </button>
       </div>
       {toggleValue && (
@@ -93,7 +143,7 @@ export default function SearchSection({
           variants={staggerContainer}
           initial="hidden"
           animate="show"
-          className="grid gap-3 pt-5 grid-cols-6 "
+          className={classNames('grid gap-3 pt-5', isModal ? 'grid-cols-3' : 'grid-cols-6')}
         >
           {Object.entries(TYPE_BY_COLOR).map(([typeKey, typeInfo]) => (
             <motion.div variants={item} key={typeKey} className="relative h-[40px] w-full">
@@ -118,7 +168,7 @@ export default function SearchSection({
                 style={{ backgroundColor: typeInfo.color }}
                 key={typeKey}
               >
-                {typeInfo['ko']}
+                {typeInfo[language]}
               </motion.button>
             </motion.div>
           ))}

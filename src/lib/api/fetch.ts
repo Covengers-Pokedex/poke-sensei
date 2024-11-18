@@ -1,8 +1,8 @@
 import axiosInstance from './instance';
-import { GetPokemonListParams } from './type';
+import { GetPokemonPageParams } from './type';
 import { END_POINT } from './path';
 
-export const fetchPokemonListData = async ({ offset, limit }: GetPokemonListParams) => {
+export const fetchPokemonListData = async ({ offset, limit }: GetPokemonPageParams) => {
   try {
     const response = await axiosInstance.get(`${END_POINT.pokemon}?offset=${offset}&limit=${limit}`);
     return response.data;
