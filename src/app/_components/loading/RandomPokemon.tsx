@@ -1,6 +1,7 @@
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 
-export default function RandomPokemon({ pokemonImgSrc }: { pokemonImgSrc: any }) {
+export default function RandomPokemon({ pokemonImgSrc }: { pokemonImgSrc: string | StaticImport }) {
   return (
     // 서버 컴포넌트와 클라이언트 컴포넌트 양측에서 모두 사용하기 위해 absolute 속성 사용
     // 상위에 static 이외의 요소가 없다면 최상위 html 태그가 기준이 됨
