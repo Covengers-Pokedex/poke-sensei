@@ -67,14 +67,14 @@ function useSearchPokemon() {
       return;
     }
     const rowerCasePokemon = filteredPokemon[0].en.toLowerCase();
-    setSearchValue(filteredPokemon[0]['ko']);
+    setSearchValue(filteredPokemon[0][language]);
     setQueryValue(rowerCasePokemon);
   };
 
   useQuery({
     queryKey: [POKEMON_QUERY_KEY, queryValue],
     queryFn: async () => {
-      const response = await getPokemonInfo({ number: queryValue, language: 'ko' });
+      const response = await getPokemonInfo({ number: queryValue, language });
       if (!response) {
         return setSearchedPokemon(false);
       } else {
