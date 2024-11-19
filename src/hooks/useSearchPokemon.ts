@@ -69,6 +69,8 @@ function useSearchPokemon() {
     const rowerCasePokemon = filteredPokemon[0].en.toLowerCase();
     setSearchValue(filteredPokemon[0][language]);
     setQueryValue(rowerCasePokemon);
+    setSearchValue('');
+    setFilteredPokemon([]);
   };
 
   useQuery({
