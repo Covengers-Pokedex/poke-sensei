@@ -47,3 +47,34 @@
     -1px 1px 0 #ffffff;
   color: #000000; /* 텍스트 색상 */
 }
+
+.detail-modal-important button {
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+  width: 50px !important;
+  height: 50px !important;
+}
+
+.detail-modal-important button img {
+  width: 50px !important;
+  height: 50px !important;
+}
+
+@media (max-width: 768px) {
+  .detail-modal-important button {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .detail-modal-important button img {
+    width: 35px !important;
+    height: 35px !important;
+  }
+}
+
+.favorite-modal-important button {
+  position: relative !important;
+  right: auto !important;
+  top: auto !important;
+}

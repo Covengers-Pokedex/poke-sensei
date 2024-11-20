@@ -12,9 +12,10 @@ import PokePicker from './PokePicker';
 interface PokemonListProps {
   pokemonData: InfiniteData<PokemonInfo[] | undefined, unknown> | undefined;
   targetRef?: MutableRefObject<HTMLDivElement | null>;
+  carousel?: boolean;
 }
 
-export default function PokemonList({ pokemonData, targetRef }: PokemonListProps) {
+export default function PokemonList({ pokemonData, targetRef, carousel }: PokemonListProps) {
   const { language } = useLanguageStore();
   const [pokemonId, setPokemonId] = useState<number>(0);
   const { toggleValue, switchToggle, turnOffToggle } = useToggle();
@@ -31,7 +32,7 @@ export default function PokemonList({ pokemonData, targetRef }: PokemonListProps
   return (
     <div className="grid gap-4 pb-10 justify-items-center grid-cols-[repeat(auto-fit,minmax(210px,1fr))] pt-10">
       <ModalFrame isOpenModal={toggleValue} closeModal={turnOffToggle} backdropBgColor="#000000">
-        <PokemonModal turnOffToggle={turnOffToggle} pokemonNumber={pokemonId} />
+        <PokemonModal turnOffToggle={turnOffToggle} pokemonNumber={pokemonId} carousel={carousel} />
       </ModalFrame>
       {pokemonData?.pages.map(pokemonList =>
         pokemonList?.map(pokemon =>

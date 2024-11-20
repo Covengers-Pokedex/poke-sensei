@@ -12,9 +12,10 @@ import { useLanguageStore } from '@/stores/useLanguageStore';
 interface PokemonModalProps {
   turnOffToggle: () => void;
   pokemonNumber: number;
+  carousel?: boolean;
 }
 
-export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonModalProps) {
+export default function PokemonModal({ turnOffToggle, pokemonNumber, carousel }: PokemonModalProps) {
   const { language } = useLanguageStore();
   const [tabActive, setTabActive] = useState<string>('info');
   const [shiny, setShiny] = useState<boolean>(false);
@@ -43,10 +44,10 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber }: PokemonMo
     return <div>에러...</div>;
   }
   return (
-    <div className="relative w-screen max-w-[90%] sm:max-w-[500px] md:max-w-[700px] h-[75vh] bg-[#F0F0F0] rounded-2xl mx-auto p-2 md:p-4">
-      <div className="flex flex-col justify-between h-full bg-[#79C9FA] rounded-2xl">
+    <div className="relative w-screen max-w-[90%] sm:max-w-[500px] md:max-w-[700px] h-[75vh] max-h-[700px] bg-[#F0F0F0] rounded-2xl mx-auto p-2 md:p-4">
+      <div className="flex flex-col justify-between h-full bg-[#79C9FA] rounded-2xl overflow-y-auto">
         <ModalTitle pokemonData={data} onTurnOffToggle={turnOffToggle} language={language} />
-        <ModalImage pokemonData={data} number={number} setNumber={setNumber} shiny={shiny} />
+        <ModalImage pokemonData={data} number={number} setNumber={setNumber} shiny={shiny} carousel={carousel} />
         <div>
           <ModalTabMenu
             tabActive={tabActive}
