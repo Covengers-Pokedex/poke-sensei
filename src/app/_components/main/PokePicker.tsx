@@ -5,6 +5,8 @@ import { usePokebox } from '@/stores/usePokebox';
 import { useToastAction } from '@/stores/actions/useToastAction';
 import { MouseEvent } from 'react';
 import party from 'party-js';
+import { localeText } from '@/constants/localeText';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 
 interface PokePickerProps {
   id: number;
@@ -12,6 +14,7 @@ interface PokePickerProps {
 }
 
 export default function PokePicker({ id, name }: PokePickerProps) {
+  const { language } = useLanguageStore();
   const { addToast } = useToastAction();
   const {
     checkIsPicked,
@@ -21,7 +24,7 @@ export default function PokePicker({ id, name }: PokePickerProps) {
 
   const handlePickerClick = (event: MouseEvent<HTMLButtonElement>) => {
     if (isPicked) {
-      addToast({ type: 'error', message: `바이바이, ${name}!` });
+      addToast({ type: 'error', message: `${localeText[language].dropPokemon} ${name}!` });
       removePokemon(id);
     } else {
       party.sparkles(event.target as HTMLButtonElement, {
@@ -29,7 +32,7 @@ export default function PokePicker({ id, name }: PokePickerProps) {
         speed: 80,
         size: party.variation.range(0.8, 1.2),
       });
-      addToast({ type: 'success', message: `${name}이(가) 포켓박스에 추가되었다!` });
+      addToast({ type: 'success', message: `${name}${localeText[language].pickPokemon}` });
       addPokemon(id);
     }
   };
