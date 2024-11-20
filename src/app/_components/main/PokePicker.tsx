@@ -1,8 +1,9 @@
 import classNames from 'classnames';
 import Image from 'next/image';
 import monsterBall from '@/images/items/poke-ball.webp';
+import { usePokebox } from '@/stores/usePokebox';
 import { useToastAction } from '@/stores/actions/useToastAction';
-import { MouseEvent, useEffect, useState } from 'react';
+import { MouseEvent } from 'react';
 import party from 'party-js';
 
 interface PokePickerProps {
@@ -10,48 +11,28 @@ interface PokePickerProps {
   name: string;
 }
 
-const getPokebox = () => {
-  const storage = localStorage.getItem('pokebox');
-  return storage ? (JSON.parse(storage) as number[]) : null;
-};
-
 export default function PokePicker({ id, name }: PokePickerProps) {
   const { addToast } = useToastAction();
-  const [isPicked, setIsPicked] = useState<boolean>(false);
+  const {
+    checkIsPicked,
+    action: { addPokemon, removePokemon },
+  } = usePokebox();
+  const isPicked = checkIsPicked(id);
 
   const handlePickerClick = (event: MouseEvent<HTMLButtonElement>) => {
-    const pokebox = getPokebox();
-    if (pokebox) {
-      if (isPicked) {
-        localStorage.setItem('pokebox', JSON.stringify(pokebox.filter(v => v !== id)));
-        addToast({ type: 'error', message: `바이바이, ${name}!` });
-        setIsPicked(false);
-      } else {
-        localStorage.setItem('pokebox', JSON.stringify([...pokebox, id]));
-        party.sparkles(event.target as HTMLButtonElement, {
-          count: 20,
-          speed: 80,
-          size: party.variation.range(0.8, 1.2),
-        });
-        addToast({ type: 'success', message: `${name}이(가) 포켓박스에 추가되었다!` });
-        setIsPicked(true);
-      }
+    if (isPicked) {
+      addToast({ type: 'error', message: `바이바이, ${name}!` });
+      removePokemon(id);
+    } else {
+      party.sparkles(event.target as HTMLButtonElement, {
+        count: 20,
+        speed: 80,
+        size: party.variation.range(0.8, 1.2),
+      });
+      addToast({ type: 'success', message: `${name}이(가) 포켓박스에 추가되었다!` });
+      addPokemon(id);
     }
   };
-
-  useEffect(() => {
-    const pokebox = getPokebox();
-    if (pokebox) {
-      const isPickedPokemon = pokebox.find(v => v === id);
-      if (isPickedPokemon) {
-        setIsPicked(true);
-      } else {
-        setIsPicked(false);
-      }
-    } else {
-      localStorage.setItem('pokebox', JSON.stringify([]));
-    }
-  }, [isPicked]);
 
   return (
     <button
