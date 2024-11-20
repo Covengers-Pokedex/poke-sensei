@@ -102,9 +102,13 @@ export default function SearchSection({
                 )}
                 key={pokemonName.en}
               >
-                {pokemonName['ko'].split('').map((word, index) => {
+                {pokemonName[language].split('').map((word, index) => {
                   //포켓몬 이름과 input value를 한글자씩 쪼개서 글자가 포함되어있는지 확인
-                  const isHighlighted = searchValue.split('').some(searchWord => searchWord === word);
+                  const isHighlighted = searchValue.split('').some(searchWord => {
+                    const lowerWord = word.toLowerCase();
+                    const lowerValue = searchWord.toLowerCase();
+                    return lowerWord === lowerValue;
+                  });
                   return isHighlighted ? (
                     <span className="text-blue-600" key={`${pokemonName['en']}-${index}`}>
                       {word}
@@ -118,27 +122,29 @@ export default function SearchSection({
           </div>
         )}
       </form>
-      <div className="flex gap-3">
-        <button
-          className={classNames(
-            toggleValue ? 'bg-gray-200 shadow-none top-1' : 'bg-white shadow-xl',
-            ' px-5 py-3 flex hover:bg-gray-200 active:shadow-none active:top-1 justify-center relative rounded-xl items-center ',
-          )}
-          onClick={switchToggle}
-        >
-          {toggleValue ? typeClose : typeOpen}
-        </button>
-        <button
-          onClick={() => {
-            handleResetButton();
-            handleResetSearchedPokemon();
-          }}
-          className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
-        >
-          {language === 'ko' ? '초기화' : 'reset'}
-        </button>
-      </div>
-      {toggleValue && (
+      {!isModal && (
+        <div className="flex gap-3">
+          <button
+            className={classNames(
+              toggleValue ? 'bg-gray-200 shadow-none top-1' : 'bg-white shadow-xl',
+              ' px-5 py-3 flex hover:bg-gray-200 active:shadow-none active:top-1 justify-center relative rounded-xl items-center ',
+            )}
+            onClick={switchToggle}
+          >
+            {toggleValue ? typeClose : typeOpen}
+          </button>
+          <button
+            onClick={() => {
+              handleResetButton();
+              handleResetSearchedPokemon();
+            }}
+            className="bg-white active:shadow-none active:top-1 relative hover:bg-gray-200 px-5 py-3 flex justify-center rounded-xl items-center shadow-xl"
+          >
+            {language === 'ko' ? '초기화' : 'reset'}
+          </button>
+        </div>
+      )}
+      {showButton && (
         <motion.div
           variants={staggerContainer}
           initial="hidden"

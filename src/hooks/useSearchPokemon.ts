@@ -3,10 +3,11 @@ import { getPokemonInfo } from '@/lib/api/api';
 import { PokemonInfo } from '@/lib/api/type';
 import pokemonNamesKoEn from '@/db/pokemonNamesKoEn.json';
 import { InfiniteData, useQuery } from '@tanstack/react-query';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
 import { FilteredPokemonArr } from '@/types/filteredPokemon';
 import { disassemble } from 'es-hangul';
 import { NOT_FOUND_POKEMON } from '@/constants/searchNotFound';
+import { useLanguageStore } from '@/stores/useLanguageStore';
 
 function useSearchPokemon() {
   //검색된 데이터 관리
@@ -14,21 +15,28 @@ function useSearchPokemon() {
   const [queryValue, setQueryValue] = useState('');
   const [searchedPokemon, setSearchedPokemon] = useState<InfiniteData<PokemonInfo[]> | false | null>(null);
   const [filteredPokemon, setFilteredPokemon] = useState<FilteredPokemonArr[]>([]);
-
   const handleResetSearchedPokemon = () => {
     setSearchedPokemon(null);
   };
+  const { language } = useLanguageStore();
+
+  const mappedData = useMemo(() => {
+    const parsedData: Record<string, string> = pokemonNamesKoEn;
+    const processedData = Object.keys(parsedData).map(key => ({
+      ko: key,
+      en: parsedData[key],
+      disassembled: disassemble(key),
+    }));
+    return processedData;
+  }, []);
 
   const filterPokemon = (value: string) => {
-    /**
-     * disassemble은 한글의 자,모를 분리해주는 API입니다.
-     * 한글이름인 key와 인자로 받은 value의 자모음을 분리해서 포함되어있는지 확인합니다.
-     */
-    const mappedData: Record<string, string> = pokemonNamesKoEn;
-    const result = Object.keys(mappedData)
-      .filter(key => disassemble(key).trim().includes(disassemble(value)))
-      .map(key => ({ ko: key, en: mappedData[key] }));
-    setFilteredPokemon(result);
+    const compareData = language === 'ko' ? 'disassembled' : 'en';
+    const compareValue = language === 'ko' ? disassemble(value) : value;
+    const filteredData = mappedData.filter(data =>
+      data[compareData].toLowerCase().includes(compareValue.toLowerCase()),
+    );
+    setFilteredPokemon(filteredData);
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -59,14 +67,16 @@ function useSearchPokemon() {
       return;
     }
     const rowerCasePokemon = filteredPokemon[0].en.toLowerCase();
-    setSearchValue(filteredPokemon[0]['ko']);
+    setSearchValue(filteredPokemon[0][language]);
     setQueryValue(rowerCasePokemon);
+    setSearchValue('');
+    setFilteredPokemon([]);
   };
 
   useQuery({
     queryKey: [POKEMON_QUERY_KEY, queryValue],
     queryFn: async () => {
-      const response = await getPokemonInfo({ number: queryValue, language: 'ko' });
+      const response = await getPokemonInfo({ number: queryValue, language });
       if (!response) {
         return setSearchedPokemon(false);
       } else {
