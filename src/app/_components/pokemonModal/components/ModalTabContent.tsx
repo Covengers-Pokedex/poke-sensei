@@ -10,7 +10,7 @@ interface ModalTabContentProps {
 
 export default function ModalTabContent({ pokemonData, tabActive, language }: ModalTabContentProps) {
   return (
-    <div className="flex flex-col justify-between w-full h-[180px] sm:h-[150px] bg-black bg-opacity-50 rounded-b-2xl px-3 py-2 text-sm sm:text-base text-white">
+    <div className="flex flex-col justify-between w-full h-[180px] sm:h-[155px] bg-black bg-opacity-50 rounded-b-2xl px-3 py-2 text-sm sm:text-base text-white">
       {tabActive === 'info' && (
         <>
           <p className="break-keep">{pokemonData?.flavor}</p>

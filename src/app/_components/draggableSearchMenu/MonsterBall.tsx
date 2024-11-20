@@ -1,16 +1,24 @@
 import Image from 'next/image';
 import pokeBall from '@/images/items/poke-ball.webp';
+import { Tooltip } from 'react-tooltip';
 
-export default function MonsterBall() {
+interface MonsterBallProps {
+  onClick: () => void;
+}
+
+export default function MonsterBall({ onClick }: MonsterBallProps) {
   return (
-    <div className="h-10 w-10 flex justify-center items-center border rounded-md shadow-md bg-white">
-      <Image
-        className="active:pointer-events-none hover:animate-wobbleHorBottom"
-        src={pokeBall}
-        alt="몬스터볼 이미지"
-        height={30}
-        width={30}
-      />
-    </div>
+    <>
+      <div
+        onClick={onClick}
+        id="monsterBall"
+        className="h-[65px] w-[65px] flex justify-center items-center rounded-full animate-wobbleHorBottom hover:animate-none"
+      >
+        <Image className="active:pointer-events-none " src={pokeBall} alt="몬스터볼 이미지" height={60} width={60} />
+      </div>
+      <Tooltip anchorSelect="#monsterBall" place="top">
+        가랏, 몬스터볼!
+      </Tooltip>
+    </>
   );
 }

@@ -15,8 +15,10 @@
     "es-hangul": "^2.2.3",
     "framer-motion": "^11.9.0",
     "next": "14.2.13",
+    "party-js": "^2.2.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-tooltip": "^5.28.0",
     "sharp": "^0.33.5",
     "zustand": "^5.0.0-rc.2"
   },

@@ -21,7 +21,7 @@ export default async function MainPage() {
 
   const dehydratedState = dehydrate(queryClient);
   return (
-    <div className="flex flex-col justify-between relative items-center gap-8 m-auto mt-10 w-full min-h-[500px] sm:min-h-[700px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
+    <div className="flex flex-col justify-between relative items-center gap-20 m-auto mt-10 w-full min-h-[500px] sm:min-h-[700px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
       <MainTitle />
       <QuizButton />
       <div className="flex flex-col w-full">

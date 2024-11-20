@@ -4,7 +4,6 @@ import { motion, useDragControls } from 'framer-motion';
 import MonsterBall from './MonsterBall';
 import { ReactElement, useRef, useState } from 'react';
 import SearchMenuContainer from './SearchMenuContainer';
-import classNames from 'classnames';
 import Portal from '../modal/Portal';
 import { useToggle } from '@/hooks/useToggle';
 
@@ -40,15 +39,16 @@ export default function DraggableMenu({ children }: { children: ReactElement }) 
           dragTransition={{ bounceStiffness: 500, bounceDamping: 20 }} // 드래그 요소가 경계를 벗어날 때 튕겨서 돌아오는 효과
           dragElastic={0.5} // 경계 구간에 얼마나 들어갈 수 있는 지 설정
           style={{ touchAction: 'none' }} // 모바일에서 터치 가능하려면 넣어야 하는 설정
+          initial={{ x: 0, y: 100, scale: 0 }} // 초기 위치 및 크기
+          animate={{ scale: 1 }} // 애니메이션이 끝날 때 크기를 1로 설정
+          transition={{ duration: 0.5 }} // 애니메이션 시간 0.5초
+          whileHover={{
+            scale: 1.1,
+            cursor: 'pointer',
+          }}
+          whileTap={{ scale: 0.9, cursor: 'grab' }}
         >
-          <div className="flex gap-5">
-            <article
-              onClick={handleMenuDisplayClick}
-              className={classNames('hover:cursor-pointer', isDragging && 'hover:cursor-grab')}
-            >
-              <MonsterBall />
-            </article>
-          </div>
+          <MonsterBall onClick={handleMenuDisplayClick} />
         </motion.div>
       </div>
     </Portal>
