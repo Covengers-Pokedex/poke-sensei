@@ -47,7 +47,15 @@ export default function PokemonModal({ turnOffToggle, pokemonNumber, carousel }:
     <div className="relative w-screen max-w-[90%] sm:max-w-[500px] md:max-w-[700px] h-[75vh] max-h-[700px] bg-[#F0F0F0] rounded-2xl mx-auto p-2 md:p-4">
       <div className="flex flex-col justify-between h-full bg-[#79C9FA] rounded-2xl overflow-y-auto">
         <ModalTitle pokemonData={data} onTurnOffToggle={turnOffToggle} language={language} />
-        <ModalImage pokemonData={data} number={number} setNumber={setNumber} shiny={shiny} carousel={carousel} />
+        <ModalImage
+          pokemonData={data}
+          number={number}
+          setNumber={setNumber}
+          shiny={shiny}
+          setShiny={setShiny}
+          setTabActive={setTabActive}
+          carousel={carousel}
+        />
         <div>
           <ModalTabMenu
             tabActive={tabActive}
