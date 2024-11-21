@@ -1,3 +1,4 @@
+import { localeText } from '@/constants/localeText';
 import { useLanguageStore } from '@/stores/useLanguageStore';
 
 export default function LanguageToggleButton() {
@@ -9,7 +10,7 @@ export default function LanguageToggleButton() {
       className="absolute top-12 sm:top-11 left-5 translate-y-[-50%] text-lg font-Galmuri7"
       onClick={toggleLanguage}
     >
-      {language === 'ko' ? 'KOR' : 'ENG'}
+      {localeText[language].languageText}
     </button>
   );
 }
