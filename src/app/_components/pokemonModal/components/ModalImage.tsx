@@ -5,11 +5,21 @@ interface ModalImageProps {
   pokemonData: any;
   number: number;
   setNumber: React.Dispatch<React.SetStateAction<number>>;
+  setShiny: React.Dispatch<React.SetStateAction<boolean>>;
   shiny: boolean;
   carousel: boolean | undefined;
+  setTabActive: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function ModalImage({ pokemonData, number, setNumber, shiny, carousel = true }: ModalImageProps) {
+export default function ModalImage({
+  pokemonData,
+  number,
+  setNumber,
+  shiny,
+  setShiny,
+  carousel = true,
+  setTabActive,
+}: ModalImageProps) {
   const pokemonImage = shiny ? pokemonData?.shiny : pokemonData?.image;
   return (
     <>
@@ -24,6 +34,8 @@ export default function ModalImage({ pokemonData, number, setNumber, shiny, caro
             )}
             onClick={() => {
               setNumber(prev => prev - 1);
+              setShiny(false);
+              setTabActive('info');
             }}
             disabled={number === 1}
           >
@@ -38,6 +50,8 @@ export default function ModalImage({ pokemonData, number, setNumber, shiny, caro
             )}
             onClick={() => {
               setNumber(prev => prev + 1);
+              setShiny(false);
+              setTabActive('info');
             }}
             disabled={number === 1025}
           >
