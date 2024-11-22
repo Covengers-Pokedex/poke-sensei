@@ -30,18 +30,18 @@
 ## 기술 스택
 
 ## 프로젝트 기능 소개
-
-## 프로젝트 기능 소개
-
-## 팀원 소개
-|김민찬|김세환|염정훈|
-|:---:|:---:|:---:|
-|<img src="https://github.com/user-attachments/assets/0619f39b-b421-44fd-8611-0fff0614cc56" width="180"/>|<img src="https://github.com/user-attachments/assets/7f0352f0-9ad0-430b-9c7e-1348df9ec3ff" width="180"/>|<img src="https://github.com/user-attachments/assets/099b982a-3016-4603-aa34-ebdf97df4c8b" width="180"/>|
-|[@itscold96](https://github.com/itscold96)|[@kimsayhi](https://github.com/kimsayhi)|[@youmdang](https://github.com/youmdang)|
-<br/>
-
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 가랏, 몬스터볼! - 몬스터볼을 던져봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+|  ![LOG__](https://github.com/user-attachments/assets/b436c8f4-59b9-4a72-88ca-9051a71069e3) |
+| - 흔들리는 몬스터볼을 마우스로 잡고 던질 수 있어요! <br> - 스크롤을 내리니 검색창과 필터 버튼이 보이지 않는다구요? 몬스터볼을 클릭해보세요! <br> - 클릭하면 포켓몬을 검색할 수 있는 메뉴가 등장해요! <br> - 검색은 물론, 타입별로 포켓몬을 필터링할 수 있어요! |
 
 ## 개인 목표와 핵심 작업 내역
+|이름|개인 목표와 핵심 작업 내역|
+| - | - |
+|<img src="https://github.com/user-attachments/assets/0619f39b-b421-44fd-8611-0fff0614cc56" width="180"/> <p align='center'>[@itscold96](https://github.com/itscold96)</p>| **개인 목표** <br> 오버레이 컴포넌트 제작 숙달 및 동료 개발자가 쉽게 사용할 수 있는 공통 컴포넌트 제작 <br> <br> **핵심 작업 내역** <br> - Portal과 Framer-Motion 을 활용, 뷰포트 내에서 던질 수 있는 몬스터볼을 구현 <br> - Portal과 Zustand를 활용, 전역에서 호출 가능한 토스트 팝업 기능 구현 <br> - Portal을 활용, 내부를 children prop으로 채울 수 있고 애니메이션이 적용된 모달 프레임 컴포넌트 제작  <br> - Position 속성을 활용, SSR, CSR 상황에 맞게 랜덤 포켓몬을 표출하는 오버레이 로딩중 컴포넌트 제작 <br> - Zustand를 활용, 로컬 스토리지에 저장된 마이 포켓몬 데이터를 전역에서 관리하도록 구현 <br> - party.js를 활용하여 마이 포켓몬으로 추가할 때, 몬스터볼에 스파클링 효과 적용
+|<img src="https://github.com/user-attachments/assets/7f0352f0-9ad0-430b-9c7e-1348df9ec3ff" width="180"/> <p align='center'>[@kimsayhi](https://github.com/kimsayhi)</p>|**개인 목표** <br> useContext, 커스텀 훅 등 기본 리액트 훅 및 API 사용 숙달 <br> <br> **핵심 작업 내역** <br>|
+|<img src="https://github.com/user-attachments/assets/099b982a-3016-4603-aa34-ebdf97df4c8b" width="180"/> <p align='center'>[@youmdang](https://github.com/youmdang)</p>|**개인 목표** <br> 리액트 쿼리 활용한 서버상태 관리 및 최적화 숙달 <br> <br> **핵심 작업 내역** <br>|
+<br/>
 
 
 
