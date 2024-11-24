@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import MonsterBallImage from '@/images/items/monster-ball.png';
 import { LanguageTypes } from '@/types/language';
+import { localeText } from '@/constants/localeText';
 
 interface ModalTabContentProps {
   pokemonData: any;
@@ -17,13 +18,13 @@ export default function ModalTabContent({ pokemonData, tabActive, language }: Mo
           <div>
             <ul className="flex items-center gap-3 text-xs sm:text-base">
               <li>
-                {language === 'ko' ? '분류' : 'genus'} - {pokemonData?.genus}
+                {localeText[language].modalGenus} - {pokemonData?.genus}
               </li>
               <li>
-                {language === 'ko' ? '신장' : 'height'} - {pokemonData?.height}m
+                {localeText[language].modalHeight} - {pokemonData?.height}m
               </li>
               <li>
-                {language === 'ko' ? '무게' : 'weight'} - {pokemonData?.weight}kg
+                {localeText[language].modalWeight} - {pokemonData?.weight}kg
               </li>
             </ul>
           </div>
@@ -49,7 +50,7 @@ export default function ModalTabContent({ pokemonData, tabActive, language }: Mo
               );
             })
           ) : (
-            <li>진화 트리가 없습니다.</li>
+            <li>{localeText[language].modalNotEvolution}</li>
           )}
         </ul>
       )}
@@ -64,7 +65,7 @@ export default function ModalTabContent({ pokemonData, tabActive, language }: Mo
               );
             })
           ) : (
-            <li>특성이 없습니다.</li>
+            <li>{localeText[language].modalNotAbility}</li>
           )}
         </ul>
       )}
