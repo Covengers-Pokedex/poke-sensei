@@ -35,6 +35,28 @@
 |  ![LOG__](https://github.com/user-attachments/assets/b436c8f4-59b9-4a72-88ca-9051a71069e3) |
 | - 흔들리는 몬스터볼을 마우스로 잡고 던질 수 있어요! <br> - 스크롤을 내리니 검색창과 필터 버튼이 보이지 않는다구요? 몬스터볼을 클릭해보세요! <br> - 클릭하면 포켓몬을 검색할 수 있는 메뉴가 등장해요! <br> - 검색은 물론, 타입별로 포켓몬을 필터링할 수 있어요! |
 
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 나는 포켓몬 마스터! - 포켓몬 퀴즈를 풀어봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+|  ![화면-기록-2024-11-24-오후-5 24 42](https://github.com/user-attachments/assets/ed47fa81-0ae8-4dd1-9156-e03a943ec3b1) |
+| - 포켓몬 그림자를 보고 정답을 맞출 수 있어요! <br> - 문제를 맞추셨나요? 그렇다면 당신은 포켓몬 마스터! 다른 문제를 풀어보거나 도감을 볼 수 있어요! <br> - 문제를 틀리셨나요? 그렇다면 공부가 필요해요 포켓몬 도감을 클릭하여 공부하고 다시 풀어보세요! |
+
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 이건 어떤 포켓몬이야? - 포켓몬 상세 정보를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+|  ![화면-기록-2024-11-24-오후-5 25 12](https://github.com/user-attachments/assets/a97ac38a-d9cb-4017-a433-8aa713c6cb88) |
+| - 포켓몬의 이런것 까지 알려준다고? 모든 정보를 알려줍니다. <br> - 기본적인 정보는 물론 디테일한 진화 단계랑 특성, 색이 다른 버전인 이로치까지 볼 수 있어요! <br> - 포켓몬 이미지 양옆에 화살표를 클릭하면 다음과 이전 포켓몬도 바로 바로 볼 수 있어요! |
+ 
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 내 최애 포켓몬! - 나만의 포켓몬 리시트를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+|  ![화면-기록-2024-11-24-오후-5 26 18](https://github.com/user-attachments/assets/3e2528c3-6386-41e2-894e-1f4c496af90c) |
+| - 포켓몬 이름 옆 몬스터볼을 클릭하여 나만의 포켓몬을 저장할 수 있어요! <br> - 나만의 포켓몬 조합을 만들어서 저장하거나 내가 좋아하는 모든 포켓몬을 저장할 수 있어요! <br> - 마음에 들지 않는다면 놓아주자! 몬스터볼을 다시 한번 클릭하여 즐겨찾기에서 제외할 수 있어요! |
+
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 포켓몬 영어 이름! - 글로벌한 이름을 확인해보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+|  ![화면-기록-2024-11-24-오후-5 31 05](https://github.com/user-attachments/assets/eb1fcc81-a3c5-4594-bb37-1736360835e8) |
+| - 포켓몬 도감을 전 세계 사람들과 함께 즐겨요! <br> - 왼쪽 상단 KOR 텍스트를 클릭하면 영어로도 확인할 수 있어요! <br> - 다시 한글로 보고 싶다면 왼쪽 상단 ENG 버튼을 클릭하면 볼 수 있어요! |
+
+
+
 ## 개인 목표와 핵심 작업 내역
 |이름|개인 목표와 핵심 작업 내역|
 | - | - |
