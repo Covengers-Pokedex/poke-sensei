@@ -60,17 +60,17 @@
 <!-- 포케몬 상세모달 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 이건 어떤 포켓몬이야? - 포켓몬 상세 정보를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-|  ![화면 기록 2024-11-24 오후 5 (1)](https://github.com/user-attachments/assets/5e255851-3bd2-439f-ba1e-e99fb8b99e0f) |
+|  ![화면 기록 2024-11-25 오후 10 (1)](https://github.com/user-attachments/assets/75404087-148f-45b6-ba10-e7522e7bb673) |
 | - 이런것 까지 알려준다고? 포켓몬의 모든 정보를 알려줍니다. <br> - 기본적인 정보는 물론 디테일한 진화 단계와 특성, 색이 다른 버전인 이로치까지 볼 수 있어요! <br> - 포켓몬 이미지 양옆에 화살표를 클릭하면 다음과 이전 포켓몬도 바로 바로 볼 수 있어요! |
  <!-- 즐겨찾는 포켓몬 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 내 최애 포켓몬! - 나만의 포켓몬 리시트를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-|  ![화면 기록 2024-11-24 오후 5 (2)](https://github.com/user-attachments/assets/fc2d6061-b8da-4f0d-bff4-45cb53f2d201) |
+|  ![화면 기록 2024-11-25 오후 10](https://github.com/user-attachments/assets/25f2a1b7-835c-481c-bbbf-e82df17e382f) |
 | - 포켓몬 이름 옆 몬스터볼을 클릭하여 나만의 포켓몬을 저장할 수 있어요! <br> - 나만의 포켓몬 조합을 만들고 좋아하는 모든 포켓몬을 저장할 수 있어요! <br> - 마음에 들지 않는다면 놓아주자! 몬스터볼을 다시 한번 클릭하여 즐겨찾기에서 제외할 수 있어요! |
 <!-- 힌/영 변환 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 포켓몬 영어 이름! - 글로벌한 이름을 확인해보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-|  ![화면-기록-2024-11-24-오후-5 31 05](https://github.com/user-attachments/assets/eb1fcc81-a3c5-4594-bb37-1736360835e8) |
+|  ![화면 기록 2024-11-25 오후 10 (2)](https://github.com/user-attachments/assets/e59221fb-a201-49b3-9fb7-d8769f9838ed) |
 | - 포켓몬 도감을 전 세계 사람들과 함께 즐겨요! <br> - 왼쪽 상단 KOR 텍스트를 클릭하면 영어로도 확인할 수 있어요! <br> - 다시 한글로 보고 싶다면 왼쪽 상단 ENG 버튼을 클릭하면 볼 수 있어요! |
 
 
