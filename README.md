@@ -35,8 +35,8 @@
 <!-- 포켓몬 퀴즈 페이지 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 나는 포켓몬 마스터! - 포켓몬 퀴즈를 풀어봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-|  ![화면 기록 2024-11-24 오후 5](https://github.com/user-attachments/assets/48a0164c-7246-4afa-9f24-c8ac9f506213)) |
-| - 포켓몬 그림자를 보고 정답을 맞출 수 있어요! <br> - 문제를 맞추셨나요? 그렇다면 당신은 포켓몬 마스터! 다른 문제를 풀어보거나 도감을 볼 수 있어요! <br> - 문제를 틀리셨나요? 그렇다면 공부가 필요해요 포켓몬 도감을 클릭하여 공부하고 다시 풀어보세요! |
+|  ![화면 기록 2024-11-24 오후 5](https://github.com/user-attachments/assets/48a0164c-7246-4afa-9f24-c8ac9f506213) |
+| - 포켓몬 그림자를 보고 정답을 맞출 수 있어요! <br> - 문제를 맞추셨나요? 그렇다면 당신은 포켓몬 마스터! 다른 문제를 풀어보거나 도감을 볼 수 있어요! <br> - 문제를 틀리셨나요? 그렇다면 포켓몬 도감을 클릭하여 공부하고 다시 풀어보세요! |
 <!-- 플로팅 몬스터볼 기능소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 가랏, 몬스터볼! - 몬스터볼을 던져봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
@@ -61,12 +61,12 @@
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 이건 어떤 포켓몬이야? - 포켓몬 상세 정보를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
 |  ![화면 기록 2024-11-24 오후 5 (1)](https://github.com/user-attachments/assets/5e255851-3bd2-439f-ba1e-e99fb8b99e0f) |
-| - 포켓몬의 이런것 까지 알려준다고? 모든 정보를 알려줍니다. <br> - 기본적인 정보는 물론 디테일한 진화 단계랑 특성, 색이 다른 버전인 이로치까지 볼 수 있어요! <br> - 포켓몬 이미지 양옆에 화살표를 클릭하면 다음과 이전 포켓몬도 바로 바로 볼 수 있어요! |
+| - 이런것 까지 알려준다고? 포켓몬의 모든 정보를 알려줍니다. <br> - 기본적인 정보는 물론 디테일한 진화 단계와 특성, 색이 다른 버전인 이로치까지 볼 수 있어요! <br> - 포켓몬 이미지 양옆에 화살표를 클릭하면 다음과 이전 포켓몬도 바로 바로 볼 수 있어요! |
  <!-- 즐겨찾는 포켓몬 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 내 최애 포켓몬! - 나만의 포켓몬 리시트를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
 |  ![화면 기록 2024-11-24 오후 5 (2)](https://github.com/user-attachments/assets/fc2d6061-b8da-4f0d-bff4-45cb53f2d201) |
-| - 포켓몬 이름 옆 몬스터볼을 클릭하여 나만의 포켓몬을 저장할 수 있어요! <br> - 나만의 포켓몬 조합을 만들어서 저장하거나 내가 좋아하는 모든 포켓몬을 저장할 수 있어요! <br> - 마음에 들지 않는다면 놓아주자! 몬스터볼을 다시 한번 클릭하여 즐겨찾기에서 제외할 수 있어요! |
+| - 포켓몬 이름 옆 몬스터볼을 클릭하여 나만의 포켓몬을 저장할 수 있어요! <br> - 나만의 포켓몬 조합을 만들고 좋아하는 모든 포켓몬을 저장할 수 있어요! <br> - 마음에 들지 않는다면 놓아주자! 몬스터볼을 다시 한번 클릭하여 즐겨찾기에서 제외할 수 있어요! |
 <!-- 힌/영 변환 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 포켓몬 영어 이름! - 글로벌한 이름을 확인해보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
