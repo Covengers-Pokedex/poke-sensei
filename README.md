@@ -28,7 +28,8 @@
 - 🫵 넌 내꺼야! 내가 좋아하는 포켓몬을 포켓박스에 저장할 수 있어요!
 
 ## 기술 스택
-![화면 기록 2024-11-25 오후 7 (1)]()
+![Web App Reference Architecture (1)](https://github.com/user-attachments/assets/b69d041b-e912-467f-b138-629745d96bec)
+
 
 ## 프로젝트 기능 소개
 <!-- 포켓몬 퀴즈 페이지 소개 -->
@@ -41,26 +42,21 @@
 | - |
 |  ![화면 기록 2024-11-22 오후 4](https://github.com/user-attachments/assets/ac390620-2574-4974-9a9c-cc1e60043469) |
 | - 흔들리는 몬스터볼을 마우스로 잡고 던질 수 있어요! <br> - 스크롤을 내리니 검색창과 필터 버튼이 보이지 않는다구요? 몬스터볼을 클릭해보세요! <br> - 클릭하면 포켓몬을 검색할 수 있는 메뉴가 등장해요! <br> - 검색은 물론, 타입별로 포켓몬을 필터링할 수 있어요! |
-<!-- 인터렉티브 디자인 소개 -->
-| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 어떤 버튼을 눌러야 할끼? - 상호작용 하는 요소를 찾아보세요 <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
-| - |
-| ![인터렉티브효과](https://github.com/user-attachments/assets/2ecd6cf7-916b-4624-ba55-385c2db86104)  |
-| - 상호작용 하는 요소에는 모두 효과가 있어요! <br> - 버튼들을 클릭해 유용한 기능들을 찾아보세요! |
 <!-- 무한 스크롤 및 로딩 소개 -->
-| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 더 많은 포켓몬을 보여줘! - 스크롤을 내려 다양한 포켓몬을 확인하세요 <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 포켓몬들을 보고싶어! - 스크롤을 내려 모든 포켓몬을 확인하고 상호작용하세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-| ![녹화_2024_11_25_16_07_52_949](https://github.com/user-attachments/assets/ac65f5ce-e00b-4cee-8db2-56a08a4d0cb5)  |
-| - 잠시만 기다려주세요! 스크롤을 내리면 잠깐의 로딩 후 더 많은 포켓몬을 불러와요! <br> - 짧은 로딩 시간에도 기다리기 지루하지 않게 랜덤한 포켓몬이 로딩 화면과 함께 등장해요! |
+| ![녹화_2024_11_25_19_00_49_948 (1)](https://github.com/user-attachments/assets/ab0156f6-13b9-4295-b942-c550a2dec613)  |
+| - 포켓몬 도감 페이지의 다양한 기능들과 상호작용하세요! 상호작용 가능한 모든 버튼에 효과가 있어요! <br> - 잠시만 기다려주세요! 스크롤을 내리면 잠깐의 로딩 후 더 많은 포켓몬을 불러와요! <br> - 짧은 로딩 시간에도 기다리기 지루하지 않게 랜덤한 포켓몬이 로딩 화면과 함께 등장해요!|
+<!-- 이름 검색 기능소개 -->
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 찾고 싶은 포켓몬이 있는데.. - 검색을 통해 포켓몬을 찾아보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+| ![녹화_2024_11_25_16_34_49_146](https://github.com/user-attachments/assets/0f48a8fd-5a2b-44d5-b148-e6012d2f739d) |
+| - 포켓몬을 검색하여 원하는 포켓몬을 찾을 수 있어요! <br> - 가물가물한 포켓몬 이름도 자동 완성의 도움으로 찾을 수도 있을거에요! <br> - 자동완성 창이 보이면 엔터키를 눌러 포켓몬을 빠르게 찾을 수 있어요! <br> - 물론 영어 버전에서도 검색과 자동완성 모두 할 수 있어요! |
 <!-- 타입 검색 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 전기 타입 포켓몬에는 뭐가 있을까? - 타입별 포켓몬을 확인하세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
 | ![녹화_2024_11_25_16_29_35_284](https://github.com/user-attachments/assets/57fe8541-f3b6-4658-8d23-283365191923)  |
 | - 타입 버튼을 클릭해 원하는 타입의 포켓몬을 찾아보세요! <br> - 타입별 포켓몬 또한 스크롤을 통해 더 많은 포켓몬을 불러올 수 있어요! <br> - 화면이 내려가 타입 버튼이 안보여도 떠다니는 몬스터볼을 클릭하면 타입 버튼을 찾을 수 있어요! |
-<!-- 이름 검색 기능소개 -->
-| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 찾고 싶은 포켓몬이 있는데.. - 검색을 통해 포켓몬을 찾아보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
-| - |
-| ![녹화_2024_11_25_16_34_49_146](https://github.com/user-attachments/assets/0f48a8fd-5a2b-44d5-b148-e6012d2f739d) |
-| - 포켓몬을 검색하여 원하는 포켓몬을 찾을 수 있어요! <br> - 가물가물한 포켓몬 이름도 자동 완성의 도움으로 찾을 수도 있을거에요! <br> - 엔터키를 통해 자동완성 맨 위에 나오는 포켓몬을 빠르게 검색하세요! <br> - 물론 영어 버전에서도 검색과 자동완성 모두 할 수 있어요! |
 <!-- 포케몬 상세모달 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 이건 어떤 포켓몬이야? - 포켓몬 상세 정보를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
