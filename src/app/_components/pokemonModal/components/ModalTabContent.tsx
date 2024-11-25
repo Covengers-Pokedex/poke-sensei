@@ -37,14 +37,15 @@ export default function ModalTabContent({ pokemonData, tabActive, language }: Mo
               return (
                 <li key={evolution.pokemonName} className="relative w-32">
                   <span className="relative flex flex-col justify-center items-center pb-4 z-10">
-                    <Image src={evolution.pokemonImage} width={70} height={60} alt="포켓몬 이미지" />
+                    <Image src={evolution.pokemonImage} width={70} height={60} alt="포켓몬 이미지" priority />
                   </span>
                   <Image
                     src={MonsterBallImage}
                     width={400}
                     height={400}
-                    alt="포켓몬 이미지"
+                    alt="몬스터볼 이미지"
                     className="absolute w-[300px] top-[50%] translate-y-[-50%] opacity-80"
+                    priority
                   />
                 </li>
               );
