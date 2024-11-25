@@ -1,3 +1,4 @@
+import { localeText } from '@/constants/localeText';
 import { LanguageTypes } from '@/types/language';
 import classNames from 'classnames';
 
@@ -23,7 +24,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny,
             tabActive === 'info' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
           )}
         >
-          {language === 'ko' ? '정보' : 'information'}
+          {localeText[language].modalTabInformation}
         </button>
         <button
           type="button"
@@ -35,7 +36,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny,
             tabActive === 'evolution' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
           )}
         >
-          {language === 'ko' ? '진화트리' : 'evolution'}
+          {localeText[language].modalTabEvolution}
         </button>
         <button
           type="button"
@@ -47,7 +48,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny,
             tabActive === 'ability' ? 'bg-[#ffffff]' : 'bg-[#D9D9D9]',
           )}
         >
-          {language === 'ko' ? '특성' : 'ability'}
+          {localeText[language].modalTabAbility}
         </button>
       </div>
       <button
@@ -65,7 +66,7 @@ export default function ModalTabMenu({ tabActive, setTabActive, shiny, setShiny,
             )}
           />
         </span>
-        {language === 'ko' ? '이로치' : 'shiny'}
+        {localeText[language].modalTabShiny}
       </button>
     </div>
   );

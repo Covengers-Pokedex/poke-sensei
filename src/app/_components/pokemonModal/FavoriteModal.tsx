@@ -2,8 +2,9 @@ import { useLanguageStore } from '@/stores/useLanguageStore';
 import FavoritePokemon from './components/FavoritePokemon';
 import ModalTitle from './components/ModalTitle';
 import { useEffect, useState } from 'react';
-import { useQueries, useQueryClient } from '@tanstack/react-query';
+import { useQueries } from '@tanstack/react-query';
 import { getPokemonInfo } from '@/lib/api/api';
+import { localeText } from '@/constants/localeText';
 
 interface FavoriteModalProps {
   turnOffToggle: () => void;
@@ -38,7 +39,7 @@ export default function FavoriteModal({ turnOffToggle }: FavoriteModalProps) {
     <div className="w-screen max-w-[90%] sm:max-w-[500px] md:max-w-[700px] h-[75vh] max-h-[700px] bg-[#F0F0F0] rounded-2xl mx-auto p-2 md:p-4">
       <div className="relative h-full bg-[#A8D8A8] rounded-2xl overflow-y-auto">
         <ModalTitle
-          modalTitle={language === 'ko' ? '내 포켓몬' : 'Favorite'}
+          modalTitle={localeText[language].modalFavoriteTitle}
           onTurnOffToggle={turnOffToggle}
           language={language}
         />
@@ -56,7 +57,7 @@ export default function FavoriteModal({ turnOffToggle }: FavoriteModalProps) {
           </div>
         ) : (
           <div className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-full text-center text-base sm:text-lg">
-            잡은 포켓몬이 없어요...
+            {localeText[language].modalNotFavoritePokemon}
           </div>
         )}
       </div>
