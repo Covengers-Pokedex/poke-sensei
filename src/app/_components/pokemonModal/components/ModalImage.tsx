@@ -66,6 +66,7 @@ export default function ModalImage({
           height={150}
           className="w-[100px] md:w-[150px]"
           alt={pokemonData?.name ? `${pokemonData.name} 이미지` : '포켓몬 이미지'}
+          priority
         />
       </div>
     </>

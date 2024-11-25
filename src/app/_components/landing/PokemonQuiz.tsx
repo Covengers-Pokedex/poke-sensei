@@ -96,6 +96,7 @@ export default function PokemonQuiz() {
         height={250}
         draggable={false}
         alt={localeText[language].quizPokemonImage}
+        priority
       />
       <div className="flex flex-col justify-center items-center w-full gap-3 sm:gap-5">
         {isSubmit && <p className="text-xl sm:text-2xl leading-9">{data?.pokemonName}</p>}
