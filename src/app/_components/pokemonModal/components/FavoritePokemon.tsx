@@ -15,7 +15,7 @@ export default function FavoritePokemon({
   return (
     <div className="flex flex-col items-center">
       <div className="w-[110px] h-[110px] sm:w-[120px] sm:h-[120px] relative">
-        <Image src={image} className="object-contain py-5" fill sizes="100vw, 100vw" alt="포켓몬 이미지" />
+        <Image src={image} className="object-contain py-5" fill sizes="100vw, 100vw" alt="포켓몬 이미지" priority />
       </div>
       <div className="flex items-center mt-2">
         <h3 className="outline-text text-sm sm:text-base md:text-lg">{name}</h3>
