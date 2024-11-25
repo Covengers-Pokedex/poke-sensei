@@ -44,17 +44,17 @@
 <!-- 무한 스크롤 및 로딩 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 포켓몬들을 보고싶어! - 스크롤을 내려 모든 포켓몬을 확인하고 상호작용하세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-| ![녹화_2024_11_25_19_00_49_948 (1)](https://github.com/user-attachments/assets/ab0156f6-13b9-4295-b942-c550a2dec613)  |
+| ![123](https://github.com/user-attachments/assets/a9927000-aca1-4d99-9228-e75937f41b40)  |
 | - 포켓몬 도감 페이지의 다양한 기능들과 상호작용하세요! 상호작용 가능한 모든 버튼에 효과가 있어요! <br> - 잠시만 기다려주세요! 스크롤을 내리면 잠깐의 로딩 후 더 많은 포켓몬을 불러와요! <br> - 짧은 로딩 시간에도 기다리기 지루하지 않게 랜덤한 포켓몬이 로딩 화면과 함께 등장해요!|
 <!-- 이름 검색 기능소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 찾고 싶은 포켓몬이 있는데.. - 검색을 통해 포켓몬을 찾아보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-| ![녹화_2024_11_25_16_34_49_146](https://github.com/user-attachments/assets/0f48a8fd-5a2b-44d5-b148-e6012d2f739d) |
+| ![456](https://github.com/user-attachments/assets/764f0ced-6b72-446b-af38-b0ae2cf966a6) |
 | - 포켓몬을 검색하여 원하는 포켓몬을 찾을 수 있어요! <br> - 가물가물한 포켓몬 이름도 자동 완성의 도움으로 찾을 수도 있을거에요! <br> - 자동완성 창이 보이면 엔터키를 눌러 포켓몬을 빠르게 찾을 수 있어요! <br> - 물론 영어 버전에서도 검색과 자동완성 모두 할 수 있어요! |
 <!-- 타입 검색 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 전기 타입 포켓몬에는 뭐가 있을까? - 타입별 포켓몬을 확인하세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-| ![녹화_2024_11_25_16_29_35_284](https://github.com/user-attachments/assets/57fe8541-f3b6-4658-8d23-283365191923)  |
+| ![789](https://github.com/user-attachments/assets/8db9f5b3-07e5-4db3-93c5-12103204401a)  |
 | - 타입 버튼을 클릭해 원하는 타입의 포켓몬을 찾아보세요! <br> - 타입별 포켓몬 또한 스크롤을 통해 더 많은 포켓몬을 불러올 수 있어요! <br> - 화면이 내려가 타입 버튼이 안보여도 떠다니는 몬스터볼을 클릭하면 타입 버튼을 찾을 수 있어요! |
 <!-- 포케몬 상세모달 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 이건 어떤 포켓몬이야? - 포켓몬 상세 정보를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
@@ -77,7 +77,7 @@
 |이름|개인 목표와 핵심 작업 내역|
 | - | - |
 |<img src="https://github.com/user-attachments/assets/367cf10f-1cb6-439e-b292-1b326b96ad2b" width="180"/> <p align='center'>[@itscold96](https://github.com/itscold96)</p>| **개인 목표** <br> 오버레이 컴포넌트 및 동료 개발자가 쉽게 사용할 수 있는 공통 컴포넌트 제작 숙달<br> <br> **핵심 작업 내역** <br> - Portal과 Framer-Motion 을 활용, 뷰포트 내에서 던질 수 있는 몬스터볼을 구현 <br> - Portal과 Zustand를 활용, 전역에서 호출 가능한 토스트 팝업 기능 구현 <br> - Portal을 활용, 내부를 children prop으로 채울 수 있고, <br> 애니메이션이 적용된 모달 프레임 컴포넌트 제작  <br> - Position 속성을 활용, SSR, CSR 상황에 맞게, <br> 랜덤 포켓몬을 표출하는 오버레이 로딩중 컴포넌트 제작 <br> - Zustand를 활용, 로컬 스토리지에 저장된 마이 포켓몬 데이터를 전역에서 관리하도록 구현 <br> - party.js를 활용, 마이 포켓몬으로 추가할 때, 몬스터볼에 스파클링 효과 적용
-|<img src="https://github.com/user-attachments/assets/7f0352f0-9ad0-430b-9c7e-1348df9ec3ff" width="180"/> <p align='center'>[@kimsayhi](https://github.com/kimsayhi)</p>|**개인 목표** <br> 리액트 쿼리 활용한 서버상태 관리 및 최적화 숙달 <br> <br> **핵심 작업 내역** <br>|
+|<img src="https://github.com/user-attachments/assets/7f0352f0-9ad0-430b-9c7e-1348df9ec3ff" width="180"/> <p align='center'>[@kimsayhi](https://github.com/kimsayhi)</p>|**개인 목표** <br> 리액트 쿼리 활용한 서버상태 관리 및 최적화 숙달 <br> <br> **핵심 작업 내역** <br> - Tanstack Query를 활용한 서버 상태관리 <br> - 무한 스크롤로 데이터 불러오기 구현 <br> - 초기데이터를 포함한 SSR을 구현하여  SEO최적화 <br> - 타입별 필터링, 포켓몬 검색 등을 조건부 랜더링을 통해 SPA처럼 동작하도록 구현 <br> - 타입 필터링, 포켓몬 검색 기능을 모달 내부에서도 사용할 수 있도록 컴포넌트 추상화 <br> - 한국어, 영문 검색, 자동 완성 기능 구현 <br> - 뷰포트 사이즈에 맞춰 적절하게 줄바꿈 되는 반응형 디자인 구현 <br> - Framer-Motion 라이브러리를 활용해 타입 버튼 클릭에 대한 인터렉티브한 효과 구현 
 |<img src="https://github.com/user-attachments/assets/099b982a-3016-4603-aa34-ebdf97df4c8b" width="180"/> <p align='center'>[@youmdang](https://github.com/youmdang)</p>|**개인 목표** <br> useContext, 커스텀 훅 등 기본 리액트 훅 및 API 사용 숙달 <br> <br> **핵심 작업 내역** <br> - PokeApi를 사용해 포켓몬의 정보(이름, 번호, 이미지, 타입, 무게, 신장, 분류, 특성,<br> 설명, 진화 단계, 이로치)를 가져오는 코드 작성 <br> - Zustand를 활용하여 글로벌 상태로 적용 가능한 한영 변환 기능 구현 <br> - 랜덤으로 번호를 생성하여 해당 번호로 포켓몬 데이터를 가져와 문제를 출제하는 퀴즈 페이지 구현 <br> - 포켓몬 클릭 시 해당 번호로 데이터를 조회해 상세 정보를 보여주는 모달 구현 <br> - 상세 모달에서 탭 상태에 따라 적절한 콘텐츠가 표시되도록 구현 <br> - 로컬스토리지에 저장된 포켓몬 번호를 기반으로 데이터를 조회해 표시하는 즐겨찾기 모달 구현 |
 <br/>
 
