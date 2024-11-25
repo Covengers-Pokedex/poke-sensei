@@ -28,18 +28,19 @@
 - 🫵 넌 내꺼야! 내가 좋아하는 포켓몬을 포켓박스에 저장할 수 있어요!
 
 ## 기술 스택
+![화면 기록 2024-11-25 오후 7 (1)]()
 
 ## 프로젝트 기능 소개
- <!-- 플로팅 몬스터볼 기능소개 -->
-| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 가랏, 몬스터볼! - 몬스터볼을 던져봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
-| - |
-|  ![화면 기록 2024-11-22 오후 4](https://github.com/user-attachments/assets/473b61d0-0caf-42a3-82ea-b42c41f306aa) |
-| - 흔들리는 몬스터볼을 마우스로 잡고 던질 수 있어요! <br> - 스크롤을 내리니 검색창과 필터 버튼이 보이지 않는다구요? 몬스터볼을 클릭해보세요! <br> - 클릭하면 포켓몬을 검색할 수 있는 메뉴가 등장해요! <br> - 검색은 물론, 타입별로 포켓몬을 필터링할 수 있어요! |
 <!-- 포켓몬 퀴즈 페이지 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 나는 포켓몬 마스터! - 포켓몬 퀴즈를 풀어봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
 |  ![화면 기록 2024-11-24 오후 5](https://github.com/user-attachments/assets/48a0164c-7246-4afa-9f24-c8ac9f506213)) |
 | - 포켓몬 그림자를 보고 정답을 맞출 수 있어요! <br> - 문제를 맞추셨나요? 그렇다면 당신은 포켓몬 마스터! 다른 문제를 풀어보거나 도감을 볼 수 있어요! <br> - 문제를 틀리셨나요? 그렇다면 공부가 필요해요 포켓몬 도감을 클릭하여 공부하고 다시 풀어보세요! |
+<!-- 플로팅 몬스터볼 기능소개 -->
+| <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 가랏, 몬스터볼! - 몬스터볼을 던져봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
+| - |
+|  ![화면 기록 2024-11-22 오후 4](https://github.com/user-attachments/assets/ac390620-2574-4974-9a9c-cc1e60043469) |
+| - 흔들리는 몬스터볼을 마우스로 잡고 던질 수 있어요! <br> - 스크롤을 내리니 검색창과 필터 버튼이 보이지 않는다구요? 몬스터볼을 클릭해보세요! <br> - 클릭하면 포켓몬을 검색할 수 있는 메뉴가 등장해요! <br> - 검색은 물론, 타입별로 포켓몬을 필터링할 수 있어요! |
 <!-- 인터렉티브 디자인 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 어떤 버튼을 눌러야 할끼? - 상호작용 하는 요소를 찾아보세요 <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
