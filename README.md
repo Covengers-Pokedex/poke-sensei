@@ -32,7 +32,7 @@
 ## 프로젝트 기능 소개
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 가랏, 몬스터볼! - 몬스터볼을 던져봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-|  ![LOG__](https://github.com/user-attachments/assets/b436c8f4-59b9-4a72-88ca-9051a71069e3) |
+|  ![화면 기록 2024-11-22 오후 4](https://github.com/user-attachments/assets/473b61d0-0caf-42a3-82ea-b42c41f306aa) |
 | - 흔들리는 몬스터볼을 마우스로 잡고 던질 수 있어요! <br> - 스크롤을 내리니 검색창과 필터 버튼이 보이지 않는다구요? 몬스터볼을 클릭해보세요! <br> - 클릭하면 포켓몬을 검색할 수 있는 메뉴가 등장해요! <br> - 검색은 물론, 타입별로 포켓몬을 필터링할 수 있어요! |
 
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 나는 포켓몬 마스터! - 포켓몬 퀴즈를 풀어봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
