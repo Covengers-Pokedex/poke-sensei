@@ -30,12 +30,11 @@
 ## 기술 스택
 ![Web App Reference Architecture (1)](https://github.com/user-attachments/assets/b69d041b-e912-467f-b138-629745d96bec)
 
-
 ## 프로젝트 기능 소개
 <!-- 포켓몬 퀴즈 페이지 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 나는 포켓몬 마스터! - 포켓몬 퀴즈를 풀어봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-|  ![화면 기록 2024-11-24 오후 5](https://github.com/user-attachments/assets/48a0164c-7246-4afa-9f24-c8ac9f506213) |
+|  ![화면 기록 2024-11-25 오후 10 (3)](https://github.com/user-attachments/assets/4723bfa8-e19f-44f6-b0ca-4488de5dd0e8) |
 | - 포켓몬 그림자를 보고 정답을 맞출 수 있어요! <br> - 문제를 맞추셨나요? 그렇다면 당신은 포켓몬 마스터! 다른 문제를 풀어보거나 도감을 볼 수 있어요! <br> - 문제를 틀리셨나요? 그렇다면 포켓몬 도감을 클릭하여 공부하고 다시 풀어보세요! |
 <!-- 플로팅 몬스터볼 기능소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 가랏, 몬스터볼! - 몬스터볼을 던져봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
