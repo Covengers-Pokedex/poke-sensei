@@ -7,6 +7,7 @@ import { TYPE_BY_COLOR } from '@/constants/mappingTypeColor';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useLanguageStore } from '@/stores/useLanguageStore';
 import { FilteredPokemonArr } from '@/types/filteredPokemon';
+import { localeText } from '@/constants/localeText';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -79,7 +80,9 @@ export default function SearchSection({
             onChange={handleInputChange}
             value={searchValue}
             name="pokemonName"
-            placeholder={language === 'ko' ? '찾으실 포켓몬 이름을 입력하세요.' : 'Enter the Pokémon name.'}
+            placeholder={
+              isModal ? localeText[language].modalSearchInputPlaceholder : localeText[language].searchInputPlaceholder
+            }
             className=" w-full bg-transparent px-3 py-1 outline-none"
           />
           <button type="submit" className="w-20 h-full rounded-md bg-gray-200 shadow-xl">
