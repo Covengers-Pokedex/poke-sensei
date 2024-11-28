@@ -1,23 +1,28 @@
 import { POKEMON_QUERY_KEY } from '@/constants/queryKeys';
 import { getPokemonInfo } from '@/lib/api/api';
-import { PokemonInfo } from '@/lib/api/type';
 import pokemonNamesKoEn from '@/db/pokemonNamesKoEn.json';
-import { InfiniteData, useQuery } from '@tanstack/react-query';
-import { ChangeEvent, FormEvent, useMemo, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { FormEvent, useMemo, useState } from 'react';
 import { FilteredPokemonArr } from '@/types/filteredPokemon';
 import { disassemble } from 'es-hangul';
 import { NOT_FOUND_POKEMON } from '@/constants/searchNotFound';
 import { useLanguageStore } from '@/stores/useLanguageStore';
+import { useToastAction } from '@/stores/actions/useToastAction';
 
 function useSearchPokemon() {
   //검색된 데이터 관리
   const [searchValue, setSearchValue] = useState('');
   const [queryValue, setQueryValue] = useState('');
   const [filteredPokemon, setFilteredPokemon] = useState<FilteredPokemonArr[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { addToast } = useToastAction();
+  const { language } = useLanguageStore();
+  const changeModalOpenValue = (bool: boolean) => {
+    setIsModalOpen(bool);
+  };
   const handleResetSearchedPokemon = () => {
     setQueryValue('');
   };
-  const { language } = useLanguageStore();
 
   const mappedData = useMemo(() => {
     const parsedData: Record<string, string> = pokemonNamesKoEn;
@@ -38,18 +43,18 @@ function useSearchPokemon() {
     setFilteredPokemon(filteredData);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const targetValue = e.target.value;
-    setSearchValue(targetValue);
-    if (!targetValue) {
+  const handleInputChange = (value: string) => {
+    setSearchValue(value);
+    if (!value) {
       setFilteredPokemon([]);
       return;
     }
-    filterPokemon(targetValue);
+    filterPokemon(value);
   };
 
   const handleClickFilteredPokemon = (value: FilteredPokemonArr) => {
     if (value.en === NOT_FOUND_POKEMON[0].en) {
+      addToast({ type: 'error', message: '검색된 포켓몬이 없어요!' });
       return;
     }
     const rowerCasePokemon = value.en.toLowerCase();
@@ -62,6 +67,7 @@ function useSearchPokemon() {
     event.preventDefault();
     //자동완성된 포켓몬이 없으면 어차피 해당 포켓몬이 없다고 판단, 있을 때만 검색됨
     if (filteredPokemon.length <= 0 || filteredPokemon[0].en === NOT_FOUND_POKEMON[0].en) {
+      addToast({ type: 'error', message: '검색된 포켓몬이 없어요!' });
       setSearchValue('');
       return;
     }
@@ -102,6 +108,8 @@ function useSearchPokemon() {
     handleClickFilteredPokemon,
     filteredPokemon,
     isFetching,
+    isModalOpen,
+    changeModalOpenValue,
   };
 }
 export default useSearchPokemon;
