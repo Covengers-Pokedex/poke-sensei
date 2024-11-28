@@ -24,6 +24,8 @@ export const localeText = {
     modalNotAbility: 'No abilities.',
     modalFavoriteTitle: 'Favorite',
     modalNotFavoritePokemon: 'No caught Pokémon...',
+    searchInputPlaceholder: 'Enter the Pokémon name.',
+    modalSearchInputPlaceholder: 'Pokémon name.',
   },
   ko: {
     pickPokemon: '이(가) 포켓박스에 추가되었다!',
@@ -50,5 +52,7 @@ export const localeText = {
     modalNotAbility: '특성이 없습니다.',
     modalFavoriteTitle: '내 포켓몬',
     modalNotFavoritePokemon: '잡은 포켓몬이 없어요...',
+    searchInputPlaceholder: '찾으실 포켓몬 이름을 입력하세요.',
+    modalSearchInputPlaceholder: '포켓몬 이름',
   },
 };
