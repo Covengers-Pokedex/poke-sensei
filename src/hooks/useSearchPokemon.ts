@@ -13,10 +13,9 @@ function useSearchPokemon() {
   //검색된 데이터 관리
   const [searchValue, setSearchValue] = useState('');
   const [queryValue, setQueryValue] = useState('');
-  const [searchedPokemon, setSearchedPokemon] = useState<InfiniteData<PokemonInfo[]> | false | null>(null);
   const [filteredPokemon, setFilteredPokemon] = useState<FilteredPokemonArr[]>([]);
   const handleResetSearchedPokemon = () => {
-    setSearchedPokemon(null);
+    setQueryValue('');
   };
   const { language } = useLanguageStore();
 
@@ -73,19 +72,19 @@ function useSearchPokemon() {
     setFilteredPokemon([]);
   };
 
-  useQuery({
+  const { data, isFetching } = useQuery({
     queryKey: [POKEMON_QUERY_KEY, queryValue],
     queryFn: async () => {
       const response = await getPokemonInfo({ number: queryValue, language });
       if (!response) {
-        return setSearchedPokemon(false);
+        return;
       } else {
         const nextData = {
           pages: [[response]],
           pageParams: [],
         };
         //무한스크롤 쿼리들과 형식을 맞추기 위해서
-        setSearchedPokemon(nextData);
+
         return nextData;
       }
     },
@@ -96,12 +95,13 @@ function useSearchPokemon() {
   return {
     searchValue,
     queryValue,
-    searchedPokemon,
+    data,
     handleSubmit,
     handleInputChange,
     handleResetSearchedPokemon,
     handleClickFilteredPokemon,
     filteredPokemon,
+    isFetching,
   };
 }
 export default useSearchPokemon;

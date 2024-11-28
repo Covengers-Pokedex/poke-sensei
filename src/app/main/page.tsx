@@ -24,7 +24,7 @@ export default async function MainPage() {
     <div className="flex flex-col justify-between relative items-center gap-20 m-auto mt-10 w-full min-h-[500px] sm:min-h-[700px] pb-6 sm:pb-10 max-w-[1200px] rounded-3xl bg-[#F2F4F6] border-4 border-[#ffffff] px-[10px]">
       <MainTitle />
       <QuizButton />
-      <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full grow">
         <HydrationBoundary state={dehydratedState}>
           <PokedexMain />
         </HydrationBoundary>
