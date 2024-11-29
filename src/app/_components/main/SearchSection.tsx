@@ -4,10 +4,11 @@ import classNames from 'classnames';
 import { motion } from 'framer-motion';
 import { useToggle } from '@/hooks/useToggle';
 import { TYPE_BY_COLOR } from '@/constants/mappingTypeColor';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useLanguageStore } from '@/stores/useLanguageStore';
 import { FilteredPokemonArr } from '@/types/filteredPokemon';
 import { localeText } from '@/constants/localeText';
+import { useSearchMenuOff } from '../draggableSearchMenu/SearchMenuContent';
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -35,12 +36,14 @@ interface SearchSectionProps {
   handleTypeButton: (type: number) => void;
   handleResetButton: () => void;
   handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleInputChange: (value: string) => void;
   handleResetSearchedPokemon: () => void;
   searchValue: string;
   filteredPokemon?: FilteredPokemonArr[];
   isModal?: boolean;
   handleClickFilteredPokemon?: (value: FilteredPokemonArr) => void;
+  changeModalOpenValue: (bool: boolean) => void;
+  isModalOpen: boolean;
 }
 
 export default function SearchSection({
@@ -53,6 +56,8 @@ export default function SearchSection({
   searchValue,
   handleResetSearchedPokemon,
   handleClickFilteredPokemon = () => {},
+  changeModalOpenValue,
+  isModalOpen,
   isModal = false,
 }: SearchSectionProps) {
   const { language } = useLanguageStore();
@@ -63,8 +68,17 @@ export default function SearchSection({
   const typeClose = language === 'ko' ? '타입 접기' : 'type close';
   const showButton = isModal || (!isModal && toggleValue);
   const visibleFiltered = filteredPokemon.slice(0, 5);
+  const useSearchMenuOffContextValue = isModal ? useSearchMenuOff() : null;
+  useEffect(() => {
+    if (isModal) {
+      changeModalOpenValue(true);
+      handleInputChange('');
+    }
 
-  const handleHoverIndex = () => {};
+    return () => {
+      changeModalOpenValue(false);
+    };
+  }, []);
   return (
     <div>
       <form
@@ -72,13 +86,18 @@ export default function SearchSection({
           handleResetSearchedPokemon();
           handleResetButton();
           handleSubmit(e);
+          if (isModal) {
+            useSearchMenuOffContextValue?.searchMenuOff();
+          }
         }}
         className={classNames('relative flex w-full justify-center  gap-1', isModal ? 'pb-5' : 'pb-10')}
       >
         <div className="flex h-12 w-full max-w-[500px] shadow-xl justify-between px-5 py-3 items-center rounded-xl bg-gray-50">
           <input
-            onChange={handleInputChange}
-            value={searchValue}
+            onChange={e => {
+              handleInputChange(e.target.value);
+            }}
+            value={isModalOpen ? (isModal ? searchValue : '') : isModal ? '' : searchValue}
             name="pokemonName"
             placeholder={
               isModal ? localeText[language].modalSearchInputPlaceholder : localeText[language].searchInputPlaceholder
@@ -89,7 +108,7 @@ export default function SearchSection({
             {language === 'ko' ? '검색' : 'search'}
           </button>
         </div>
-        {filteredPokemon.length > 0 && searchValue && (
+        {filteredPokemon.length > 0 && searchValue && !isModalOpen && (
           <div className="flex bg-gray-50 opacity-90 border-gray-300 border  rounded-xl overflow-hidden flex-col z-[2] w-full absolute top-[60px] left-1/2 -translate-x-1/2  max-w-[500px] ">
             {visibleFiltered.map((pokemonName, index) => (
               <button
@@ -172,6 +191,9 @@ export default function SearchSection({
                 onClick={() => {
                   handleResetSearchedPokemon();
                   handleTypeButton(typeInfo.num);
+                  if (isModal) {
+                    useSearchMenuOffContextValue?.searchMenuOff();
+                  }
                 }}
                 className={classNames('rounded-md w-full flex absolute justify-center py-1.5 text-white')}
                 style={{ backgroundColor: typeInfo.color }}

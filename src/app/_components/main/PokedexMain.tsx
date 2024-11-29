@@ -42,8 +42,9 @@ export default function PokedexMain() {
     filteredPokemon,
     handleClickFilteredPokemon,
     isFetching: isFetchingSearch,
+    isModalOpen,
+    changeModalOpenValue,
   } = useSearchPokemon();
-
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
     saveScrollPosition();
     fetchAllPokemonNextPage();
@@ -56,6 +57,7 @@ export default function PokedexMain() {
     hasMoreType,
     activedTypeNum,
   );
+
   return (
     <>
       {(isFetchingPokemon || isFetchingType) && (
@@ -77,6 +79,8 @@ export default function PokedexMain() {
         handleResetSearchedPokemon={handleResetSearchedPokemon}
         filteredPokemon={filteredPokemon.length > 0 ? filteredPokemon : NOT_FOUND_POKEMON}
         handleClickFilteredPokemon={handleClickFilteredPokemon}
+        changeModalOpenValue={changeModalOpenValue}
+        isModalOpen={isModalOpen}
       />
       {((searchedPokemon && searchedPokemon.pages[0].length > 0) || isFetchingSearch) && (
         <PokemonList pokemonData={searchedPokemon} carousel={false} />
@@ -97,6 +101,8 @@ export default function PokedexMain() {
           handleResetButton={handleResetButton}
           handleSubmit={handleSubmit}
           handleResetSearchedPokemon={handleResetSearchedPokemon}
+          changeModalOpenValue={changeModalOpenValue}
+          isModalOpen={isModalOpen}
           isModal
         />
       </DraggableMenu>
