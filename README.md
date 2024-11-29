@@ -49,12 +49,12 @@
 <!-- 이름 검색 기능소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 찾고 싶은 포켓몬이 있는데.. - 검색을 통해 포켓몬을 찾아보세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-| ![456](https://github.com/user-attachments/assets/764f0ced-6b72-446b-af38-b0ae2cf966a6) |
+| ![녹화_2024_11_29_15_30_06_293](https://github.com/user-attachments/assets/d8879836-7883-48ff-995a-11166c0a4cc2) |
 | - 포켓몬을 검색하여 원하는 포켓몬을 찾을 수 있어요! <br> - 가물가물한 포켓몬 이름도 자동 완성의 도움으로 찾을 수도 있을거에요! <br> - 자동완성 창이 보이면 엔터키를 눌러 포켓몬을 빠르게 찾을 수 있어요! <br> - 물론 영어 버전에서도 검색과 자동완성 모두 할 수 있어요! |
 <!-- 타입 검색 기능 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 전기 타입 포켓몬에는 뭐가 있을까? - 타입별 포켓몬을 확인하세요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
 | - |
-| ![789](https://github.com/user-attachments/assets/8db9f5b3-07e5-4db3-93c5-12103204401a)  |
+| ![녹화_2024_11_29_15_34_37_999](https://github.com/user-attachments/assets/13bc92cd-6487-4727-8a5b-70d07439f938)  |
 | - 타입 버튼을 클릭해 원하는 타입의 포켓몬을 찾아보세요! <br> - 타입별 포켓몬 또한 스크롤을 통해 더 많은 포켓몬을 불러올 수 있어요! <br> - 화면이 내려가 타입 버튼이 안보여도 떠다니는 몬스터볼을 클릭하면 타입 버튼을 찾을 수 있어요! |
 <!-- 포케몬 상세모달 소개 -->
 | <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> 이건 어떤 포켓몬이야? - 포켓몬 상세 정보를 확인해봐요! <img src='https://github.com/user-attachments/assets/2d2abfc1-8ecf-470c-ab70-af45813132f3' height=15 width=15/> |
