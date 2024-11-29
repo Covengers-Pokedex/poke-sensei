@@ -20,7 +20,7 @@ function useInfinityTypePokemons() {
   const {
     data: typePokemonData,
     fetchNextPage: fetchTypePokemonNextPage,
-    isFetchingNextPage,
+    isFetching,
     hasNextPage,
   } = useInfiniteQuery({
     queryKey: [POKEMON_QUERY_KEY, activedTypeNum, language],
@@ -39,6 +39,7 @@ function useInfinityTypePokemons() {
       return undefined;
     },
     enabled: activedTypeNum !== null,
+    staleTime: Infinity,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
   });
@@ -49,7 +50,6 @@ function useInfinityTypePokemons() {
       setHasMoreType(true);
     }
   }, [hasNextPage]);
-
   return {
     activedTypeNum,
     handleResetButton,
@@ -57,7 +57,7 @@ function useInfinityTypePokemons() {
     typePokemonData,
     fetchTypePokemonNextPage,
     hasMoreType,
-    isFetchingNextPage,
+    isFetching,
   };
 }
 export default useInfinityTypePokemons;

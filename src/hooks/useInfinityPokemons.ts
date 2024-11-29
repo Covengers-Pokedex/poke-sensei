@@ -24,6 +24,9 @@ const useInfinityPokemon = () => {
       setHasMore(false);
       return undefined;
     },
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   return { allPokemonData, fetchNextPage, hasMore, isFetchingNextPage };

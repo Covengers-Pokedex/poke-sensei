@@ -30,24 +30,24 @@ export default function PokedexMain() {
     typePokemonData,
     fetchTypePokemonNextPage,
     hasMoreType,
-    isFetchingNextPage: isFetchingType,
+    isFetching: isFetchingType,
   } = useInfinityTypePokemons();
 
   const {
-    searchedPokemon,
+    data: searchedPokemon,
     handleSubmit,
     handleInputChange,
     searchValue,
     handleResetSearchedPokemon,
     filteredPokemon,
     handleClickFilteredPokemon,
+    isFetching: isFetchingSearch,
   } = useSearchPokemon();
 
   const { targetRef, saveScrollPosition } = useInfiniteScroll(() => {
     saveScrollPosition();
     fetchAllPokemonNextPage();
   }, hasMore);
-
   const { targetRef: typeTargetRef, saveScrollPosition: typePosition } = useInfiniteScroll(
     () => {
       typePosition();
@@ -66,6 +66,7 @@ export default function PokedexMain() {
 
       <LanguageToggleButton />
       <MyFavoriteButton />
+
       <SearchSection
         searchValue={searchValue}
         handleInputChange={handleInputChange}
@@ -77,14 +78,16 @@ export default function PokedexMain() {
         filteredPokemon={filteredPokemon.length > 0 ? filteredPokemon : NOT_FOUND_POKEMON}
         handleClickFilteredPokemon={handleClickFilteredPokemon}
       />
-      {activedTypeNum === null && searchedPokemon === null && (
+      {((searchedPokemon && searchedPokemon.pages[0].length > 0) || isFetchingSearch) && (
+        <PokemonList pokemonData={searchedPokemon} carousel={false} />
+      )}
+      {activedTypeNum === null && !(searchedPokemon && searchedPokemon.pages[0].length > 0) && !isFetchingSearch && (
         <PokemonList pokemonData={allPokemonData} targetRef={targetRef} />
       )}
-      {!!activedTypeNum && searchedPokemon === null && (
+      {!!activedTypeNum && !(searchedPokemon && searchedPokemon.pages[0].length > 0) && !isFetchingSearch && (
         <PokemonList pokemonData={typePokemonData} targetRef={typeTargetRef} carousel={false} />
       )}
-      {searchedPokemon && <PokemonList pokemonData={searchedPokemon} carousel={false} />}
-      {searchedPokemon === false && <div>없음</div>}
+
       <DraggableMenu>
         <SearchSection
           searchValue={searchValue}
